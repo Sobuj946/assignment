@@ -1,0 +1,75 @@
+* ------------------------------------------------------------ *
+*
+* MOTOROLA Semiconductor Product Sector
+* Semiconductor Component Group
+* MC44608 average FLYBACK AC model DCM and CCM modes
+* FLYBACK average model made by Ben-Gurion University (ISRAEL)
+* http://www.ee.bgu.ac.il/~pel
+* MC44608 AC model developed by Christophe BASSO, Toulouse (FRANCE)
+* MICROSIM's PSpice compatible
+* Last modified: April 9th 1999
+*
+* ------------------------------------------------------------ *
+*********
+.SUBCKT MC44608 77      81       11 31  51  61 PARAMS: Lp=180u Fs=75k
+*				In_duty Duty_Out FB Gnd Out Vin
+
+
+RGAIN1 11 70 20			; Dynamic zener resistance
+XERR 71 70 72 ERRAMP	; Internal error amplifier
+VREF 71 31 5V			; Internal reference voltage
+XPCH 73 72 70 PCHAN		; P-channel MOSFET
+RGAIN2 73 31 390		; I/V converter
+DCLP 73 74 DCLAMP		; Negative clamp
+VCLP1 74 31 320mV		; lower duty-cycle limit
+VD 75 31 820mV			; upper duty-cycle limit
+E1 76 31 75 73 1		; decreasing duty-cycle
+RF 76 140 750k
+CF 140 31 55pF
+EB2 81 31 VALUE = { IF ( V(140,31)>810mV,810mV, IF ( V(140,31)<10mV,10mV, V(140,31) ) ) }
+EELM OUT1 31 VALUE = { V(61)*V(77)-V(51)*V(DOFF) }
+EDOFF 7 31 VALUE = { 2*I(VLM)*{FS}*{Lp}/V(77)/V(61)-V(77) }
+GIN 61 31 VALUE = { I(VLM)*V(77)/(V(77)+V(DOFF)) }
+GOUT 31 51 VALUE = { I(VLM)*V(DOFF)/1/(V(77)+V(DOFF)) }
+RM OUT1 5 1M
+LM 5 8 {Lp}
+VLM 8 31
+VCLP2 VC 31 9M
+D2 VC DOFF DBREAK
+D1 DOFF 6 DBREAK
+R4 DOFF 7 10
+EDOFFM 6 31 VALUE = { 1-V(77)-9M }
+.MODEL DBREAK D (TT=10N CJO=100P N=0.01 RS=10M)
+.MODEL DCLAMP D (BV=100V CJO=4PF IS=7E-09 M=.45 N=1.8
++ RS=1.5 TT=6E-09 VJ=.6V)
+.ENDS MC44608
+*********
+.SUBCKT PCHAN 30 40 50
+* NODES: DRAIN GATE SOURCE
+M1 30 20 50 50 MOD1 L=1U W=1U
+RG 40 20 167
+RL 30 50 50E6
+.MODEL MOD1 PMOS VTO=-1.709 RS=3.091 RD=0.979 IS=1E-15 KP=0.146
++CGSO=26P CGDO=4P CBD=12P PB=1
+.ENDS
+**** SIMPLE ERROR AMPLIFIER ****
+.SUBCKT ERRAMP 1 5 2
+*               + - OUT
+G1 0 4 1 5 100u
+R1 4 0 300Meg	; 90dB OL
+C1 4 0 53pF		; 10Hz pole
+E1 2 0 4 0 1
+V1 3 0 500mV
+D2 3 4 DCLP
+.MODEL DCLP D (BV=8.7 CJO=40PF IS=7E-09 M=.45 N=2 RS=.8)
++ TT=10E-09 VJ=.6V)
+.ENDS ERRAMP
+**** SINGLE WINDING TRANSFORMER ****
+.SUBCKT XFMR1 1 2 3 4 PARAMS: RATIO=1
+RP 1 2 1MEG
+E 5 4 VALUE = { V(1,2)*RATIO }
+G 1 2 VALUE = { I(VM)*RATIO }
+RS 6 3 1U
+VM 5 6 
+.ENDS XFMR1
+*********

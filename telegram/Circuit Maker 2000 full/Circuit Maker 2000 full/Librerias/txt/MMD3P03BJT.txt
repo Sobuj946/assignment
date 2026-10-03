@@ -1,0 +1,89 @@
+*******************************************************************************
+*                                                                             *
+*                                                                             *
+*                                                                             *
+*        #############################################################        *
+*        #                                                           #        *
+*        #                     MMD3P03bjt                            #        *
+*        #                                                           #        *
+*        #                   Motorola Power BJT                      #        *
+*        #                   Icmax -5.0 AMPERES                      #        *
+*        #                   VCEO -30 VOLTS                          #        *
+*        #                   Package = SO-8                          #        *
+*        #                                                           #        *
+*        #               This model was developed by                 #        *
+*        #                      Analogy, Inc.                        #        *
+*        #                    9205 SW Gemini Dr.                     #        *
+*        #                   Beaverton, OR  97005                    #        *
+*        #               Copyright 1994 Analogy, Inc.                #        *
+*        #                  All Rights Reserved                      #        *
+*        #                                                           #        *
+*        #    The content of this model is subject to change         #        *
+*        #    without notice and may not be modified or altered      #        *
+*        #    without permission from Motorola, Inc.  This model     #        *
+*        #    has been carefully checked and is believed to be       #        *
+*        #    accurate, however neither Analogy nor Motorola         #        *
+*        #    assume liability for the use of this model or the      #        *
+*        #    results obtained from using it.                        #        *
+*        #                                                           #        *
+*        #    For more information regarding modeling services,      #        *
+*        #    model libraries or simulation products, please         #        *
+*        #    Analogy, Inc. (503) 626-9700.                          #        *
+*        #                                                           #        *
+*        #############################################################        *
+*                                                                             *
+*                                                                             *
+*                                                                             *
+*******************************************************************************
+**********************************************************************
+** mmd3p03bjt mmd3p03bjt MMD3P03bjt Motorola PNP BJT 10/30/96
+** pdmax= 2.0W icmax= -3.0A vcemax= -30V vebmax= -8V case= SO-8
+** betamax= undef betaic= -1.2A betavc=-.3V 
+** ftmin= undef ftic= undef ftvc=undef
+** vcesatmax=-.215V vcesatic= -1.2A vcesatib= -20mA
+** Spice 2G6
+** Parameter Data
+ .model mmd3p03 pnp 
+ + is= 1.63e-12
+ + bf= 348.2
+ + nf= 1.003
+ + vaf= 40.39
+ + ikf= 2.179
+ + ise= 2.007e-12
+ + ne= 1.608
+ + br= 73.4
+ + nr= 1.003
+ + var= 27.67
+ + ikr= 0.2514
+ + isc= 3.88e-13
+ + nc= 1.247
+ + rb= 1.99
+ + irb= 7.2e-05
+ + rbm= 0.5711
+ + re= 0.0291
+ + rc= 0.06077
+ + xtb= 1.4
+ + eg= 1.11
+ + xti= 5.1
+ + cje= 4.648e-10
+ + vje= 0.7322
+ + mje= 0.4031
+ + tf = 9.5e-10
+ + xtf= 15.86
+ + vtf= 0.3313
+ + itf= 3.801
+ + ptf= 1.6
+ + cjc= 3.361e-10
+ + vjc= 0.601
+ + mjc= 0.4085
+ + xcjc= 1
+ + tr = 7.4e-09
+ + cjs= 0
+ + vjs= 0.75
+ + mjs= 0
+ + fc = 0.9
+ + kf = 0
+ + af = 1
+
+
+

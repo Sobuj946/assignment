@@ -1,0 +1,282 @@
+*	|==========================================================
+*	|
+*	|
+*	|
+*	|			   CS5323
+*	|
+*	|			ON SEMICONDUTOR
+*	|
+*	|		 Three-Phase Buck Controller
+*	|
+*	|			with  5-Bit DAC
+*	|
+*	|		200kHz to 800kHz Operation (Per Phase)
+*	|
+*	|
+*	|
+*	|	This model was developed by
+*	|
+*	|	AEI (Analytic Engineering)
+*	|
+*	|	182 Morris Avenue
+*	|
+*	|	Holtsville, NY 11742
+*	|
+*	|	Copyright 2001 AEI
+*	|
+*	|	All Rights Reserved
+*	|
+*	|
+*	|
+*	|	The content of this model is subject to change
+*	|
+*	|	without notice and may not be modified or altered
+*	|
+*	|	without permission from On Semiconductor. This model
+*	|
+*	|	has been carefully checked and is believed to be
+*	|
+*	|	accurate, however neither AEI nor On Semiconductor
+*	|
+*	|	assume liability for the use of this model or the
+*	|
+*	|	results obtained from using it.
+*	|
+*	|
+*	|
+*	|	For more information regarding modeling services,
+*	|
+*	|	model libraries or simulation productors, please
+*	|
+*	|	call AEI at (631) 654-0253 ext 116 or 106.
+*	|
+*	|	email: Sales@aeng.com.
+*	|
+*	|
+*	|
+*	|==========================================================
+**********
+*SRC=CS5323;CS5323;ON SEMI;;3 PHASE BUCK CONTROLLER
+*SYM=CS5323
+.SUBCKT CS5323 1 2 3 4 5 6 7 8 9 10
++ 11 12 13 14 15 16 17 18 19 20
+*TERMINAL IDENTIFICATIONS ARE AS FOLLOWS:
+*ROSC= 1 COMP=2 VFB=3 VDRP=4 CS1=5 CS2=6
+*CS3=7 CSREF=8 ILIM=9 REF = 10
+*VID0=11 VID1=12 VID2=13 VID3=14 VID4=15 GND=16
+*GATE3=17 GATE2=18 GATE1=19 VCC=20
+.MODEL SUVLO SW VT=4.5 VH=0.1 RON=10 ROFF=10MEG
+.MODEL DMAIN D N=0.005
+.SUBCKT SUBLIMIT 1 2 8
+*INPUT=1 OUTPUT=2 GND=8
+*PARAMETERS ARE GAIN={K} 
+*POS LIMIT = {PLIM}  NEG LIMIT = {NLIM}
+RIN 1 8 1E12
+E1 3 8 8 1 {K}
+RC1 2 4 1MEG
+C1 2 4 1F IC=0
+R1 3 4 1MEG
+E2 2 8 8 4 1E6
+*DIODES WILL HAVE .0597V DROP AT 10V INPUT FOR GAIN=1
+*IDIODE = IS*EXP(.597/.O26)
+VN 5 2 {NLIM-.0597}
+DN 4 5 DN
+.MODEL DN D(IS=1E-12 N=.14319)
+VP 2 6 {PLIM-.0597}
+DP 6 4 DN
+.ENDS
+.SUBCKT SUBPOLE 1 2 5
+*PARAMS ARE DC GAIN = {K}
+*POLE FREQ = {FP} HERTZ
+*INPUT=1 OUTPUT=2 GND 5
+E1 5 3 1 5 {K}
+RI 1 5 1E12
+R1 3 4 1MEG
+R2 4 2 1MEG
+C2 2 4 {1U/(6.28319*FP)}
+E2 2 5 5 4 1E6
+.ENDS
+.SUBCKT SUBTMD 2    4   5 {K=1 TD=10N}
+*-------------GND VIN VOUT
+*TIME DELAY
+*GAIN=K TD=TIME DELAY
+R1 29 1 {TD/20P}
+C1 29 6 1P
+C2 1 2 1P
+R2 2 6 {TD/20P}
+R4 4 2 100G
+E2 3 2 6 1 1
+R5 3 8 {TD/20P}
+C3 3 10 1P
+C4 8 2 1P
+R6 2 10 {TD/20P}
+E3 9 2 10 8 1
+R7 9 11 {TD/20P}
+C5 9 13 1P
+C6 11 2 1P
+R8 2 13 {TD/20P}
+E4 15 2 13 11 1
+R9 15 14 {TD/20P}
+C7 15 16 1P
+C8 14 2 1P
+R10 2 16 {TD/20P}
+E5 12 2 16 14 1
+R11 12 17 {TD/20P}
+C9 12 19 1P
+C10 17 2 1P
+R12 2 19 {TD/20P}
+E6 18 2 19 17 1
+R13 18 20 {TD/20P}
+C11 18 21 1P
+C12 20 2 1P
+R14 2 21 {TD/20P}
+E7 36 2 21 20 1
+R15 7 24 {TD/20P}
+C13 7 25 1P
+C14 24 2 1P
+R16 2 25 {TD/20P}
+E8 26 2 25 24 1
+R17 26 27 {TD/20P}
+C15 26 28 1P
+C16 27 2 1P
+R18 2 28 {TD/20P}
+E9 22 2 28 27 1
+R19 22 30 {TD/20P}
+C17 22 31 1P
+C18 30 2 1P
+R20 2 31 {TD/20P}
+E10 5 2 31 30 1
+R23 36 38 {TD/20P}
+C21 36 40 1P
+C22 38 2 1P
+R24 2 40 {TD/20P}
+E11 7 2 40 38 1
+R25 2 5 100G
+E1 29 2 4 2 {K}
+.ENDS
+S1 23 22 20 16 SUVLO
+B1 20 95 V=V(20)-3.31/(1+EXP(3.96-2.4*V(20)))
+DREF 95 96 DMAIN
+REF 96 10 10
+R1 10 16 100G
+R2 22 16 10K
+V4 23 16 3.3
+R3 23 11 50K
+R4 23 12 50K
+R5 23 13 50K
+R6 23 14 50K
+R7 23 15 50K
+V5 1 16 1
+V6 24 16 PULSE 0 100K 0 100K
+V7 25 16 PULSE 0 1
+R16 18 16 10MEG
+R17 17 16 10MEG
+R18 19 16 10MEG
+R19 9 16 100G
+R20 8 16 100G
+R21 7 16 100G
+R22 6 16 100G
+R23 5 16 100G
+R24 3 16 100G
+X2 36 27 16 SUBPOLE {K=1 FP=3MEG }
+E1 36 16 5 8 4.2
+X4 29 35 16 SUBPOLE {K=1 FP=3MEG }
+X6 30 28 16 SUBPOLE {K=1 FP=3MEG }
+E2 29 16 6 8 4.2
+E3 30 16 7 8 4.2
+B2 37 16 V=25M/(1+EXP(40*V(11,16)-40))+50M/(1+EXP(40*V(12,16)-40))
+++0.1/(1+EXP(40*V(13,16)-40))+1.075
+B3 45 37 V=0.2/(1+EXP(40*V(14,16)-40))+0.4/(1+EXP(40*V(15,16)-40))
+R26 45 44 100K
+R27 31 34 100K
+R28 32 34 100K
+R29 33 34 100K
+E4 41 16 45 3 2.133K
+E5 42 16 34 16 3
+X7 38 43 16 SUBPOLE {K=1.5 FP=4K }
+X8 42 38 16 SUBLIMIT {K=1 PLIM=1.45 NLIM=40M }
+X9 41 40 16 SUBLIMIT {K=1 PLIM=100 NLIM=100 }
+R30 44 38 100K
+X10 39 4 16 SUBPOLE {K=1 FP=100K }
+E6 39 16 44 16 2
+R31 16 43 100G
+V8 46 16 2.7
+B4 3 46 I=I(V5)
+D1 3 46 DMAIN
+D2 2 46 DMAIN
+R32 46 2 5MEG
+R33 2 16 5MEG
+D3 16 2 DMAIN
+B5 16 2 I=-5.01U/(1+EXP(9.9-6*V(26,16)))+
++30.06U*(1-EXP(-V(40,16)))/(1+EXP(-V(40,16)))/(1+EXP(6*V(26,16)-9.9))
+B6 26 16 V=(V(25,16)*V(22,16))<1 ? 3.3 : V(43,9)>0 ? 3.3 : 
++V(48,16)<1 ? 3.3 : 0
+B7 47 16 V=(V(25,16)*V(22,16))<1 ? 0 : V(43,9)>0 ? 0 : 
++V(2,16)<0.27 ? 3.3 : V(26,16)<1 ? 3.3 : 0
+B8 49 16 V=(V(31,16)+V(3,2)+0.4)>0 ? 3.3 : 0
+B9 53 16 V=(V(32,16)+V(3,2)+0.4)>0 ? 3.3 : 0
+B10 52 16 V=(V(33,16)+V(3,2)+0.4)>0 ? 3.3 : 0
+B11 56 16 V=V(88,16)>1 ? 3.3 : V(60,16)>1 ? 0 : 3.3
+B12 60 16 V=V(88,16)>1 ? 0 : V(84,16)<1 ? 3.3 : V(57,16)>1 ? 0 : 3.3
+B14 58 16 V=V(88,16)>1 ? 3.3 : V(60,16)<1 ? 3.3 : V(63,16)>1 ? 0 : 3.3
+B16 67 16 V=V(82,16)>1 ? 0 : V(86,16)<1 ? 3.3 : V(64,16)>1 ? 0 : 3.3
+B17 65 16 V=V(82,16)>1 ? 3.3 : V(67,16)>1 ? 0 : 3.3
+B13 62 16 V=V(84,16)>1 ? V(60,16)>1 ? 3.3 : V(58,16)>1 ? 0 : 3.3
+B18 68 16 V=V(82,16)>1 ? 3.3 : V(67,16)<1 ? 3.3 : V(72,16)>1 ? 0 : 3.3
+B19 66 16 V=V(86,16)>1 ? V(67,16)>1 ? 3.3 : V(68,16)>1 ? 0 : 3.3
+B20 74 16 V=V(83,16)>1 ? 0 : V(87,16)<1 ? 3.3 : V(79,16)>1 ? 0 : 3.3
+B21 69 16 V=V(83,16)>1 ? 3.3 : V(74,16)>1 ? 0 : 3.3
+B22 76 16 V=V(83,16)>1 ? 3.3 : V(74,16)<1 ? 3.3 : V(78,16)>1 ? 0 : 3.3
+B23 70 16 V=V(87,16)>1 ? V(74,16)>1 ? 3.3 : V(76,16)>1 ? 0 : 3.3
+B27 88 16 V=V(26,16)>1 ? 3.3 : V(31,16)>0.44 ? 3.3 : V(51,16)>1 ? 3.3 :
++ 0
+B28 82 16 V=V(26,16)>1 ? 3.3 : V(32,16)>0.44 ? 3.3 : V(54,16)>1 ? 3.3 :
++ 0 
+B29 83 16 V=V(26,16)>1 ? 3.3 : V(33,16)>0.44 ? 3.3 : V(55,16)>1 ? 3.3 :
++ 0
+B30 84 16 V=SIN(84.2G*I(V5)*V(24,16)-2.0944)>0 ? 3.3 : 0
+B31 86 16 V=SIN(84.2G*I(V5)*V(24,16))>0 ? 3.3 : 0
+B32 87 16 V=SIN(84.2G*I(V5)*V(24,16)+2.0944)>0 ? 3.3 : 0
+X1 16 27 31 SUBTMD {K=1 TD=80N }
+X3 16 35 32 SUBTMD {K=1 TD=80N }
+X5 16 28 33 SUBTMD {K=1 TD=80N }
+X12 16 47 48 SUBTMD {K=1 TD=10N }
+X34 16 50 51 SUBTMD {K=1 TD=80N }
+X13 16 49 50 SUBTMD {K=1 TD=80N }
+X35 16 61 54 SUBTMD {K=1 TD=80N }
+X14 16 53 61 SUBTMD {K=1 TD=80N }
+X36 16 59 55 SUBTMD {K=1 TD=80N }
+X15 16 52 59 SUBTMD {K=1 TD=80N }
+X16 16 56 57 SUBTMD {K=1 TD=10N }
+X19 16 62 63 SUBTMD {K=1 TD=10N }
+X20 16 65 64 SUBTMD {K=1 TD=10N }
+X23 16 66 72 SUBTMD {K=1 TD=10N }
+X24 16 69 79 SUBTMD {K=1 TD=10N }
+X27 16 70 78 SUBTMD {K=1 TD=10N }
+B34 90 16 V=(V(20,16)-1.45)*V(85,16)/3.3+0.25
+R62 85 16 1MEG
+B33 16 85 I=1.1M*V(63,58)/3.3
+C3 85 16 10P
+D4 16 85 DMAIN
+D5 85 23 DMAIN
+V11 90 19 
+B35 20 16 I=I(V11)<0 ? 0 :  I(V11)
+R63 81 16 1MEG
+B36 16 81 I=1.1M*V(72,68)/3.3
+C4 81 16 10P
+D6 16 81 DMAIN
+D7 81 23 DMAIN
+B37 20 16 I=I(V12)<0 ? 0 :  I(V12)
+B38 89 16 V=(V(20,16)-1.45)*V(81,16)/3.3+0.25
+V12 89 18 
+R64 77 16 1MEG
+B39 16 77 I=1.1M*V(78,76)/3.3
+C5 77 16 10P
+D8 16 77 DMAIN
+D9 77 23 DMAIN
+B40 20 16 I=I(V13)<0 ? 0 :  I(V13)
+B41 80 16 V=(V(20,16)-1.45)*V(77,16)/3.3+0.25
+V13 80 17 
+.ENDS
+*DATE: 6/10/01 DESIGNER: KEHINDE OMOLAYO
+**********

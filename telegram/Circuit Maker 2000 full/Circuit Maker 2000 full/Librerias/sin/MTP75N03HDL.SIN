@@ -1,0 +1,288 @@
+###############################################################################
+#                                                                             #
+#                                                                             #
+#                                                                             #
+#        #############################################################        #
+#        #                                                           #        #
+#        #                        MTP75N03HDL                        #        #
+#        #                                                           #        #
+#        #                 Motorola TMOS Power FET                   #        #
+#        #                        75 AMPERES                         #        #
+#        #                        25 VOLTS                           #        #
+#        #                     RDS(on) = .009 OHMS                   #        #
+#        #                     Package = TO-220                      #        #
+#        #                                                           #        #
+#        #               This model was developed by                 #        #
+#        #                      Analogy, Inc.                        #        #
+#        #                    9205 SW Gemini Dr.                     #        #
+#        #                   Beaverton, OR  97005                    #        #
+#        #               Copyright 1994 Analogy, Inc.                #        #
+#        #                  All Rights Reserved                      #        #
+#        #                                                           #        #
+#        #    The content of this model is subject to change         #        #
+#        #    without notice and may not be modified or altered      #        #
+#        #    without permission from Motorola, Inc.  This model     #        #
+#        #    has been carefully checked and is believed to be       #        #
+#        #    accurate, however neither Analogy nor Motorola         #        #
+#        #    assume liability for the use of this model or the      #        #
+#        #    results obtained from using it.                        #        #
+#        #                                                           #        #
+#        #    For more information regarding modeling services,      #        #
+#        #    model libraries or simulation products, please         #        #
+#        #    Analogy, Inc. (503) 626-9700.                          #        #
+#        #                                                           #        #
+#        #############################################################        #
+#                                                                             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#mfr_start
+# component_template: cmpv3.dec
+# org: 01/22/97
+# mfr_pn: MTP75N03HDL  mfr: MOTOROLA  case: TO-220
+# vth_typ: 1.5  vth_id: 250u
+# rdson_max: .009  rdson_id: 37.5  rdson_vgs: 5.0
+# vdson_max: .68  vdson_id: 75  vdson_vgs: undef
+# ciss_max: 5635p  coss_max: 1894p  crss_max: 430p  c_vds: 25
+# qt_max: 122n  q_vds: 24  q_id: 75  q_vgs: 5.0
+# tdon_max: 48n  tr_max: 986n  tdoff_max: 120n  tf_max: 300n
+# t_vdd: 15  t_id: 75  t_vgson: 5.0  t_rgen: 4.7
+# vsd_max: 1.1  vsd_is: 75 trr_typ: 58n  trr_is: 75
+# pdmax_derate: undefW/C
+# library_name: component
+# menu_name: MTP75N03HDL
+# symbol_name: p_pmosn.sym
+#mfr_end
+# For explanatory comments see undefined template umpv3.sin or manual.
+electrical d,g,s
+external number temp, include_stress
+string part_type  = "powr_mos",
+       part_class = "n_chan enh"
+# STRESS RATINGS
+mpv3type..ratings ratings = (vdsmax = 25, vdgmax = 25, vgsmax = 15, idavg = 75,
+        idmax = 225, isavg = undef, ismax = undef, ibdavg = undef, ibdmax = 
+undef,
+        pdmax_ja = inf, pdmax_jc = undef, tjmax = 175, tjmin = -55)
+number rth_ja = 62.5, rth_jc = 1.0, rth_hs = undef
+export val p  pwrd
+export val tc tempj
+export val i  id, ig, is, ibd
+mpv3type..group group = typical
+mpv3type..model_typ model = ()
+mpv3type..change change = ()
+mpv3type..tol tol = ()
+mpv3type..mc mc = yes
+number ic[2]=[undef,undef]
+{
+    mpv3type..model_cfg model_cfg=()
+    number  enums=model_cfg->enums, numbers=model_cfg->numbers,
+        index = 1
+<mpv3chs.sin
+!crypt_start
+008aba86f7c2526a8a6
+064a262563cc698a2f1b7e812706604ac474d131c0b08094808b6ea7a647fac0dbafab3564b69e21
+0d8a4a4bf88627c7d2d942b15119a2f011cfbbe2e6c2b41e303
+0325402312317514c0badbd1e55733af6bef9a505f384321e0201135c583c4c1444
+032f48a63737a6d7b2d621f5e4e6826f3b6ff3708603b57f313f5be3e60764bf3b0
+048eea27955dd47420d17065c567323efb4b5970f303b3ced15eea3793cd8215940e7a305ed4d5a0
+84a17135858eb3c1e10
+056a4a4bf856c0ca24ed8e6534bd87a5655edf7420969f94babace986bb560cef03a7624f285c026
+311a92b0a2a79e943e3ec975230224ba6e0
+040a4f26ca560ee4ceaa484672c80d1bfb5f8b7d6d43f4df615ff37167c81cfbdb5fab302e186c1c
+ca9
+016a22b797cc2baf5b8a997103c863c6f1c
+032a4b5bfd4793ab01ef9cc1fac80c1cca9fa875e3068bc10dc15135e585339347b
+040f48763476d247a28e36a166c9ccda1d8902a4f293527feddf8add4d59a310355e5b5d1b92322e
+eb7
+040b6b0517c364da1bbf7290a7c86301c080154331b22463836bc2b497c5c406354ebbe536c9a3c1
+210
+032b6c551712579a4e2ebbe226080bcbdb5eec8795a6d767f39ebbe2260764befb6
+032a2377917c2dce2edf7f33e6c6a3af3db96a350ed6429250015135e58edc1bda5
+040a4bd6cf161d747bab6bd0a573b4ded160c59331b22463836bc2b517c8dcdcab5f9b9bdc49a3c1
+210
+040a4c2bfd96616a950f9a01def525c0b48fab5ccb9515f1657e9a98dbfe9215843e5b303e19ccda
+1d8
+056b6af5117322bacfeacb4cd81515d0f48f9aed7d42234293e86eb223f96725f6f5b055349504af
+746e3331260045a1355e6b30d473f352e06
+040f487634760246b28e36a166c9ccda1d89029487c204db0bbfe290a7c51401655f8b9bdc44d4c1
+844
+032f48663477a24683ce5f4d1c49ccda0d896a34bed0b5c053fe5b303e15339347b
+040a22b797cdcbaf5b8ebc1222180c1cca9bcbf5cf131bc76b1ffce03f1862c1e06b5971c3c6636e
+3a6
+048a4ae6cb579e54ef592a202ed862c0200ff37167c3e282877a9c20c433c0114445c0316547e292
+50015135e58edc1bda5
+032eec8795ac37d46420913425480bcbdb5a4c2bfd9c699fce4a997103080bcbdb5
+040a4c2bfd96507a645a897103087411e01a2377917735cb240f5ae3b609a29021eb797093c1b36e
+fa6
+032a4b5bfd4603aa51ef9c6cc89514c6548f89b5a2d31a076b6081333589cc1b1a5
+040f499632c68427b660c1d4248763aedb3fa627b289a43125da5a994c8d72c0f6be5b303e1eb3c1
+e10
+040b6a3512d3262abe392b5d0b94d5c0848fbc563711977a6f2fe37167c862d021cf9b5ccb93dbc1
+db7
+048eeae7906dd6c534092abd0ca982c001cb5da0c3c254df17e90355217dedcfee8ecc3227b3ebe1
+aabe5b313e1414c1844
+048a4c86cfc6be240eea8d2592d21a01cb5aea2174a3c7c346ab1fe7b0b22463836551f1a495c406
+355fe277b6c9cc1b1a5
+032eec8795ad270575cff270a6051311454a4b5bfd4d4bafdb8ff270a6c3e394577
+032a4c86cfc7bf840ebfe270a603f44346ab6c551712261a6eab3b30a4b80bcbdb5
+040541f314805374f59ff580a2176369eaaacfb6a287b7898f35f1f421e79e943e3aebe6060d2415
+756
+056a25c7971dd8ef4f1f6fd4812d2305756e7f643036877342e5f5733146a49e3ebf0d25a7831e27
+6f2afbf1fa77b7c763fbcb35ded6f3ca645
+056eea37949da2c0f6bf9a9d0d43a4fef13b3a3175722292875b2ae7b102246383692bf03f0982c0
+200f9a9cec83cbd1db7e7b303ed3e44286a
+032b6b2517c274da7bbb3cc0a0a863c6f1ce2bf55573335436bebbe536c2239387b
+032a22b797cc0baf5b8f9c6cc8976369eaab9bf40f17b3a98b6b3b37b472741e303
+032eea2793cd8214054e5fe02e1274df27ec69b522dc2bae2b8b2b30a4777369eaa
+040a4c2bfd96512ac4db3b30a4b764befb6f4db6379796f743ef25a7d7f384def10b5971c3c2cac0
+da7
+032a4c2bfd97c0eb557f9b7ced43e352c6eb3a613529a2c021e92270a6c2e39387b
+016a4a66c9a7bb146f7b59b0a419cd3a6ab
+040bfad51172f2bb0f4adbe17023aba19b208075b49274cf246b5860f314f090952fb277b6c6a36e
+3a6
+048e7a0793cdf21415ce7b4d58159540a56f8abd2d76a27f2a85c0643563a52f20ff836117d81cca
+3e092270a6c414c1844
+040e7a0793cdf214158e7b4d1817020f7b3eaaa3b7d2234293ee33615616873f2b0fdb36ee19a3c1
+210
+032e7e6793cdf214155a7fd848a6e14a50fe6f540026a72b6e8deb30a476636e3a6
+040adb5bfd6653ab11efbcc1fa5534c6548a7a35ff17b3898b7fcbf1ff4872c1c00eabe206051310
+851
+0405d5d310d0f375059ab624328d68fbdf0e5ce0a0114095600f7c52e71d2796d5ef8b31fed81bcb
+db4
+040fd99632c7c426b66f9a603f73e2e2f6dbba50a5680d1bfb5fbaad2d42751f30db7b3144b714bf
+2b0
+032fdd963697c426266adf656a56ae201f2afce1fa779e943e3e327066c6636e3a6
+032bfaf51172f2ba8e0ff5a0a7c3dbd1dabf7a32e3668ff72ee621f5e2522292877
+040e7a37956d847480db3bf16574d5c0954b2f716473e352806c69b522d6ed75bbaf8b31fe177369
+eaa
+024ab37797fd2bae7b8b59b0f41575e145019134e58963c1210
+016ab5c7971c889e5ec0c1342543e3cef16
+056bfae51172f2ba1f0b7990c2c80cda3b0f9a303ef3c292d77f9cc01a573369eaaf0d35772c4690
+f6be6f540026a72b6e8f7b27b112870a7e3
+0325d1f314815375559096c421c3e394577afae7d607bbc10dce5b303e1eb3c1e10
+040bfb0517b324db7bbebae3a6153090a51f0b5ccdc3a51a60ea88f122c3a342a3e92270a6c2b41e
+303
+048e7a0793cd521585fe7be00a438212d63f9ab0af922292d75aa310b627621faaaf63e177c743bf
+1e3641342586636e3a6
+056adb7bfd47d3aa91effa50bef3a51fa0ff1ab02f758421454eaf33713537d347bbea17d513cb40
+3b4151f5e4a4f5a0b5cf9b5ceb983d3a9b3
+040adbd6cf16ad74ebaeeb0227c3ca003b20c5e330a2246383fa02b427c8b306900b3b37b479cc1b
+1a5
+0485d0e314800045414c2c249306507a746a7f757afd594f7a95c580827eb781e10e5a31b4b57bc1
+dabc497103c6636e3a6
+032adb5bfd56a3aa51ea8e810783dac70abbb30487e63d740baafbf143a7121efb4
+048bfac51173e2bb7efe7abd6c89a2a001e17525827eb781e10f5994c2ed8baf0b8fa290a7e3c353
+66efcb9bdc49cc1b1a5
+040bfc551712477a6f2b3b30a4b3e44346be7e47914d47d5744bece7d5751401454b5971c3c414c1
+844
+032bfc551713227adeaff270a603e44346be7c8795a7a2b7637ff270a603cd101b7
+072fdec63217a287621ebae20603c2c2f63adbd145781300a05fbf704e188cda4d896a3479a0f514
+256e12b167b51550c55f9aecedd515d0850f7a73e7d6822f3b6feb36ee14d4c1844
+048ada4bfd57f17ad41621f5e256a26f3aae9a484d5197eb7e892ec95c8d87a5655edf742092363a
+5aaacb986c4edc1bda5
+0485d683145155e560cecd9526905405d02fdd259782078eff3e5fd7b139cbeb1e1aba345ed535c0
+53fe5b303e1edc1bda5
+080adc86cfc78bd5ff4ff30087480d9a1b3e5a1d0dc2557f313eca6227a862c1c00e3ea39133c081
+444eb994f2d3ea110dcedb23f797226a6abf6b33f292555f512ff36137a4d421555fdb985c821d11
+db2
+0325d683145155d4a1ef9b31fed3e44346bbfc551717f53b159f9b31fed3cd101b7
+040bfa3517d326caaf592bf039c9cd1a1a9fbac6a361965b7efe6c3557c80cdbdb5b5971c3c414c1
+844
+080fdec63217a287a2db3ab085580d6a1b5f7ac3e7b9ed1a1b5f1a41ff1862c1c00fbedd8bb3c081
+444abae96ca742ffeddfba0d9c8d32b1f00f5a9397c84310b55e5b4d9819825050209135958edc1b
+da5
+056adc2bfd97f07aa48ebae20623b51f20fa89b10417627edb6a3a3423cefdce6e7f5ae3e623b51f
+20fa9860d2c6a26f3a894b9ccc4414c1844
+048adfcbfd5653aa11ee43617677373efb7fcc4ccd13dbd48acb5ec1c21d27b6d55b2a208493dbd1
+cabfe2b0a113f28366a
+056fdc2634763246d35b5fa6a222363a5aafcd15a79227d6d35c4c710692e747c04bebf7d013373a
+de2aef0603905405d02bfbe6b6c6d419e0f
+0405d683145061a4a01fafcced7832d0001aea2174a7473efb3fba8ccc97173edb7fbb9bdc44d4c1
+844
+016adae6cb778e94af592b5d0b96a26f3aa
+032fdec63216f786a3ea89710303a3cef12adc86cfc62ff42e9b3b30a4b51311454
+032bfc551713e6cb7efbcf78e916f4da645ab6243286ae201f2afb9bdc42741e303
+048aeae57b953ed4eea9430177e6827f2b1beaa2362515d0048fc29437d6b3af3befea307ec39e91
+5bebbb37b472239387b
+048aea4848a5408a04ed8a514506822fbbee6a60b497725f3aab1a7144b6b29356a171e5d1d7627f
+3b6fe27166ceb3c1e10
+016a83a422aef84e7f792b5d1b94d5d0948
+048fe8a587a517c7b2992fcd2d798290107b4d20c257f38efb4e4add0d135a201b4f9c4d6dd505c5
+d49b5971c3c963c1210
+048bcad6a17192ba0b6171e581d362e2c6a090b57419a28061e5c0743567623faaaa08e0d2c3aa11
+ce2c497103c2cac0da7
+0245e560a0a3e1a5b54afa30eed5051f30fc497103c414c1844
+048e4ae551fe97d515d942a102922b814b6090157404d5c094aacafcdca862d0a1ce2a63d7c743bf
+4e3641342582cac0da7
+040e4ae5509e975515d9436177c202e216abeb3232981d2a1a9eaaa3e756a20f7a8a19b0e41d5d1b
+cb4
+016bca37d2a1973b5f492b5d1b99cd0a0a9
+0485e0e1d1e3e095b1692aed1d24f5f0d5dfc8311323e2b2177f0aad4c869b500b7e12a1f29862a0
+009f9b30ae11b36efa6
+048fe854f4751247b6b171e5f1d535e0d57ff311f7e4d5f0b4aaca11eef3b54fa0f090a5a4889cca
+8e094b31fe190c1b1a5
+0325e561d0a3e1a5b54afa9ddc85051f30fc4ec10219092f2e2ebbe2260764befb6
+032fa875b306a292500150e5e1f1b64efa692aad3d52550f611afbf133a6a27f4a8
+032afae6d17772bb1e1f7ea3e6c22352806e0bf145713375f59b3b30a47863c6f1c
+06455060a4f5c426357aa320b627622faaaacadcdca7623faaaacf5cdc4763afadbaefcddd1552b2
+e75b4d20c29324fef14e4a303ec5809145df0b36ee120ac0da7
+032efa655558b326906fc821132862b0b1caa2a0b293b58fa0fff271f6c5641ef03
+040bba984ca3a51fe78a99b0d297521f7b7ff32087f3e212869150a5e4198290200ff27176c3d394
+577
+080bdc850fc3dbd5fe3f9aa1df351550850e5abd0dd4f580854e2a72278862c1c00b1a11f04eb681
+e10f1bd42563f3425000d1f564e38297d76f6b33f299ed7a5bda98f0a284d4215550f130b5423442
+86d
+080bba984ca3951fe78ebae3e6057590f50b7820c283b56f31515045e4e4f5c0854fb36132feb681
+e10bd374262842c0f6bebb03a7c58400a5dff3716603f58fa11b7ea0c25515e0c5dafb306472b41e
+303
+0804d680d45535e4a00b49a0d799ed7a5bdff3f10786a38eeb7edaf6b619dcda1b3e131127c34a11
+be294a31f9a2b5cb150e13e167851590857ac87052c9a2c021efea8d5d46a26f3a8b6b31e4b38d11
+bbe
+080ed9a5f473f246a28a986122e3cb51db7efae227c9b2c021ea0990e2c50410c48f9c4d0d03b50f
+a11e5a4c09778fe4eb592be00a44f58005709075b4b22212b75fc8f1132862f071cfc2e12116b2c3
+56b
+024b6fb7e3c306ff0f21752400ac23c5d5ca7b987cdd5c9aca5
+024a262563cc698a2f1b7d3123c68f844f4a0b093cc7f41e31e
+032a4f643b17af51ef3e1270827c482e3e4bdb341fc6a41a048abb30f4790c1b1a5
+04054561e0817150b10e7cc1dae7e6d6a34ab684f3e3566b7a6afbe6138516a7c32e6be2e6c9e3c1
+b10
+024a4fc90947d18f057adb3080b637c773fa22e55642236e3bb
+02454561e0817150b10e7b31dad2b73ace2eeba554fc2c1b1b8
+0165f130116130b5d0df497533cd495e2e0
+016e9d25d687c7c7936eb974f3c414c4344
+048a0b986c42b41e303abae415ac291fef0a76e4f2d2171abd9b5be276c2cac0da7a3ae4f47de99f
+5e0ef27146c2e39387b
+0485c13021e12055d44e1ae54fc3466acf3ebf64f17d792f9daaa27426c484c1844b98a553c286ea
+7e3a3b315476636e3a6
+048fc97507a7d707d7be1a487d9c291fef0a5fd5ca8c17d6d5710134e586636e3a6e9ae5ae160617
+c3ee9b307e190c1b1a5
+048bebe622a357fa6a6110e0945c46c5d45a5fc8f817bfc72f4fd97153c90c1b1a5a3ae4f4760617
+c3ee9b9d5c4963c1210
+048aa274a2ac388f4a5b18a5b217efc42f25140071d6c13ab7ca0b09381c27f535efba3676c0f145
+c01191358582cac0da7
+048e6b34a01c5755710f3a369717911ac56f5de536f16096716bc2752656f7c7638b98a553cde99f
+5e0b9970b3c2b41e303
+072f4d84f717c3938665d461d162373b7aea4fc93862274762eeb9f4f6e2705a24754571a1c7fed0
+4abf1ba0e0bdb795d54affb470468a449f5a6fd898a6808a678e6b35e4751ac04ab
+05658520a10050f4a4ca7f754a56b783177bbf21bed61a55ee35d540a167c783029e6f70f069a305
+f53fd9e4e682312a74aafb306472cac0da7
+040a8f5848b6f15b10baae70a4f6f6b7c3febc55d6cd5305919a073523f0e056700e0b313e1963c1
+210
+008b227066c90c1b1a5
+040f4864c6d78372b38e9a484c4966f5510fbf363710e005c01bc6e54714d0f180daab31fe1414c1
+844
+064bbae52b278eb44e9bd2b473f3271aae8ef3a542dc2765a6f4b131a54d880ceef4b411a4564ef7
+2ed4d410658efcdfbe6bded8896545cab50ebb37947de3c411c
+048f3e3471ec468466fbeea33137cf84cf5fae156066b69347bf7ae7914021f5405abff6f207eef5
+9d8a8be7d6c414c1844
+024abbe79713436a7a6e9e99089c1344054ef970f352527edf7
+024bb274371ddc1e1ef4d430b150c44480e4f135d516fbd03f6
+024eab3425a963c121019434e15663eaae2adbe3d65025d1615
+024a0b354fc2cac0da7a3e3060a2e31713cb92715656850ed52
+024a0b993d92b41e303ef7706212e317128f5b3154e6850ed52
+02450130c45054c1844e9e9c089d9c9f3e1ef970f356d28362a
+01618560d2713184114a127426c2b41e303
+}
+
+
+

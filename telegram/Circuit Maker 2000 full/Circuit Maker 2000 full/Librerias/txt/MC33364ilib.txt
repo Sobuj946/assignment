@@ -1,0 +1,223 @@
+* ------------------------------------------------------------ *
+*
+* ON Semiconductor
+* MC33364 model developed by Christophe BASSO, Toulouse (FRANCE)
+* e-mail: christophe.basso@onsemi.com
+* INTUSOFT's IsSpice4 compatible
+*
+* These models account for the various propagation delays and
+* timers, except the internal 100ms re-start delay which has
+* purposely NOT been included.
+*
+* Last modified: 8/26/99
+*
+* MC33364D1: fixed internal frequency clamp
+* MC33364D2: no internal frequency clamp
+* MC33364D: adjustable frequency clamp (Not available now)
+*
+* ------------------------------------------------------------ *
+**********
+*SRC=MC33364D1;MC33364D1;MOTOROLA;SMPS Controller;DCM with FC
+*SYM=MC33364D1
+.SUBCKT MC33364D1 1  2  3  4   5   6   7   8
+*                 ZC CS FB Ref Gnd Drv Vcc Line
+**** ISUPPLY ****
+BSUPP 7 5 I=V(81)<3.5 ? 800U : 4.5M
+**** REFERENCE VOLTAGE ****
+BREF 80 5 V=V(81)<3.5 ? 0 : 5V
+ROUT 80 4 10
+RBIAS 4 3 5k
+**** STARTUP AND UVLO ****
+XUVLO 7 81 UVLO
+BSTRT 8 7 I=V(81)<3.5 ? (8.5M*((14-V(7))/14)+6M) : 70U
+CSTRT 81 600 2nF
+RSTRT 5 600 1k
+XOR2 600 213 610 OR2
+**** ZERO DETECTION ****
+DCLAMP 5 1 DZEN1
+XCOMP1 50 1 51 COMP2
+XDEL1 51 52 UTD {TD=300ns}
+BREF1 50 5 V=V(51) > 1V ? 1.2V : 1V
+**** CURRENT SENSE ****
+RCS1 3 30 45k
+RCS2 30 5 15k
+DCS 5 30 DZEN2
+XCOMP2 32 30 31 COMP2 ; + - S
+XDEL2 31 33 UTD {TD=230ns}
+VOFF1 32 LEBO 100mV
+XLATCH 33 302 620 661 TFFLOP ; S R Q Qb
+RDUM1 661 5 100k
+**** 250ns LEB ****
+XDEL3 121 62 UTD {TD=250ns}
+BLEB LEBO 5 V=V(62) > 3V ? V(2) : 0
+**** LOGIC CIRCUITRY ****
+XFFLOP 52 200 620 610 120 121 FFLOP_HD	; CLK D R S QB Q
+RDUM2 120 5 100k
+VDAT 200 5 5
+**** 400us TIMER ****
+BCHG 5 211 I=V(121) < 3V ? 10uA : 0
+CTIM 211 5 410pF
+VTIM 212 5 10V
+XCOMP3 211 212 213 COMP2
+DRST 211 120 DSTD
+**** FIXED 6.7us DEADTIME ****
+ICHG 5 300 3uA
+CDT 300 5 10pF
+XCOMP4 300 301 302 COMP2
+VDT 301 5 2V
+S2 300 5 121 5 SDT
+**** DRIVER and UVLO ****
+BDRVU 90 5 V=(V(121)>3V) & (V(81)>3V) ? V(7) : 100mV
+RON 90 6 36
+ROFF 6 250 18
+DOFF 6 250 DSTD
+.MODEL SDT SW RON=1  ROFF=10Meg  VT=2V VH=1V
+.MODEL DSTD D RS=100M CJO=15pF TT=10N IBV=100u N=0.01
+.MODEL DZEN2 D BV=1.2 RS=100M CJO=15pF TT=100N IBV=100u
+.MODEL DZEN1 D BV=10 RS=100M CJO=15pF TT=100N IBV=1m
+.ENDS
+*INCLUDE MC33364.LIB
+***************
+*SRC=MC33364D2;MC33364D2;MOTOROLA;SMPS Controller;DCM no FC
+*SYM=MC33364D1
+.SUBCKT MC33364D2 1  2  3  4   5   6   7   8
+*                 ZC CS FB Ref Gnd Drv Vcc Line
+**** ISUPPLY ****
+BSUPP 7 5 I=V(81)<3.5 ? 800U : 4.5M
+**** REFERENCE VOLTAGE ****
+BREF 80 5 V=V(81)<3.5 ? 0 : 5V
+ROUT 80 4 10
+RBIAS 4 3 5k
+**** STARTUP AND UVLO ****
+XUVLO 7 81 UVLO
+BSTRT 8 7 I=V(81)<3.5 ? (8.5M*((14-V(7))/14)+6M) : 70U
+CSTRT 81 600 2nF
+RSTRT 5 600 1k
+XOR2 600 213 610 OR2
+**** ZERO DETECTION ****
+DCLAMP 5 1 DZEN1
+XCOMP1 50 1 51 COMP2
+XDEL1 51 52 UTD {TD=300ns}
+BREF1 50 5 V=V(51) > 1V ? 1.2V : 1V
+**** CURRENT SENSE ****
+RCS1 3 30 45k
+RCS2 30 5 15k
+DCS 5 30 DZEN2
+XCOMP2 32 30 31 COMP2 ; + - S
+XDEL2 31 33 UTD {TD=230ns}
+VOFF1 32 LEBO 100mV
+**** 250ns LEB ****
+XDEL3 121 62 UTD {TD=250ns}
+BLEB LEBO 5 V=V(62) > 3V ? V(2) : 0
+**** LOGIC CIRCUITRY ****
+XFFLOP 52 200 33 610 120 121 FFLOP_HD ;CLK D R S QB Q
+RDUM2 120 5 100k
+VDAT 200 5 5
+**** 400us TIMER ****
+BCHG 5 211 I=V(121) < 3V ? 10uA : 0
+CTIM 211 5 410pF
+VTIM 212 5 10V
+XCOMP3 211 212 213 COMP2
+DRST 211 120 DSTD
+**** DRIVER and UVLO ****
+BDRVU 90 5 V=(V(121)>3V) & (V(81)>3V) ? V(7) : 100mV
+RON 90 6 36
+ROFF 6 250 18
+DOFF 6 250 DSTD
+.MODEL SDT SW RON=1  ROFF=10Meg  VT=2V VH=1V
+.MODEL DSTD D RS=100M CJO=15pF TT=10N IBV=100u N=0.01
+.MODEL DZEN2 D BV=1.2 RS=100M CJO=15pF TT=100N IBV=100u
+.MODEL DZEN1 D BV=10 RS=100M CJO=15pF TT=100N IBV=1m
+.ENDS
+*INCLUDE MC33364.LIB
+********************
+.SUBCKT UTD 1 2 {TD=???}
+*
+*Parameters K=GAIN TD=DELAY
+RIN 1 0 1E15
+E1 3 0 1 0 1
+T1 3 0 2 0 Z0=1 TD={TD}
+R1 2 0 1
+.ENDS
+**** UVLO CIRCUIT ****
+** VH = (VON - VOFF)/2
+** VT = VOFF + VH
+.SUBCKT UVLO  1   2  
+*            VIN OUT
+S1 1 3 1 0 SUVLO
+RUV 3 0 100K
+B1 4 0 V= V(3) > 5V ? 5V : 0
+RD 4 2 100
+CD 2 0 100P
+.MODEL SUVLO SW RON=1 ROFF=1E6 VT=11.3 VH=3.7 ; VON = VT+VH = 15.0 VOFF = VT-VH = 7.6V
+.ENDS UVLO
+**** 2 INPUT COMPARATOR ****
+.SUBCKT COMP2 1 2 3
+*             + - S
+B1 4 0 V=V(1) > V(2) ? 5V : 0
+RD 4 3 100
+CD 3 0 10P
+.ENDS COMP2
+**** 2 INPUT OR GATE ****
+.SUBCKT OR2 1 2 3
+B1 4 0 V= (V(1)>800M) | (V(2)>800M) ? 5V : 0
+RD 4 3 100
+CD 3 0 10P
+.ENDS OR2
+*****
+.SUBCKT F_FLOP 1  2 11 12 5  6 {VHIGH=10 VLOW=100m}
+*             CLK D R  S  QB Q 
+.SUBCKT NAND3_0 1 2 3 4
+B1 5 0 V= (V(1)>800mV) & (V(2)>800mV) & (V(3)>800mV) ? 100m : 10
+R1 5 4 10
+C1 4 0 10P IC=100m
+.ENDS
+.SUBCKT NAND3_1 1 2 3 4
+B1 5 0 V= (V(1)>800mV) & (V(2)>800mV) & (V(3)>800mV) ? 100m : 10
+R1 5 4 10
+C1 4 0 10P IC=10
+.ENDS
+.SUBCKT INV 1 2
+B1 3 0 V= V(1)>800mV ? 100m : 10
+R1 3 2 10
+C1 2 0 10P IC=10
+.ENDS
+X1 7 4 2 8 NAND3_0
+X2 8 3 10 9 NAND3_0
+X3 1 8 10 7 NAND3_1
+X4 4 9 1 10 NAND3_0
+X5 4 7 6 5 NAND3_1
+X6 5 10 3 6 NAND3_0
+X7 11 4 INV
+X8 12 3 INV
+.ENDS
+********
+.SUBCKT TFFLOP 6 8 2 1
+*              S R Q Q\
+BQB   10 0 V=(V(8)<800M) & (V(2)>800M) ? 0 : 10V
+BQ    20 0 V=(V(6)<800M) & (V(1)>800M) ? 0 : 10V
+RD1   10 1 100
+CD1   1 0 10p IC=5
+RD2   20 2 100
+CD2   2 0 10p IC=0
+.ENDS TFFLOP
+*******
+.SUBCKT FFLOP_HD 1   2 4 3  5  6 {VHIGH=10 VLOW=100m VUND=100m Init=0}
+*                CLK D R S  QB Q 
+A10 [1] [51] A2D_001				; Analog Clock to Digital Clock
+A11 [2] [50] A2D_001				; Analog Data to Digital Data
+A6 [3] [30] A2D_001					; Analog Set to Digital Set
+A7 [4] [40] A2D_001					; Analog Reset to Digital Reset
+A8 [31] [5] D2A_001					; Digital Q\ to analog Q\
+A9 [32] [6] D2A_001					; Digital Q to analog Q
+A3 40 42 INV_001					; Set\
+A4 30 41 INV_001					; Reset\	
+A1 50 51 41 42 32 31 DFF_001		; HDL Flip-Flop
+.MODEL DFF_001 d_dff(clk_delay=1.0N nset_delay=1.0N nreset_delay=1.0N rise_delay=1.0N 
++ fall_delay=1.0N ic={Init} data_load=1.0P clk_load=1.0P nset_load=1.0P nreset_load=1.0P)
+.MODEL A2D_001 adc_bridge(in_low=1.0 in_high=3.0 rise_delay=1.0N fall_delay=1.0N)
+.MODEL D2A_001 dac_bridge(out_low={VLOW} out_high={VHIGH} out_undef={VUND} t_rise=10N
++ t_fall=10N input_load=1.0P)
+.MODEL INV_001 d_inverter(rise_delay=1.0N fall_delay=1.0N input_load=1.0P)
+.ENDS FFLOP_HD
+*******

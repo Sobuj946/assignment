@@ -1,0 +1,70 @@
+* ------------------------------------------------------------ *
+*
+* MOTOROLA Semiconductor Product Sector
+* Semiconductor Component Group
+* MC44608 average FLYBACK AC model DCM and CCM modes
+* FLYBACK average model made by Ben-Gurion University (ISRAEL)
+* http://www.ee.bgu.ac.il/~pel
+* MC44608 AC model developed by Christophe BASSO, Toulouse (FRANCE)
+* INTUSOFT's IsSpice4 compatible
+* Last modified: March 21st 1999
+*
+* ------------------------------------------------------------ *
+*********
+*SRC=MC44608;MC44608;MOTOROLA;MC44608 AC model;
+*SYM=MC44608
+.SUBCKT MC44608 77      81       11 31  51  61 {Lp=??? Fs=75k}
+*				In_duty Duty_Out FB Gnd Out Vin
+
+RGAIN1 11 70 20			; Dynamic zener resistance
+XERR 71 70 72 ERRAMP	; Internal error amplifier
+VREF 71 31 5V			; Internal reference voltage
+XPCH 73 72 70 PCHAN		; P-channel MOSFET
+RGAIN2 73 31 390		; I/V converter
+DCLP 73 74 DCLAMP		; Negative clamp
+VCLP1 74 31 320mV		; lower duty-cycle limit
+VD 75 31 820mV			; upper duty-cycle limit
+E1 76 31 75 73 1		; decreasing duty-cycle
+RF 76 140 750k
+CF 140 31 55pF
+B2 81 31 V=V(140,31)>810mV ? 810mV : V(140,31)<10mV ? 10mV : V(140,31)
+BELM OUT1 31 V=V(61)*V(77)-V(51)*V(DOFF)
+BDOFF 7 31 V=2*I(VLM)*{Fs}*{Lp}/(V(77)+1u)/(V(61)+1u)-V(77)
+BGIN 61 31 I=I(VLM)*V(77)/(V(77)+V(DOFF)+1u)
+BGOUT 31 51 I=I(VLM)*V(DOFF)/1/(V(77)+V(DOFF)+1u)
+RM OUT1 5 1M
+LM 5 8 {Lp}
+VLM 8 31
+VCLP2 VC 31 9M
+D2 VC DOFF DBREAK
+D1 DOFF 6 DBREAK
+R4 DOFF 7 10
+BDOFFM 6 31 V=1-V(77)-9M
+.MODEL DBREAK D (TT=10N CJO=100P N=0.01 RS=10M)
+.MODEL DCLAMP D (BV=100V CJO=4PF IS=7E-09 M=.45 N=1.8
++ RS=1.5 TT=6E-09 VJ=.6V)
+.ENDS MC44608
+*INCLUDE MC44608.LIB
+*********
+**** INTERNAL P-CHANNEL MODEL ****
+.SUBCKT PCHAN 30 40 50
+* NODES: DRAIN GATE SOURCE
+M1 30 20 50 50 MOD1 L=1U W=1U
+RG 40 20 167
+RL 30 50 50E6
+.MODEL MOD1 PMOS VTO=-1.709 RS=3.091 RD=0.979 IS=1E-15 KP=0.146
++CGSO=26P CGDO=4P CBD=12P PB=1
+.ENDS
+**** SIMPLE ERROR AMPLIFIER ****
+.SUBCKT ERRAMP 1 5 2
+*               + - OUT
+G1 0 4 1 5 100u
+R1 4 0 300Meg		 ; 90dB OL
+C1 4 0 53pF 		 ; 10Hz pole
+E1 2 0 4 0 1
+V1 3 0 500mV
+D2 3 4 DCLP
+.MODEL DCLP D (BV=8.7 CJO=40PF IS=7E-09 M=.45 N=2 RS=.8)
++ TT=10E-09 VJ=.6V)
+.ENDS
+***********

@@ -1,0 +1,38 @@
+element component template mmbfj309lt1 d g s = part_type,part_class
+#*********************************************************************
+#               This template created by Analogy, Inc.               *
+#           for exclusive use with the Saber(TM) simulator.          *
+#           Copyright 1997, Analogy, Inc.                            *
+#   This template may not be  reproduced in any way (physically or   *
+#   electronically)  without permission  from Analogy,  Inc.   The   *
+#   content  of this template is subject to change without notice.   *
+#   Analogy does not assume liability for the use of this template   *
+#   or the results obtained from using it.                           *
+#*********************************************************************
+# Model generated on Apr 14, 98
+# MODEL FORMAT: Saber
+electrical d,g,s
+
+external number temp
+
+string part_type  = "jfet"
+string part_class = "small signal"
+
+export val i  id, is, ig
+export val p  pwrd
+export val tc tempj
+
+{
+# BODY_BEGIN
+spj..model jjmmbfj309lt1=(type=_n,
+vto=-1.7,beta=0.0055601,lambda=0.02184,rd=0.1,
+rs=0.1,is=1.3336e-12,cgs=5.07189e-12,cgd=5.35152e-12,
+pb=2.41896,fc=0.5,kf=9.99982e-21,af=0.200092)
+spj.j d g s =model=jjmmbfj309lt1
+
+id    = id(spj.j)
+is    = is(spj.j)
+ig    = ig(spj.j)
+pwrd  = pwrd(spj.j)
+tempj = tempj(spj.j)
+}

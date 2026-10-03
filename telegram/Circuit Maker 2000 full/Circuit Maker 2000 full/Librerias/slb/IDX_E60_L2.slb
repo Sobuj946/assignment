@@ -1,0 +1,184 @@
+*version 9.1 20988580
+@index
+symloc IDD03E60_L2 0 521
+symloc IDP45E60_L2 521 522
+symloc IDP30E60_L2 1043 522
+symloc IDP23E60_L2 1565 522
+symloc IDP15E60_L2 2087 522
+symloc IDP09E60_L2 2609 521
+symloc IDP06E60_L2 3130 521
+*symbol IDD03E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 3A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDD03E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDD03E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;
+*symbol IDP45E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 45A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP45E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP45E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;
+*symbol IDP30E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 30A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP30E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP30E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;
+*symbol IDP23E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 23A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP23E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP23E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;
+*symbol IDP15E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 15A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP15E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP15E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;
+*symbol IDP09E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 9A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP09E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP09E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;
+*symbol IDP06E60_L2
+d INFINEON Technologies EMCON HE Level 2 Diode 6A/600V
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP06E60_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP06E60_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;

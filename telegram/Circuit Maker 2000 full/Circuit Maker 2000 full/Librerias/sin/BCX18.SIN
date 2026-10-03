@@ -1,0 +1,44 @@
+element component template bcx18 c b e = part_type,part_class
+#*********************************************************************
+#               This template created by Analogy, Inc.               *
+#           for exclusive use with the Saber(TM) simulator.          *
+#           Copyright 1997, Analogy, Inc.                            *
+#   This template may not be  reproduced in any way (physically or   *
+#   electronically)  without permission  from Analogy,  Inc.   The   *
+#   content  of this template is subject to change without notice.   *
+#   Analogy does not assume liability for the use of this template   *
+#   or the results obtained from using it.                           *
+#*********************************************************************
+# Model generated on Apr 14, 98
+# MODEL FORMAT: SABER
+electrical c,b,e
+
+external number temp
+
+string part_type  = "bjt"
+string part_class = "pnp"
+
+export val i  icc, iee
+export val p  pwrd
+export val tc tempj
+
+{
+# BODY_BEGIN
+spq..model qqbcx18=(type=_p,
+is=9.65227e-14,bf=298.722,nf=0.981783,vaf=10,
+ikf=0.206045,ise=1.73744e-14,ne=1.22618,br=0.685852,
+nr=1.0644,var=71.3281,ikr=1.19956,isc=4.66149e-15,
+nc=2.96765,rb=3.72293,irb=0.1,rbm=0.1,
+re=0.00688669,rc=0.382166,xtb=0.736121,xti=1.04767,
+eg=1.05,cje=1.9101e-10,vje=0.99,mje=0.422231,
+tf=9.13006e-10,xtf=12.3731,vtf=1.65639,itf=0.683922,
+cjc=1.69402e-11,vjc=0.4,mjc=0.23,xcjc=0.89979,
+fc=0.1,cjs=0,vjs=0.75,mjs=0.5,
+tr=1e-07,ptf=0,kf=0,af=1)
+spq.q c b e e=model=qqbcx18
+
+pwrd  = pwrd(spq.q)
+tempj = tempj(spq.q)
+icc   =   icc(spq.q)
+iee   =   iee(spq.q)
+}

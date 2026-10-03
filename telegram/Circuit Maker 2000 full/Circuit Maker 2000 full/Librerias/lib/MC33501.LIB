@@ -1,0 +1,339 @@
+*********
+*SRC=MC33501;MC33501;Sub Assembly;User Function Block;ON Semi MC33501 Opamp
+*SYM=OSOPAMP
+* |=======================================================
+* |                     MC33501        REV B 8/17/01
+* |                ON SEMICONDUCTOR
+* |               OP-AMP MACRO-MODEL
+* |                with NMOS INPUT 
+* |
+* | This model was developed by
+* | AEI (Analytic Engineering)
+* | 182 Morris Avenue
+* | Holtsville, NY 11742
+* |
+* | Copyright 2001 AEI
+* | All Rights Reserved
+* |
+* | The content of this model is subject to change
+* | without notice and may not be modified or altered
+* | without permission from ON Semiconductor. This model
+* | has been carefully checked and is believed to be
+* | accurate, however neither AEI nor ON Semiconductor
+* | assume liability for the use of this model or the
+* | results obtained from using it.
+* |
+* | For more information regarding modeling services,
+* | model libraries or simulation productors, please
+* | call AEI at (631) 654-0253 ext 116 or 106.
+* | email: Sales@aeng.com.
+* |=======================================================
+*by Paul Sabatino
+*
+* Connections:  Inverting input
+*               | Non-inverting input
+*               | | Output
+*               | | |  Positive power supply
+*               | | |  |  Negative power supply
+*               | | |  |  |
+*               | | |  |  |
+.SUBCKT MC33501 1 2 18 50 99
+*
+* CAUTION:  SET .OPTIONS GMIN=1E-16 TO CORRECTLY MODEL INPUT BIAS CURRENT AND CMR
+*
+* NOTE: - Noise is not modeled.
+*       - Temperature is not modeled.
+*       - PSR is not modeled.
+*
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+I1 4 99 DC=50U
+R3 5 50 1K
+R15 22 40 .0001
+R4 6 50 1K
+I2 50 99 DC=.81M
+G0 98 9 6 5 2E-2
+R0 98 9 1K
+C1 29 98 12.186P
+D3 1 50 DINB 
+.MODEL DINB D IS=9.6e-13
+D1 2 50 DINA 
+.MODEL DINA D IS=1.04e-12
+D2 99 2 DINC 
+.MODEL DINC D IS=1e-12
+R11 124 0 10MEG
+C4 5 6 6.094P
+D4 99 1 DINC 
+C6 98 22 3.897U
+G8 98 14 0 124 1E-6
+G3 98 29 9 98 1E-3
+R12 98 29 1K
+R8 50 49 3.333K
+R9 49 99 3.333K
+EN 98 99 49 96 1
+GN3 98 14 40 98 1U
+RN1 98 14 1MEG
+L2 0 37 3.183
+ENP 97 0 50 0 1
+ENN 0 96 0 99 1
+G6 98 40 98 29 11.72
+R16 98 40 1K
+V4 19 40 DC=.77
+D5 19 97 DDEF 
+.MODEL DDEF D
+V5 40 31 DC=.77
+D6 96 31 DDEF 
+R13 37 124 1K
+M2 6 7 4 99 MOSFET 
+.MODEL MOSFET NMOS KP=3.684E-3
+M1 5 1 4 99 MOSFET 
+VOS 7 2 DC=0.5M
+G7 0 124 4 99 10E-9
+Q2 48 11 50 QPNPOUT 
+.MODEL QPNPOUT PNP NE=1.5 NF=.67
+F1 99 11 V25 .01
+R32 48 52 31.7
+Q1 53 54 99 QNPNOUT 
+.MODEL QNPNOUT NPN NF=.597
+F2 54 50 V24 .01
+R33 52 53 16.7
+D19 56 59 DDEF 
+D20 58 56 DDEF 
+R34 57 58 100
+V24 0 60 DC=.63
+V25 57 0 DC=.63
+R1 59 60 100
+F3 56 0 V6 1
+V6 52 18 DC=0
+R7 14 52 10K
+.ENDS 
+*********
+*SRC=MC33502;MC33502;Sub Assembly;User Function Block;ON Semi MC33502 Opamp
+*SYM=OSOPAMP
+* |=======================================================
+* |                     MC33502        REV - 8/17/01
+* |                ON SEMICONDUCTOR
+* |               OP-AMP MACRO-MODEL
+* |                with NMOS INPUT 
+* |
+* | This model was developed by
+* | AEI (Analytic Engineering)
+* | 182 Morris Avenue
+* | Holtsville, NY 11742
+* |
+* | Copyright 2001 AEI
+* | All Rights Reserved
+* |
+* | The content of this model is subject to change
+* | without notice and may not be modified or altered
+* | without permission from ON Semiconductor. This model
+* | has been carefully checked and is believed to be
+* | accurate, however neither AEI nor ON Semiconductor
+* | assume liability for the use of this model or the
+* | results obtained from using it.
+* |
+* | For more information regarding modeling services,
+* | model libraries or simulation productors, please
+* | call AEI at (631) 654-0253 ext 116 or 106.
+* | email: Sales@aeng.com.
+* |=======================================================
+*by Paul Sabatino
+*
+* Connections:  Inverting input
+*               | Non-inverting input
+*               | | Output
+*               | | |  Positive power supply
+*               | | |  |  Negative power supply
+*               | | |  |  |
+*               | | |  |  |
+.SUBCKT MC33502 1 2 18 50 99
+*
+* CAUTION:  SET .OPTIONS GMIN=1E-16 TO CORRECTLY MODEL INPUT BIAS CURRENT AND CMR
+*
+* NOTE: - Noise is not modeled.
+*       - Temperature is not modeled.
+*       - PSR is not modeled.
+*       - Model is for single device only.  Simulated supply current is 1/2 of
+*         total package current.
+*
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+I1 4 99 DC=50U
+R3 5 50 1K
+R15 22 40 .0001
+R4 6 50 1K
+I2 50 99 DC=.81M
+G0 98 9 6 5 2E-2
+R0 98 9 1K
+C1 29 98 12.186P
+D3 1 50 DINB 
+.MODEL DINB D IS=9.6e-13
+D1 2 50 DINA 
+.MODEL DINA D IS=1.04e-12
+D2 99 2 DINC 
+.MODEL DINC D IS=1e-12
+R11 124 0 10MEG
+C4 5 6 6.094P
+D4 99 1 DINC 
+C6 98 22 3.897U
+G8 98 14 0 124 1E-6
+G3 98 29 9 98 1E-3
+R12 98 29 1K
+R8 50 49 3.333K
+R9 49 99 3.333K
+EN 98 99 49 96 1
+GN3 98 14 40 98 1U
+RN1 98 14 1MEG
+L2 0 37 3.183
+ENP 97 0 50 0 1
+ENN 0 96 0 99 1
+G6 98 40 98 29 11.72
+R16 98 40 1K
+V4 19 40 DC=.77
+D5 19 97 DDEF 
+.MODEL DDEF D
+V5 40 31 DC=.77
+D6 96 31 DDEF 
+R13 37 124 1K
+M2 6 7 4 99 MOSFET 
+.MODEL MOSFET NMOS KP=3.684E-3
+M1 5 1 4 99 MOSFET 
+VOS 7 2 DC=0.5M
+G7 0 124 4 99 10E-9
+Q2 48 11 50 QPNPOUT 
+.MODEL QPNPOUT PNP NE=1.5 NF=.67
+F1 99 11 V25 .01
+R32 48 52 31.7
+Q1 53 54 99 QNPNOUT 
+.MODEL QNPNOUT NPN NF=.597
+F2 54 50 V24 .01
+R33 52 53 16.7
+D19 56 59 DDEF 
+D20 58 56 DDEF 
+R34 57 58 100
+V24 0 60 DC=.63
+V25 57 0 DC=.63
+R1 59 60 100
+F3 56 0 V6 1
+V6 52 18 DC=0
+R7 14 52 10K
+.ENDS 
+*********
+*SRC=MC33503;MC33503;Sub Assembly;User Function Block;ON Semi MC33503 Opamp
+*SYM=OSOPAMP
+* |=======================================================
+* |                     MC33503        REV - 8/17/01
+* |                ON SEMICONDUCTOR
+* |               OP-AMP MACRO-MODEL
+* |                with NMOS INPUT 
+* |
+* | This model was developed by
+* | AEI (Analytic Engineering)
+* | 182 Morris Avenue
+* | Holtsville, NY 11742
+* |
+* | Copyright 2001 AEI
+* | All Rights Reserved
+* |
+* | The content of this model is subject to change
+* | without notice and may not be modified or altered
+* | without permission from ON Semiconductor. This model
+* | has been carefully checked and is believed to be
+* | accurate, however neither AEI nor ON Semiconductor
+* | assume liability for the use of this model or the
+* | results obtained from using it.
+* |
+* | For more information regarding modeling services,
+* | model libraries or simulation productors, please
+* | call AEI at (631) 654-0253 ext 116 or 106.
+* | email: Sales@aeng.com.
+* |=======================================================
+*by Paul Sabatino
+*
+* Connections:  Inverting input
+*               | Non-inverting input
+*               | | Output
+*               | | |  Positive power supply
+*               | | |  |  Negative power supply
+*               | | |  |  |
+*               | | |  |  |
+.SUBCKT MC33503 1 2 18 50 99
+*
+* CAUTION:  SET .OPTIONS GMIN=1E-16 TO CORRECTLY MODEL INPUT BIAS CURRENT AND CMR
+*
+* NOTE: - Noise is not modeled.
+*       - Temperature is not modeled.
+*       - PSR is not modeled.
+*
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+*FAMILY = ANALOG
+I1 4 99 DC=50U
+R3 5 50 1K
+R15 22 40 .0001
+R4 6 50 1K
+I2 50 99 DC=.81M
+G0 98 9 6 5 2E-2
+R0 98 9 1K
+C1 29 98 12.186P
+D3 1 50 DINB 
+.MODEL DINB D IS=9.6e-13
+D1 2 50 DINA 
+.MODEL DINA D IS=1.04e-12
+D2 99 2 DINC 
+.MODEL DINC D IS=1e-12
+R11 124 0 10MEG
+C4 5 6 6.094P
+D4 99 1 DINC 
+C6 98 22 3.897U
+G8 98 14 0 124 1E-6
+G3 98 29 9 98 1E-3
+R12 98 29 1K
+R8 50 49 3.333K
+R9 49 99 3.333K
+EN 98 99 49 96 1
+GN3 98 14 40 98 1U
+RN1 98 14 1MEG
+L2 0 37 3.183
+ENP 97 0 50 0 1
+ENN 0 96 0 99 1
+G6 98 40 98 29 11.72
+R16 98 40 1K
+V4 19 40 DC=.77
+D5 19 97 DDEF 
+.MODEL DDEF D
+V5 40 31 DC=.77
+D6 96 31 DDEF 
+R13 37 124 1K
+M2 6 7 4 99 MOSFET 
+.MODEL MOSFET NMOS KP=3.684E-3
+M1 5 1 4 99 MOSFET 
+VOS 7 2 DC=0.5M
+G7 0 124 4 99 10E-9
+Q2 48 11 50 QPNPOUT 
+.MODEL QPNPOUT PNP NE=1.5 NF=.67
+F1 99 11 V25 .01
+R32 48 52 31.7
+Q1 53 54 99 QNPNOUT 
+.MODEL QNPNOUT NPN NF=.597
+F2 54 50 V24 .01
+R33 52 53 16.7
+D19 56 59 DDEF 
+D20 58 56 DDEF 
+R34 57 58 100
+V24 0 60 DC=.63
+V25 57 0 DC=.63
+R1 59 60 100
+F3 56 0 V6 1
+V6 52 18 DC=0
+R7 14 52 10K
+.ENDS 
+*********

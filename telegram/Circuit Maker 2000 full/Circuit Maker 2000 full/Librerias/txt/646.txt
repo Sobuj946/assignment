@@ -1,0 +1,488 @@
+****************************************************************
+*   H646 Clock Driver I/O Modelling Kit - Netlist Schematics   *
+*                                                              *
+*     The purpose of this document is to provide the netlists  *
+* for the various schematics supplied in the H646 Clk Driver   *
+* I/O Modelling Kit Application Note.  This information will   *
+* save design engineers who have no schematic capture tools    *
+* at their disposal the task of producing the SPICE netlists   *
+* for the schematics. To use these netlists it will require    *
+* a copy of the H646 I/O SPICE Modelling Kit application       *
+* note.  This note is required to identify the appropriate     *
+* input and output models for a specific device as well as the *
+* appropriate package model and ESD structure.  In addition a  *
+* copy of this note will help visualize the netlists and ease  *
+* the building of the simulation circuits.                     *
+*                                                              *
+*                   Netlist Organization                       *
+*                                                              *
+*     The netlists are organized as a group of subcircuits so  *
+* that the user can simply build a simulation netlist by       *
+* calling the appropriate subcircuit models.  In this way any  *
+* problems associated with commonality in node numbering       *
+* or component naming due to the use of multiple copies of a   *
+* schematic will be eliminated.                                *
+*     There are a group of GLOBAL nodes for the schematics,    *
+* they are as follows:                                         *
+*                                                              *
+*                EVCC = Node (110)                             *
+*                VEE = Node (200)                              *
+*                VBB = Node (300)                              *
+*                VCS = Node (400)                              *
+*                TVCCI = Node (100)                            *
+*                TVCCO = Node (500)                            *
+*                GNDI = Node (710)                             *
+*                GNDO = Node (700)                             *
+*                                                              *
+* A detailed discussion on these nodes can be found in the     *
+* application note.                                            *
+*     All of the subcircuits are labeled as to what they rep-  *
+* represent (ie. ECL input gate) and are cross referen-        *
+* ced to the figure numbers in the application note.  In       *
+* addition all of the subcircuits list the node numbers for    *
+* the specified inputs and outputs for the cell.  This will    *
+* ease the task of interconnecting the simulation netlist.     *
+* The component labels used in the netlists are identical to   *
+* those on the schematics in the application note.  With the   *
+* simplicity of the models this should allow the user to trace *
+* the netlists back to the schematics.                         *
+*                                                              *
+*   The user may notice that there are four terminals on       *
+* the transistor models.  The fourth terminal represents       *
+* the connection to the substrate and is always biased to the  *
+* most negative voltage in the schematic.                      *
+*                                                              *
+****************************************************************
+*                                                              *
+*                     Subcircuit Netlists                      *
+*                                                              *
+*                                                              *
+*                                                              *
+*********        TTL Input Gate  (Figure 2)           **********
+*                                                              *
+* IN = Node (898) Q = Node (911) VBT = Node (912)              *
+****************************************************************
+
+.SUBCKT TTLIN 100 710 898 911 912
+* NODES: VCCI,GNDI,IN,Q,VBT
+Q1 710 901 911 TPNP2
+Q2 1 1 2 0 T2X8A
+Q3 2 2 710 0 T2X8A
+R1/R1A 100 3 2000 TC= 431.6U, 8.97U
+R1/R1B 3 911 2000 TC= 431.6U, 8.97U
+DR1/D1 3 100 RES-DIODE
+R2/R1A 100 4 2000 TC= 431.6U, 8.97U
+R2/R2B 4 912 2000 TC= 431.6U, 8.97U
+DR2/D1 4 100 RES-DIODE
+XDS1 911 912 FPS102
+XDS2 912 1 FPS102
+XESD 901 710 FPS009EX
+XPKG 898 901 PKG28
+.ENDS TTLIN
+
+**********      Typical ECL Input (Figure 1)          **********
+*                                                              *
+* IN = Node (899) Q = Node (831) QB = Node (832)               *
+****************************************************************
+
+.SUBCKT ECLIN 110 200 300 400 899 831 832
+Q1 2 821 4 200 T2X4A
+Q2 3 300 4 200 T2X4A
+Q3 4 400 5 200 T2X4A
+Q4 110 3 831 200 T2X4A
+Q5 110 2 832 200 T2X4A
+Q6 832 832 6 200 T2X4A
+Q7 831 831 8 200 T2X4A
+Q8 8 400 9 200 T2X4A
+Q9 6 400 7 200 T2X4A
+R2/R1A 110 20 250 TC= 431.6U, 8.97U
+R2/R1B 20 2 250 TC= 431.6U, 8.97U
+DR2/D1 20 110 RES-DIODE
+R3/R1A 110 30 250 TC= 431.6U, 8.97U
+R3/R1B 30 3 250 TC= 431.6U, 8.97U
+DR3/D1 30 110 RES-DIODE
+R4/R1A 5 40 230 TC= 431.6U, 8.97U
+R4/R1B 40 200 230 TC= 431.6U, 8.97U
+DR4/D1 40 110 RES-DIODE
+R5/R1A 7 50 460 TC= 431.6U, 8.97U
+R5/R1B 50 200 460 TC= 431.6U, 8.97U
+DR5/D1 50 110 RES-DIODE
+R6/R1A 9 60 460 TC= 431.6U, 8.97U
+R6/R1B 60 200 460 TC= 431.6U, 8.97U
+DR6/D1 60 110 RES-DIODE
+RPD 821 200 50000
+XESD 110 200 821 ESD
+XPKG 899 821 PKG28
+.ENDS ECLIN
+
+**********        H646 Output Gate (Figure 3)         **********
+*                                                              *
+*   IN= Node (841)  INB= Node (842)  OUT = Node (999)          *
+****************************************************************
+
+.SUBCKT H646OUT 100 500 700 710 900 841 842 999
+* NODES: TVCCI, TVCCO,GNDO,GNDI,BIAS1,IN,INB,OUT
+XQ1 22 19 710 FPN025
+XQ2 24 14 710 FPN025X
+XQ3 500 22 25 871 27 QPNN05M
+XQ4 871 24 700 QPN139
+Q5 710 900 37 TPNP2
+Q6 100 842 6 710 T05I1
+Q7 3 30 710 710 T05I1
+Q8 8 30 710 710 T05I1
+XQ9 12 3 14 FPN108
+XQ10 18 8 19 FPN108
+Q11 100 841 1 710 T05I1
+Q13 100 100 31 710 T05I1
+Q14 31 31 32 710 T05I1
+Q15 100 34 30 710 T05I1
+Q16 34 30 710 710 T05I1
+XDS3A 22 36 FPS003
+XDS3B 25 37 FPS003
+XDS2 25 22 FPS003
+XDS4 29 710 FPS003
+XDS5 36 37 FPS003
+R1/R1A 100 21 1000 TC= 431.6U, 8.97U
+R1/R1B 21 22 1000 TC= 431.6U, 8.97U
+DR1/D1 21 100 RES-DIODE
+R3/R1A 100 23 500 TC= 431.6U, 8.97U
+R3/R1B 23 24 500 TC= 431.6U, 8.97U
+DR3/D1 23 100 RES-DIODE
+R4/R1A 100 26 350 TC= 431.6U, 8.97U
+R4/R1B 26 27 350 TC= 431.6U, 8.97U
+DR4/D1 26 100 RES-DIODE
+R6/R1A 25 28 10000 TC= 431.6U, 8.97U
+R6/R1B 28 29 10000 TC= 431.6U, 8.97U
+DR6/D1 28 100 RES-DIODE
+R7/R1A 1 2 600 TC= 431.6U, 8.97U
+R7/R1B 2 3 600 TC= 431.6U, 8.97U
+DR7/D1 2 100 RES-DIODE
+R8/R1A 6 7 600 TC= 431.6U, 8.97U
+R8/R1B 7 8 600 TC= 431.6U, 8.97U
+DR8/D1 7 100 RES-DIODE
+R9/R1A 100 11 600 TC= 431.6U, 8.97U
+R9/R1B 11 12 600 TC= 431.6U, 8.97U
+DR9/D1 11 100 RES-DIODE
+R10/R1A 100 17 600 TC= 431.6U, 8.97U
+R10/R1B 17 18 600 TC= 431.6U, 8.97U
+DR10/D1 17 100 RES-DIODE
+R13/R1A 14 15 250 TC= 431.6U, 8.97U
+R13/R1B 15 710 250 TC= 431.6U, 8.97U
+DR13/D1 15 100 RES-DIODE
+R14/R1A 19 20 250 TC= 431.6U, 8.97U
+R14/R1B 20 710 250 TC= 431.6U, 8.97U
+DR14/D1 20 100 RES-DIODE
+R15/R1A 100 35 2000 TC= 431.6U, 8.97U
+R15/R1B 35 36 2000 TC= 431.6U, 8.97U
+DR15/D1 35 100 RES-DIODE
+R17/R1A 30 38 2500 TC= 431.6U, 8.97U
+R17/R1B 38 710 2500 TC= 431.6U, 8.97U
+DR17/D1 38 100 RES-DIODE
+R19/R1A 32 33 707.5 TC= 431.6U, 8.97U
+R19/R1B 33 34 707.5 TC= 431.6U, 8.97U
+DR19/D1 33 100 RES-DIODE
+XESD 871 700 FPS009EX
+XPKG 871 999 PKG28
+.ENDS H646OUT
+
+**********               FPS003 (Figure 4)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)                                 *
+****************************************************************
+
+.SUBCKT FPS003 1 2
+RX 3 4 2 TC= .445M, 2.78U
+REPI 4 5 15.3 TC= .445M, 2.78U
+REXT 5 2 22.9 TC= .445M, 2.78U
+DS1 1 3 GRS003
+D1 0 5 DSUBS003
+.ENDS FPS003
+
+**********              QPNN05M (Figure 4)           ***********
+*                                                              *
+*       N1 = Node (1)  N2 = Node (2)  N3 = Node (3)            *
+*       N4 = Node (4)  N5 = Node (5)                           *
+****************************************************************
+
+.SUBCKT QPNN05M 1 2 3 4 5
+Q1 5 2 3 0 PNN05A
+Q1A 5 2 1 0 PNN05A
+Q2 6 3 4 0 PNN05B
+RT 1 6 5.4 TC= .445M, 2.78U
+D1 0 5 DSUB1N05
+D2 0 6 DSUB2N05
+DS1 2 5 WN05
+.ENDS QPNN05M
+
+**********               QPN139 (Figure 4)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)  N3 = Node (3)                  *
+****************************************************************
+
+.SUBCKT QPN139 1 2 3
+Q1 4 2 3 0 PN139
+Q2 5 2 3 0 PN139
+Q3 6 2 3 0 PN139
+Q4 7 2 3 0 PN139
+R1 1 4 7.89 TC= .445M, 2.78U
+R2 1 5 7.89 TC= .445M, 2.78U
+R3 1 6 7.89 TC= .445M, 2.78U
+R4 1 7 7.89 TC= .445M, 2.78U
+DS1 2 4 GR139
+DS2 2 5 GR139
+DS3 2 6 GR139
+DS4 2 7 GR139
+D1 0 7 DSUB139
+.ENDS QPN139
+
+**********               FPN025 (Figure 4)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)  N3 = Node (3)                  *
+****************************************************************
+
+.SUBCKT FPN025 1 2 3
+Q1 4 2 3 0 PN025
+R1 1 4 23.4 TC= .445M, 2.78U
+D1 0 4 DSUB025
+DS1 2 4 FP025
+.ENDS FPN025
+
+**********               FPS102 (Figure 2)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)                                 *
+****************************************************************
+
+.SUBCKT FPS102 1 2
+D1 0 3 DSUBS102
+DS1 1 3 WS102
+REXT 3 2 39.1 TC= .445M, 2.78U
+.ENDS FPS102
+
+**********              FPN025X (Figure 4)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)  N3 = Node (3)                  *
+****************************************************************
+
+.SUBCKT FPN025X 1 2 3
+Q1 4 2 3 0 PN025X
+R1 1 4 19.1 TC= .445M, 2.78U
+D1 0 4 DSUB025X
+DS1 2 4 FP025X
+.ENDS FPN025X
+**********       ECL ESD CIRCUITRY (Figure 5)        ***********
+*                                                              *
+* IN = OUT = Node (1)                                          *
+****************************************************************
+
+.SUBCKT ESD 110 200 1
+* NODES: EVCC, VEE, IN/OUT
+QESD1 1 200 200 200 T2X12E
+QESD2 110 1 1 200 T2X12E
+.ENDS ESD
+
+**********  TTL ESD Circuitry FPS009EX  (Figure 5)   ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)                                 *
+****************************************************************
+
+.SUBCKT FPS009EX 1 2
+Q1 3 2 2 0 PN009E
+R1 1 3 4.97 TC= .445M, 2.78U
+D1 0 3 DSUB009E
+DS1 2 3 GR009E
+.ENDS FPS009EX
+
+**********            Package Models (Figure 5)        **********
+*                                                               *
+*                                                               *
+* Package Model (28-lead PLCC)                                  *
+* EXT = Node (84) INT = Node (81)                               *
+*****************************************************************
+
+.SUBCKT PKG28 84 81
+CPKG 82 0 1.5PF
+RPKG1 84 82 750
+RPKG2 82 83 750
+RPKG3 83 81 .2
+LPKG1 84 82 3.5NH
+LPKG2 82 83 3.5NH
+.ENDS PKG28
+
+**********               FPN108 (Figure 4)           ***********
+*                                                              *
+* N1 = Node (1)  N2 = Node (2)  N3 = Node (3)                  *
+****************************************************************
+
+.SUBCKT FPN108 1 2 3
+Q1 4 2 3 0 PN108
+R1 1 4 19.5 TC=4.45E-4,2.78E-6
+D1 0 4 DSUB108
+DS1 2 4 W108
+.ENDS FPN108
+
+***********************   SPICE Parameter List   *************************
+*
+*                        TTL Subcircuit Models                           *
+*                                                                        *
+**************************************************************************
+.MODEL DSUB108 D    (CJO=163FF VJ=.51 M=.24)
+.MODEL PN108 NPN    (IS=1.75e-17 BF=113 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=.75MA ISC=1.9E-16 NC=1 RB=638.8 RBM=222
++                   RE=0 RC=87
++                   CJE=90.6FF VJE=.9 MJE=.4
++                   CJC=50.3FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=4.1MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL W108 D       (IS=5.1E-13 RS=58.8 N=1.044 TT=10PS
++                   CJO=68.3FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+*
+.MODEL DSUB1N05 D   (CJO=203FF VJ=.51 M=.24)
+.MODEL DSUB2N05 D   (CJO=388FF VJ=.51 M=.24)
+.MODEL PNN05A NPN   (IS=1.662E-17 BF=70 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=.7125MA ISC=1.803E-16 NC=1 RB=656.7 RBM=218
++                   RE=0 RC=91.62
++                   CJE=86.47FF VJE=.9 MJE=.4
++                   CJC=58.32FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=3.89MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL PNN05B NPN   (IS=1.583E-16 BF=70 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=6.78MA ISC=1.717E-15 NC=1 RB=77.29 RBM=31.25
++                   RE=0 RC=9.61
++                   CJE=751.6FF VJE=.9 MJE=.4
++                   CJC=445.2FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=37.1MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL WN05 D       (IS=1.0578E-12 RS=37.6 N=1.044 TT=10PS
++                   CJO=141.75FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL DSUB025X D   (CJO=284FF VJ=.51 M=.24)
+.MODEL PN025X NPN   (IS=4.32E-17 BF=113 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=1.85MA ISC=4.68E-16 NC=1 RB=175 RBM=65
++                   RE=0 RC=35.2
++                   CJE=193FF VJE=.9 MJE=.4
++                   CJC=158FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=5.7MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL FP025X D     (IS=1.08E-13 RS=48.3 N=1.044 TT=10PS
++                   CJO=90FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL DSUB025 D    (CJO=284FF VJ=.51 M=.24)
+.MODEL PN025 NPN    (IS=2.45E-17 BF=113 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=1MA ISC=2.66E-16 NC=1 RB=193 RBM=89
++                   RE=0 RC=62
++                   CJE=123FF VJE=.9 MJE=.4
++                   CJC=108FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=5.7MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL FP025 D      (IS=1.4E-13 RS=52 N=1.044 TT=10PS
++                   CJO=117FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL DSUB139 D    (CJO=2.12PF VJ=.51 M=.24)
+.MODEL PN139 NPN    (IS=1.03E-16 BF=113 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=4.4MA ISC=1.22E-16 NC=1 RB=117 RBM=47
++                   RE=0 RC=8.41
++                   CJE=493FF VJE=.9 MJE=.4
++                   CJC=244FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=96.7MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL GR139 D      (IS=7E-14 RS=10 N=1.044 TT=10PS
++                   CJO=88FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL GRS003 D     (IS=4.27E-14 RS=53 N=1.044 TT=10PS
++                   CJO=54FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL DSUBS003 D   (IS=1E-16 RS=0 N=1 TT=500PS
++                   CJO=127FF VJ=.51 M=.24
++                   EG=1.115 XTI=3 FC=.5 BV=35)
+.MODEL DSUB009E D   (CJO=106FF VJ=.51 M=.24)
+.MODEL PN009E NPN   (IS=3.92E-16 BF=113 NF=1.008 VAF=30 IKF=10A
++                   ISE=0 NE=1 BR=5 NR=1 XCJC=.1 VAR=100
++                   IKR=.3MA ISC=4.25E-15 NC=1 RB=185 RBM=39
++                   RE=0 RC=3.9
++                   CJE=1.37PF VJE=.9 MJE=.4
++                   CJC=609FF VJC=.53 MJC=.37
++                   TF=40P XTF=0 VTF=100 ITF=1.64MA PTF=0
++                   TR=200P XTB=1.51 EG=1.115 XTI=5 FC=0.5 )
+.MODEL GR009E D     (IS=5.4E-13 RS=9.57 N=1.044 TT=10PS
++                   CJO=683FF VJ=.4 M=.33
++                   EG=.69 XTI=3 FC=.5 BV=30)
+*
+.MODEL WS102 D    (IS=4.64E-13 RS=46 N=1.044 TT=10PS
++                 CJO=62.2FF VJ=.4 M=.33
++                 EG=.69 XTI=3 FC=.5 BV=30)
+.MODEL DSUBS102 D (IS=1E-16 RS=0 N=1 TT=500PS
++                 CJO=85FF VJ=.51 M=.24
++                 EG=1.115 XTI=3 FC=.5 BV=35)
+*
+***********************************************************************
+*                 ECL Transistor Models                               *
+*                                                                     *
+***********************************************************************
+.MODEL T05I1 NPN
++  IS=21.18E-18  BF=112    BR=5.108  RE=1.533   IKF=.0213 VAF=41.8
++  ISE=250E-18   RB=52.7   RBM=0     IRB=0      IKR=53E-5 VAR=3.766
++  ISC=95.62E-18 EG=1.11   RC=26.33  NC=1.141   NR=.997
++  CJE=67.7E-15  VJE=1.037 MJE=.5718 NF=1.000   XTI=4.7
++  CJC=99.5E-15  VJC=.603  MJC=.266  NE=2.000   XTB=1.15
++  CJS=152E-15   VJS=.5052 MJS=.3465 TR=9.92E-9 PTF=20
++  TF=35E-12     XTF=2.25  VTF=1.67  ITF=.00808 XCJC=.069 FC=.8
+.MODEL TPNP2 PNP
++  IS=7.69E-17 BF=5 BR=1 RB=164 RC=56 CJE=.086E-12
++  CJC=1.4E-12
+.MODEL T2X4A NPN
++  IS=12.88E-18  BF=112.3  BR=.9806  RE=2        IKF=.0143  VAF=46
++  ISE=239.4E-18 RB=400    RBM=200   IRB=850E-6  IKR=.364   VAR=3.581
++  ISC=64.04E-18 EG=1.11   RC=35.4   NC=1.045    NR=.9972
++  CJE=44.5E-15  VJE=1.037 MJE=.572  NF=1.000    XTI=4.7
++  CJC=61E-15    VJC=.75   MJC=.266  NE=2.000    XTB=1.15
++  CJS=109.4E-15 VJS=.5815 MJS=.5273 TR=9.92E-9  PTF=30
++  TF=32E-12     XTF=2.25  VTF=1.67  ITF=.00808  XCJC=.059  FC=.8
+.MODEL T2X8A NPN
++  IS=25.32E-18  BF=113    BR=1.383  RE=1.50     IKF=.0273  VAF=46
++  ISE=478E-18   RB=222    RBM=111   IRB=1.7E-3  IKR=.3655  VAR=3.581
++  ISC=80E-18    EG=1.11   RC=22.67  NC=1.045    NR=.9972
++  CJE=79.6E-15  VJE=1.037 MJE=.572  NF=1.000    XTI=4.7
++  CJC=88.7E-15  VJC=.75   MJC=.266  NE=2.000    XTB=1.15
++  CJS=130.9E-15 VJS=.5815 MJS=.5273 TR=8.515E-9 PTF=50
++  TF=34.62E-12  XTF=2.599 VTF=1.578 ITF=.016    XCJC=.085  FC=.8
+.MODEL T2X12E NPN
++  IS=37.37E-18  BF=113    BR=1.383  RE=1.30     IKF=.0411  VAF=464
++  ISE=726E-18   RB=154    RBM=76.9  IRB=2.55E-3 IKR=.3655  VAR=3.681
++  ISC=100E-18   EG=1.11   RC=17     NC=1.045    NR=.9972
++  CJE=114E-15   VJE=1.037 MJE=.572  NF=1.000    XTI=4.7
++  CJC=114E-15   VJC=.75   MJC=.266  NE=2.000    XTB=1.15
++  CJS=152.3E-15 VJS=.5815 MJS=.5273 TR=8.515E-9 PTF=80
++  TF=34.62E-12  XTF=2.599 VTF=1.475 ITF=.024    XCJC=.099  FC=.8
+*
+*
+**********************************************************************
+*                      Resistor Diode Model                          *
+*                                                                    *
+**********************************************************************
+.MODEL RES-DIODE D (IS=1E-16 TT=1NS VJ=.759V M=.333 CJO=50FF )
+
+
+
+
+
+▌║|HHз(ЪАЪАЫEG(ЭHHз(d'░@VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVSummaryInformation(ЪЪЪЪЪЪЪЪЪЪЪЪщЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪ╗/f(╫@Microsoft Word 6.0.15ЪЧ	ЪЪЪЧЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVO├YЧuA┌цE├гI┼кM▌оQ▓сU√в	Y	 	ш	
+]
+·
+ъ
+ a╒Ц$e╕Г(
+i
+╙
+К
+,mЭю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-m╝О0q╡С4u╤В8y╨Ш<}╬Ъ@Ac■╔╦э;_v┼°╡еярT∙жв+Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-+@Wn┘°╠фЙ$Hj┌╓хЮ&>`└°╝цжБЦ$e╕ГХI^t▒╖╩рХЧ%=Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-=Vm┘²╟цуХЗC[╒╨ч>c{°╫тУ-Qt▄╠уН7Pt≥╡ьЩ ; a z Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-z   ф ъ У !!!X!≥!з!""/"I"h"┤"√"╕"Ё"╢"У"6#w#╦#Ы#З#$&$9$K$g$w$┤$■$╒$ё$Д$%%f%╖%╗%╫%н%ъ%П%Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-П%&&;&X&u&┐&▒&÷&╜&╪&и&й&'L'█'н'о'Д'У'(!(/(<(=(~(©()A)B)U)e)s)▓)÷) )А)"*c*╓*╔*╩*м*Й*З*	+Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-	++X+≥+з+,,2,M,h,│,▀,▄,м,-O-░-▒-╕-╦-у-Е-Т-..F.┬.й./N/░/▒/╔/╣/е/у/Д/Ж/000V0≈0ь011Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-1/1@1_1n1{1┬1┴1т1ж1!2l2╥2Д2$3]3²3╪3И34Q4▌4ф4Я45!5N5{5╩5Т586Z6┬6╦6Р6/7o7╗7М78<8l8╕8Ц89K9Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-K9y9╕9Ф9:^::╚:ы:;O;┬;╠;ъ;<L<┘<а<Ю<=:=s=╟=Ф=>>>l>╛>Е>#?D?p?·?ь?@I@r@ @в@A.A^A┴A╧AФA&BЭю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-&B_B°B╪BИBCQC▌CфCПCD DUD~D╙DьDE.E0ExEюEFPFaF╓FХF GXG▒GхGHHLH[HlH╞HУH/IhI╒IзIJ-JpJ╤JПJЭю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0Щ-ПJ)KcK⌡KщKОK3LyLЁLЛL&M^M M╒M╓MКM2NyNюNЪNOOOOOЭю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,Эю!,0ЩK @ЯЪ Normal	]a	c"A@РЪ║"Default Paragraph FontLOOЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪ	ЪЪ
+ЪЪЪЪК
+ж╩t╒!▓&▒,Т2╛;ХCLLA%
+D9	8
+├Y-m+=z П%	+1K9&BПJO./012345678gMotorola[Macintosh HD:DATA:Tech Data:Spice/IBIS Models:  SPICE Models:ECL:10K/10H:H646 I/O SPICE KITЪ@VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVLxГЛ@MTimes New RomanSymbolMArial░MNew York"─пЬ╩!╕┐$─+9H646 I/O SPICE KITCleon PettyMotorolaпоЮ║╠А;ЪЧ	ЪЪЪЧЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪ
+

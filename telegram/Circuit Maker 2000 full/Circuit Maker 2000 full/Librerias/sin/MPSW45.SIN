@@ -1,0 +1,65 @@
+template mpsw45 c b e
+#*********************************************************************
+#               This template created by Analogy, Inc.               *
+#           for exclusive use with the Saber(TM) simulator.          *
+#           Copyright 1997, Analogy, Inc.                            *
+#   This template may not be  reproduced in any way (physically or   *
+#   electronically)  without permission  from Analogy,  Inc.   The   *
+#   content  of this template is subject to change without notice.   *
+#   Analogy does not assume liability for the use of this template   *
+#   or the results obtained from using it.                           *
+#*********************************************************************
+# Model generated on Apr 14, 98
+# MODEL FORMAT: Saber
+# Darlington macro model
+# External node designations
+# Node c -> Collect
+# Node b -> Base
+# Node e -> Emitter
+electrical c,b,e
+
+external number temp
+
+string part_type  = "bjt"
+string part_class = "darlington"
+
+export val i  ic, ib
+export val p  pwrd
+export val tc tempj
+
+{
+# BODY_BEGIN
+# Default values used in dmodel
+#   EG=1.11 TT=0 BV=infinite
+spd..model dmodel=(
+is=1e-12,rs=10,n=1,xti=3,
+cjo=0,vj=0.75,m=0.33,fc=0.5)
+spq..model qmodel=(type=_n,
+is=1.0035e-12,bf=377.195,nf=1.15276,vaf=107.442,
+ikf=0.0515222,ise=1.49147e-11,ne=2.13322,br=5.03586,
+nr=1.11644,var=117.493,ikr=0.0999644,isc=9.49798e-14,
+nc=2.12847,rb=13.4767,irb=0.20768,rbm=10.084,
+re=0.15954,rc=0.797702,xtb=1.69624,xti=1,eg=1.05,
+cje=1.62439e-11,vje=0.95,mje=0.43803,tf=1e-09,
+xtf=100,vtf=10,itf=1,cjc=1.51284e-11,
+vjc=0.4,mjc=0.356798,xcjc=0.9,fc=0.5,
+tr=7e-06,ptf=0,kf=0,af=1)
+spq..model q1m=(type=_n,
+is=1.0035e-12,bf=377.195,nf=1.15276,vaf=107.442,
+ikf=0.0515222,ise=1.49147e-11,ne=2.13322,br=5.03586,
+nr=1.11644,var=117.493,ikr=0.0999644,isc=9.49798e-14,
+nc=2.12847,rb=13.4767,irb=0.20768,rbm=10.084,
+re=0.15954,rc=0.797702,xtb=1.69624,xti=1,eg=1.05,
+cje=1.62439e-11,vje=0.95,mje=0.43803,tf=1e-09,
+xtf=100,vtf=10,itf=1,cjc=0,
+vjc=0.4,mjc=0.356798,xcjc=0.9,fc=0.5,
+tr=7e-06,ptf=0,kf=0,af=1)
+spq.q1 c b d d=model=qmodel
+spq.q2 c d e e=model=q1m,area=4.0573
+spd.d1 e c=model=dmodel
+
+pwrd  = pwrd(spq.q1) + pwrd(spq.q2) + pwrd(spd.d1))
+icc   =   icc(spq.q2)
+ib    =   icc(spq.q1) - iee(spq.q1)
+tempj = tempj(spq.q2)
+}

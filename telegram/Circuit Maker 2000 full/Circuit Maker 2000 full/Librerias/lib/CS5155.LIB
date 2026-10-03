@@ -1,0 +1,208 @@
+*	|==========================================================
+*	|
+*	|
+*	|
+*	|			   CS5155 Rev A
+*	|
+*	|			ON SEMICONDUTOR
+*	|
+*	|		 CPU 5-Bit Synchronous Buck Controller
+*	|
+*	|
+*	|
+*	|	This model was developed by
+*	|
+*	|	AEI (Analytic Engineering)
+*	|
+*	|	182 Morris Avenue
+*	|
+*	|	Holtsville, NY 11742
+*	|
+*	|	Copyright 2001 AEI
+*	|
+*	|	All Rights Reserved
+*	|
+*	|
+*	|
+*	|	The content of this model is subject to change
+*	|
+*	|	without notice and may not be modified or altered
+*	|
+*	|	without permission from On Semiconductor. This model
+*	|
+*	|	has been carefully checked and is believed to be
+*	|
+*	|	accurate, however neither AEI nor On Semiconductor
+*	|
+*	|	assume liability for the use of this model or the
+*	|
+*	|	results obtained from using it.
+*	|
+*	|
+*	|
+*	|	For more information regarding modeling services,
+*	|
+*	|	model libraries or simulation productors, please
+*	|
+*	|	call AEI at (631) 654-0253 ext 116 or 106.
+*	|
+*	|	email: Sales@aeng.com.
+*	|
+*	|
+*	|
+*	|==========================================================
+**SPICE MODEL DESIGNER: KEHINDE OMOLAYO 9-20-01
+**********
+*SRC=CS5155;CS5155;ON SEMI;;Synchronous Buck Controller
+*SYM=CS5155
+.SUBCKT CS5155 1 2 3 4 5 6 7 8 9 10 11 12 13 0 15 16
+*TERMINAL IDENTIFICATION #:
+*VID0=1 VID1=2 VID2=3 VID3=4 SS=5 VID4=6 COFF=7
+*VFFB=8 VCC2=9 VGATE(H)=10 PGnd=11 VATE(L)=12 
+*VCC1=13 LGnd=0 COM=15 VFB=16
+*VID0=1 VID1=2 VID2=3 VID3=4 SS=5 VID4=6 COFF=7
+*VFFB=8 VCC2=9 VGATE(H)=10 PGND=11 VATE(L)=12 
+*VCC1=13 LGND=0 COM=15 VFB=16
+.MODEL D5155 D (RS=0.78 N=0.005 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL D5155A D (RS=0.78 N=1.95 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL D5155B D (RS=0.78 N=0.5 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL Q5155 NPN (IS=15.2F NF=1 BF=500 VAF=98.5 IKF=.5
++ ISE=8.2P NE=2 BR=4 NR=1 VAR=20 IKR=.225 RE=.01 RB=1.49
++ RC=.01 XTB=1.5 CJE=35.5P CJC=5P TF=500P TR=2N)
+.MODEL VCC1_5155 SW (VT=3.875 VH=0.025 RON=1 ROFF=1MEG
+.SUBCKT RS5155 2 3 4 5 {TD=1N}
+*RS LATCH FLIP FLOP TERMINAL ID#
+C1 11 0 10P
+R3 10 8 {TD/6.9315P}
+C3 8 0 10P
+B1 10 0 V=V(2)>1 ? V(5)>1 ? 0 : 2
+B2 16 0 V=V(3)>1 ? V(4)>1 ? 0 : 2
+B5 4 0 V=V(8)>1 ? 2 : 0
+B6 5 0 V=V(11)>1 ? 2 : 0
+R1 16 11 {TD/6.9315P}
+.ENDS
+.SUBCKT LIMIT5155 1 2
+*PARAMETERS ARE GAIN={K} 
+*POS LIMIT = {PLIM}  NEG LIMIT = {NLIM}
+RIN 1 0 1E12
+E1 3 0 0 1 {K}
+RC1 2 4 1MEG
+C1 2 4 1F IC=0
+R1 3 4 1MEG
+E2 2 0 0 4 1E6
+*DIODES WILL HAVE .0597V DROP AT 10V INPUT FOR GAIN=1
+*IDIODE = IS*EXP(.597/.O26)
+VN 5 2 {NLIM-.0597}
+DN 4 5 DN
+.MODEL DN D(IS=1E-12 N=.14319)
+VP 2 6 {PLIM-.0597}
+DP 6 4 DN
+.ENDS
+R1 4 0 1G
+R2 3 0 1G
+R3 2 0 1G
+R4 1 0 1G
+R5 6 0 1G
+R6 17 6 50K
+D1 18 19 D5155A
+R7 19 4 50K
+D2 18 20 D5155A
+R8 20 3 50K
+D3 18 21 D5155A
+R9 21 2 50K
+D4 18 22 D5155A
+R10 22 1 50K
+D5 18 17 D5155A
+S1 18 23 13 0 VCC1_5155
+R11 23 0 100K
+B1 18 0 V=5/(1+EXP(1.43*(3.5-V(13))))
+B2 25 0 V=V(1)>1.25 ? 50M : 0
+B3 24 25 V=V(2)>1.25 ? 0.1 : 0
+B4 26 24 V=V(3)>1.25 ? 0.2 : 0
+B5 28 26 V=V(4)>1.25 ? 0.4 : 0
+B6 29 0 V=V(6)>1.25 ? V(28)>0.725 ? 1.244*V(18)/5 : 
++ V(6)>1.25 ? (3.54-2*V(28))*V(18)/5 : (2.09-V(28))*V(18)/5
+B7 18 5 I=30U*(2-V(33))
+B8 5 0 I=V(23)>2.5 ? V(32)>1 ? 1U*V(33) : 1M
+X1 27 31 33 34 RS5155 {TD=1N }
+B9 27 0 V=V(31)<1 ? 2 : V(5)>2.5 ? V(51)>1 ? 0 : 2
+B10 31 0 V=V(32)<1 ? 0 : V(5)<0.7 ? 0 : 2
+V2 32 0 PULSE 0 2 0.1U
+D6 0 5 D5155
+R15 0 15 496K
+D9 41 65 D5155A
+B13 37 0 I=1.275M*V(32)/(1+50*EXP(V(39)))
+D10 0 37 D5155
+C2 15 0 0.22U IC=0.16
+X2 38 39 LIMIT5155 {K=1 PLIM=100 NLIM=100 }
+E1 38 0 29 16 100
+V3 35 0 1.05
+X3 48 42 63 47 RS5155 {TD=1N }
+B16 48 0 V=V(42)<1 ? 2 : V(53)>1 ? 2 : 0
+B17 42 0 V=V(32)>1 ? V(44)<1 ? V(43) : 0
+B18 44 0 V=2/(1+EXP(V(30)))
+B20 51 0 V=V(8)<1 ? 2 : 0
+R18 90 50 4K
+C4 50 0 10P
+B21 52 0 V=V(50)>1 ? 2 : 0
+B22 90 0 V=V(46)>1 ? V(23)>2.5 ? V(34)>1 ? 2 : 0
+B23 53 0 V=V(7)>3.333 ? V(58)<1.667 ? 0 : 2
+B24 18 7 I=V(51)>1 ? 34.375U*(2-V(46)) : 171.874U*(2-V(46))
+D12 7 18 D5155
+R19 15 41 350
+B27 7 0 I=V(51)>1 ? V(46)*34.375U : 4M*V(46)
+D13 61 7 D5155
+D14 58 18 D5155
+B28 58 0 I=V(51)>1 ? 5U*(2-V(46)) : 4M*(2-V(46))
+D15 61 58 D5155
+C6 58 0 180P
+B29 18 58 I=5U*V(46)
+V4 61 0 1.65
+B30 43 0 V=V(7)<1.667 ? V(58)>3.333 ? 0 : 2
+E2 66 11 70 71 1
+Q1 72 73 70 Q5155
+Q2 74 75 11 Q5155
+V5 66 76 
+R22 71 73 1
+R23 76 75 1
+V6 77 10 
+B36 70 71 I=15M*V(78)+I(V5)
+R24 11 10 50K
+D16 11 10 D5155A
+D17 77 74 D5155A
+D18 70 77 D5155A
+E3 72 11 9 11 1
+E4 60 11 36 59 1
+Q3 83 84 36 Q5155
+Q4 85 86 11 Q5155
+V8 60 87 
+R25 59 84 1
+R26 87 86 1
+V9 88 12 
+B37 36 59 I=15M*V(89)+I(V8)
+R27 11 12 50K
+D19 11 12 D5155A
+D20 88 85 D5155A
+D21 36 88 D5155A
+E5 83 11 13 11 1
+B38 89 0 V=V(52)<1 ? V(10)<2 ? 1 : -1
+B39 78 0 V=V(52)>1 ? V(12)<2 ? 1 : -1
+B40 9 11 I=I(V6)<0 ? 0 : I(V6)*V(32)/2
+B41 13 11 I=I(V9)<0 ? 0 : I(V9)*V(32)/2
+B42 13 0 I=1.19M*V(32)*V(18)
+X7 5 65 LIMIT5155 {K=1 PLIM=4 NLIM=0.3}
+D22 40 15 D5155B
+D23 40 35 D5155B
+I1 35 40  0.95M
+D24 15 37 D5155B
+I2 18 15  50U
+D8 5 18 D5155
+X8 57 30 LIMIT5155 {K=1 PLIM=100 NLIM=100 }
+E6 57 0 15 8 2K
+R30 63 46 1K
+C12 46 0 10P
+*DESIGNER: KEHINDE OMOLAYO 9-20-01
+.ENDS

@@ -1,0 +1,162 @@
+*	|==========================================================
+*	|
+*	|
+*	|
+*	|			   CS51411
+*	|
+*	|			ON SEMICONDUTOR
+*	|
+*	|		 1.5A 260kHz, Low Voltage, Buck Regulator
+*	|	 with External Synchronization Capability
+*	|
+*	|
+*	|	This model was developed by
+*	|
+*	|	AEI (Analytic Engineering)
+*	|
+*	|	182 Morris Avenue
+*	|
+*	|	Holtsville, NY 11742
+*	|
+*	|	Copyright 2001 AEI
+*	|
+*	|	All Rights Reserved
+*	|
+*	|
+*	|
+*	|	The content of this model is subject to change
+*	|
+*	|	without notice and may not be modified or altered
+*	|
+*	|	without permission from On Semiconductor. This model
+*	|
+*	|	has been carefully checked and is believed to be
+*	|
+*	|	accurate, however neither AEI nor On Semiconductor
+*	|
+*	|	assume liability for the use of this model or the
+*	|
+*	|	results obtained from using it.
+*	|
+*	|
+*	|
+*	|	For more information regarding modeling services,
+*	|
+*	|	model libraries or simulation productors, please
+*	|
+*	|	call AEI at (631) 654-0253 ext 116 or 106.
+*	|
+*	|	email: Sales@aeng.com.
+*	|
+*	|
+*	|
+*	|==========================================================
+**SPICE MODEL DESIGNER: KEHINDE OMOLAYO 9-19-01
+**********
+*SRC=CS51411;CS51411;ON SEMI;;Buck Regulator
+*SYM=CS51411
+.SUBCKT CS51411 1 2 3 4 5 0 7 8
+*TERMINAL ID#
+*BOOST=1 VIN=2 VSW=3 SHDNB=4 SYNC=5
+*GND=0 VFB=7 VC=8
+.MODEL D51411 D (RS=0.78 N=0.005 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL D51411A D (RS=0.78 N=1.95 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL D51411B D (RS=0.78 N=0.2 IS=7.075E-9 
++ CJO=4P TT=7.2N M=.4 VJ=.657 BV=100 IBV=100U)
+.MODEL D51411D D CJO=2P
+.MODEL VS51411 SW (VT=1 RON=0.28 ROFF=1MEG
+.SUBCKT RS51411 2 3 4 5 {TD=1N}
+C1 11 0 10P
+R3 10 8 {TD/6.9315P}
+C3 8 0 10P
+B1 10 0 V=V(2)>1 ? V(5)>1 ? 0 : 2
+B2 16 0 V=V(3)>1 ? V(4)>1 ? 0 : 2
+B5 4 0 V=V(8)>1 ? 2 : 0
+B6 5 0 V=V(11)>1 ? 2 : 0
+R1 16 11 {TD/6.9315P}
+.ENDS
+.SUBCKT LIMIT51411 1 2
+*PARAMETERS ARE GAIN={K} 
+*POS LIMIT = {PLIM}  NEG LIMIT = {NLIM}
+RIN 1 0 1E12
+E1 3 0 0 1 {K}
+RC1 2 4 1MEG
+C1 2 4 1F IC=0
+R1 3 4 1MEG
+E2 2 0 0 4 1E6
+*DIODES WILL HAVE .0597V DROP AT 10V INPUT FOR GAIN=1
+*IDIODE = IS*EXP(.597/.O26)
+VN 5 2 {NLIM-.0597}
+DN 4 5 DN
+.MODEL DN D(IS=1E-12 N=.14319)
+VP 2 6 {PLIM-.0597}
+DP 6 4 DN
+.ENDS
+D1 2 10 D51411D
+D2 1 10 D51411D
+B1 10 0 I=V(23)<1 ? V(55)<1 ? V(9)>1 ? ABS(V(53)) : 0
+V1 51 3 0.2
+X1 13 14 LIMIT51411 {K=1 PLIM=100 NLIM=100 }
+B2 13 0 V=158.321*(I(V1)-0.765)
+V3 9 0 PULSE 0 2 0.1U
+X4 20 11 21 22 RS51411 {TD=1N }
+B8 11 0 V=V(9)<1 ? 0 : V(20)<1 ? 2 : V(15)
+B9 20 0 V=V(9)<1 ? 2 : V(48)
+I1 24 4 5U
+D6 4 24 D51411A
+V6 24 0 5
+B10 23 0 V=V(4)>1.3 ? 0 : 2
+R2 0 8 8MEG
+B11 27 0 I=50U/(1+EXP(V(25)))
+D7 0 27 D51411
+C1 0 8 2N
+X5 28 25 LIMIT51411 {K=1 PLIM=100 NLIM=100 }
+E1 28 0 30 7 512
+D8 8 32 D51411B
+V8 32 0 1.46
+D9 8 27 D51411B
+D10 0 8 D51411A
+V9 30 0 1.27
+I2 32 8 25U
+B12 26 0 V=V(7)<0.32 ? 2 : 0
+B13 29 0 V=V(26)>1 ? I(V1)>1.5 ? 2 : I(V1)>2.3 ? 2 : 0
+R4 29 31 17.312K
+C2 31 0 10P
+B14 33 0 V=V(31)>1 ? 2 : 0
+B15 34 0 V=V(8)<(V(7)+35.3M*(V(39)-1.667)) ? 2 : 0
+R5 34 35 21.64K
+C3 35 0 10P
+B16 36 0 V=V(35)>1 ? 2 : 0
+V10 37 0 1.4M
+B17 38 0 V=V(45)<1 ? 2 : V(5)>1.5 ? 2 : 0
+B18 39 0 I=V(26)>1 ? 132.375U*(2-V(48)) : 529.5U*(2-V(48))
+B19 40 0 V=V(45)<1 ? 2 : V(39)>3.333 ? 0 : V(47)
+C4 39 0 216P
+X6 45 40 48 44 RS51411 {TD=1N }
+B20 45 0 V=V(9)<1 ? 0 : V(39)<1.7 ? 0 : V(23)<1 ? V(55)<1 ? 2 : 0
+X7 45 38 46 43 RS51411 {TD=1N }
+R6 5 37 13.9K
+B21 49 0 V=V(38)>1 ? V(50)>1 ? 0 : 2
+B22 50 0 V=V(45)>1 ? V(43)>1 ? 2 : 0
+X8 50 49 47 41 RS51411 {TD=1N }
+V11 42 0 1.66
+B23 24 39 I=V(26)>1 ? 26.4825U : 105.93U
+D11 42 39 D51411
+D12 39 24 D51411
+B24 54 0 V=(I(V1)-0.625)/28.5/(1+EXP(-V(17)))
+B28 55 0 V=V(2)>3.3 ? 0 : 2
+B29 15 0 V=V(36)<1 ? V(33)<1 ? V(23)<1 ? V(55)<1 ? 2 : 0
+S1 2 51 63 0 VS51411 
+X9 18 17 LIMIT51411 {K=1 PLIM=100 NLIM=100 }
+B30 18 0 V=32.222*(I(V1)-1.154)
+X10 62 19 LIMIT51411 {K=1 PLIM=100 NLIM=100 }
+B31 62 0 V=-20.515*(I(V1)+44M)
+B32 0 51 I=V(23)<1 ? V(55)<1 ? V(9)>1 ? 10M : 0
+D17 51 2 D51411D
+B33 53 52 V=(I(V1)+1.233)/133.333/(1+EXP(V(14)))/(1+EXP(V(19)))
+B34 52 54 V=(I(V1)+0.457)/80.863/(1+EXP(-V(14)))/(1+0.8*EXP(V(17)))
+R14 10 0 10MEG
+B35 63 0 V=V(21)>1 ? V(48) : 0
+.ENDS

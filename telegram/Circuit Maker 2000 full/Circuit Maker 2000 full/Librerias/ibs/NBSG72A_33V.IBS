@@ -1,0 +1,1934 @@
+|*******************************************************************
+|COPYRIGHT(C) TERASPEED CONSULTING GROUP LLC 2003 ALL
+|RIGHTS RESERVED. THIS WORK CONTAINS PROPRIETARY
+|INFORMATION WHICH IS THE PROPERTY OF TERASPEED 
+|CONSULTING GROUP LLC OR ITS LICENSORS. USE OF THESE 
+|MATERIALS IS SUBJECT TO THE TERMS BELOW. 
+|
+|USE: TERASPEED HAS LICENSED IBIS MODELS TO
+|SPECIFIC INTEGRATED CIRCUIT SUPPLIERS ("IC VENDORS")
+|FOR USE AND DISTRIBUTION AS FOLLOWS: EACH IC VENDOR
+|MAY USE IBIS MODELS, AND DISTRIBUTE THEM TO IC VENDOR'S 
+|CUSTOMERS TO USE, SOLELY FOR DEVELOPING PRINTED 
+|CIRCUIT BOARD DESIGNS. NO OTHER USE OR DISTRIBUTION 
+|OF THESE MATERIALS IS PERMITTED.
+|
+|DISCLAIMER OF WARRANTY:  UNLESS OTHERWISE AGREED
+|IN WRITING, TERASPEED SOFTWARE AND ASSOCIATED
+|FILES ARE PROVIDED "AS IS" AND WITHOUT WARRANTY. 
+|TERASPEED HAS NO OBLIGATION TO SUPPORT OR
+|OTHERWISE MAINTAIN SOFTWARE.  TERASPEED MAKES 
+|NO WARRANTIES, EXPRESS OR IMPLIED WITH RESPECT TO
+|SOFTWARE INCLUDING ANY WARRANTY OF MERCHANTABILITY 
+|OR FITNESS FOR A PARTICULAR PURPOSE.
+|
+|LIMITATION OF LIABILITY:  TERASPEED IS NOT LIABLE FOR
+|ANY PROPERTY DAMAGE, PERSONAL INJURY, LOSS OF PROFITS,
+|INTERRUPTION OF BUSINESS, OR FOR ANY OTHER SPECIAL,
+|CONSEQUENTIAL OR INCIDENTAL DAMAGES, HOWEVER CAUSED,
+|WHETHER FOR BREACH OF WARRANTY, CONTRACT, TORT 
+|(INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE. IN NO
+|EVENT SHALL TERASPEED'S LIABILITY EXCEED THE AMOUNT
+|PAID FOR THE PRODUCT GIVING RISE TO THE CLAIM.
+|
+|TRADEMARKS:  THE FOLLOWING ARE REGISTERED TRADEMARKS
+|OR SERVICE MARKS OF TERASPEED CONSULTING GROUP LLC:
+|THE FOLLOWING ARE TRADEMARKS OR SERVICE MARKS OF 
+|TERASPEED CONSULTING GROUP LLC:
+|ALL OTHER BRANDS AND PRODUCT NAMES ARE TRADEMARKS OF 
+|THEIR RESPECTIVE OWNERS
+|
+|COPIES:  ALL COPIES OF SOFTWARE, INCLUDING BUT NOT LIMITED
+|TO ANY MODIFICATIONS, ENHANCEMENTS OR DERIVATIVE WORKS
+|MUST CONTAIN ALL TERASPEED'S NOTICES AND LEGENDS,
+|INCLUDING THOSE EMBEDDED IN SOFTWARE AND THOSE AFFIXED
+|TO THE SOFTWARE MEDIUM AND CONTAINER, AS RECEIVED FROM
+|TERASPEED.
+|
+|*****************************************************
+|
+[IBIS Ver] 3.2
+[File Name] nbsg72a_33v.ibs
+[File Rev] 3.0
+[Source] Measured and created by Teraspeed Consulting Group LLC
+[Date]   7-18-2003
+[Notes]  Quality Check of this IBIS model: Model Passes IBIS Check. Model
+         parses into ICX IS.      
+         1. Package model data for LC gained by using TDA Systems Software.
+|
+[Copyright]
+|**********************************************************
+|COPYRIGHT(C) TERASPEED CONSULTING GROUP LLC 2003 ALL
+|RIGHTS RESERVED. THIS WORK CONTAINS PROPRIETARY
+|INFORMATION WHICH IS THE PROPERTY OF TERASPEED 
+|CONSULTING GROUP LLC OR ITS LICENSORS. USE OF THESE 
+|MATERIALS IS SUBJECT TO THE TERMS BELOW. 
+|
+|USE: TERASPEED HAS LICENSED IBIS MODELS TO
+|SPECIFIC INTEGRATED CIRCUIT SUPPLIERS ("IC VENDORS")
+|FOR USE AND DISTRIBUTION AS FOLLOWS: EACH IC VENDOR
+|MAY USE IBIS MODELS, AND DISTRIBUTE THEM TO IC VENDOR'S 
+|CUSTOMERS TO USE, SOLELY FOR DEVELOPING PRINTED 
+|CIRCUIT BOARD DESIGNS. NO OTHER USE OR DISTRIBUTION 
+|OF THESE MATERIALS IS PERMITTED.
+|**********************************************************
+|  Teraspeed Spectrum Model Builder
+|
+[Component] NBSG72A_3.3V
+[Manufacturer] OnSemiConductor
+|
+[Package]
+| variable   typ   min         max
+R_pkg  0.010ohms   0.010ohms   0.010ohms   
+L_pkg  0.90nH      0.90nH      0.90nH      
+C_pkg  0.160pF     0.160pF     0.160pF    
+|
+[Pin] signal_name  model_name  R_pin  L_pin C_pin
+|
+1   VTD0   POWER      0.010ohms   0.90nH   0.160pF 
+2   _D0    Input_1    0.010ohms   0.90nH   0.160pF
+3   D0     Input_1    0.010ohms   0.90nH   0.160pF
+4   SELA   Input_1    0.010ohms   0.90nH   0.160pF
+5   VEE    POWER      0.010ohms   0.90nH   0.160pF
+6   _D1    Input_1    0.010ohms   0.90nH   0.160pF
+7   D1     Input_1    0.010ohms   0.90nH   0.160pF
+8   VTD1   POWER      0.010ohms   0.90nH   0.160pF
+9   SELB   Input_1    0.010ohms   0.90nH   0.160pF
+10  Q1     Output_1   0.010ohms   0.90nH   0.160pF
+11  _Q1    Output_1   0.010ohms   0.90nH   0.160pF
+12  VCC    POWER      0.010ohms   0.90nH   0.160pF
+13  OLS    POWER      0.010ohms   0.90nH   0.160pF
+14  Q0     Output_1   0.010ohms   0.90nH   0.160pF
+15  _Q0    Output_1   0.010ohms   0.90nH   0.160pF
+16  VCC    POWER      0.010ohms   0.90nH   0.160pF
+|
+|
+[Diff Pin] inv_pin vdiff tdelay_typ tdelay_min tdelay_max
+|
+3  2   200mV  NA  NA  NA
+7  6   200mV  NA  NA  NA
+10 11  NA     NA  NA  NA
+14 15  NA     NA  NA  NA
+|
+[Series Pin Mapping] pin_2 model_name function_table_group
+|
+2  1  Series_50 
+3  1  Series_50
+6  8  Series_50
+7  8  Series_50
+|
+[Model Selector] Output_1
+|
+Output_800mV     800mV P-P swing
+Output_600mV     600mV P-P swing
+Output_400mV     400mV P-P swing
+Output_200mV     200mV P-P swing
+|
+|
+[Model] Input_1
+|
+Model_type Input
+|
+Vinl = 875.000mV
+Vinh = 1.275000V
+C_comp 2.00000pF   NA   NA
+|
+| variable typ    min    max
+[Voltage Range]         3.30000V    NA   NA
+[POWER Clamp Reference] 3.30000V    NA   NA
+[GND Clamp Reference]   0.00000V    NA   NA
+|          
+[Temperature Range] 25   NA   NA 
+|
+[GND Clamp]
+|
+-3.30000V    -134.454mA      NA   NA
+-1.09850V    -11.1063mA      NA   NA
+-982.220mV   -4.59120mA      NA   NA
+-962.040mV   -3.84581mA      NA   NA
+-901.060mV   -1.59340mA      NA   NA
+-881.080mV   -1.15675mA      NA   NA
+-881.040mV   -1.15588mA      NA   NA
+-860.950mV   -716.830uA      NA   NA
+-840.700mV   -492.111uA      NA   NA
+-820.530mV   -268.280uA      NA   NA
+-780.160mV   -211.935uA      NA   NA
+-755.177mV   -177.065uA      NA   NA
+-715.480mV   -121.659uA      NA   NA
+-683.775mV   -77.4077uA      NA   NA
+-589.884mV   -62.0278uA      NA   NA
+-464.289mV   -41.4544uA      NA   NA
+-324.737mV   -18.5949uA      NA   NA
+-185.185mV   4.26455uA       NA   NA
+57.0110uV    34.6084uA       NA   NA
+122.020mV    54.5867uA       NA   NA
+162.350mV    61.1930uA       NA   NA
+647.430mV    61.1930uA       NA   NA
+719.360mV    61.1930uA       NA   NA
+838.853mV    61.1930uA       NA   NA
+982.220mV    61.1930uA       NA   NA
+2.84391V     61.1930uA       NA   NA
+2.91840V     64.4880uA       NA   NA
+6.60000V     64.4880uA       NA   NA
+|                            
+[POWER Clamp]                
+|
+6.60000V     0.00000A        NA   NA
+-210.800mV   0.00000A        NA   NA
+-390.550mV   0.00000A        NA   NA
+-421.600mV   5.93270uA       NA   NA
+-457.500mV   12.7921uA       NA   NA
+-497.400mV   20.4157uA       NA   NA
+-539.550mV   28.4693uA       NA   NA
+-558.700mV   32.1283uA       NA   NA
+-619.400mV   43.7261uA       NA   NA
+-781.100mV   74.6220uA       NA   NA
+-841.700mV   922.712uA       NA   NA
+-882.500mV   2.31891mA       NA   NA
+-937.700mV   5.60401mA       NA   NA
+-1.07910V    17.2095mA       NA   NA
+-1.11920V    20.5007mA       NA   NA
+-1.15980V    23.8330mA       NA   NA
+-1.20070V    27.1899mA       NA   NA
+-3.30000V    199.491mA       NA   NA
+|
+|
+[Model] Output_800mV
+|
+Model_type Output_ECL
+|
+Vref=1.3000V
+Rref=50.0000ohms
+Cref=0.00000pF
+Vmeas=1.927085V
+C_comp 0.50000pF NA NA
+|
+| variable typ    min    max
+[Voltage Range]         3.30000V  NA   NA 
+[POWER Clamp Reference] 3.30000V  NA   NA 
+[Pullup Reference]      3.30000V  NA   NA 
+[Pulldown Reference]    3.30000V  NA   NA 
+[GND Clamp Reference]   0.00000V  NA   NA 
+|                                   
+[Temperature Range] 25     NA    NA
+|
+[GND Clamp]
+|
+-7.20000V   0.00000A    NA   NA
+-6.60000V   0.00000A    NA   NA
+-6.00000V   0.00000A    NA   NA
+0.00000V    0.00000A    NA   NA
+3.00000V    0.00000A    NA   NA
+3.30000V    0.00000A    NA   NA
+3.60000V    0.00000A    NA   NA
+|
+[Pulldown]
+|
+6.60000V        -603.760mA    NA   NA
+3.30000V        -187.097mA    NA   NA
+3.2902E+00      -1.8512E-01   NA   NA
+3.2592E+00      -1.8175E-01   NA   NA
+3.2191E+00      -1.7662E-01   NA   NA
+3.1783E+00      -1.7211E-01   NA   NA
+3.1380E+00      -1.6823E-01   NA   NA
+3.0974E+00      -1.6457E-01   NA   NA
+3.0618E+00      -1.6126E-01   NA   NA
+3.0212E+00      -1.5805E-01   NA   NA
+2.9807E+00      -1.5476E-01   NA   NA
+2.9400E+00      -1.5145E-01   NA   NA
+2.8997E+00      -1.4790E-01   NA   NA
+2.8593E+00      -1.4458E-01   NA   NA
+2.8190E+00      -1.4119E-01   NA   NA
+2.7785E+00      -1.3789E-01   NA   NA
+2.7385E+00      -1.3446E-01   NA   NA
+2.6974E+00      -1.3158E-01   NA   NA
+2.6569E+00      -1.2877E-01   NA   NA
+2.6214E+00      -1.2650E-01   NA   NA
+2.5811E+00      -1.2379E-01   NA   NA
+2.5405E+00      -1.2079E-01   NA   NA
+2.5002E+00      -1.1790E-01   NA   NA
+2.4596E+00      -1.1469E-01   NA   NA
+2.4194E+00      -1.1137E-01   NA   NA
+2.3791E+00      -1.0702E-01   NA   NA
+2.3384E+00      -1.0314E-01   NA   NA
+2.2979E+00      -9.8809E-02   NA   NA
+2.2577E+00      -9.3995E-02   NA   NA
+2.2172E+00      -8.8931E-02   NA   NA
+2.1817E+00      -8.4005E-02   NA   NA
+2.1411E+00      -7.7395E-02   NA   NA
+2.1011E+00      -7.0281E-02   NA   NA
+2.0605E+00      -6.1891E-02   NA   NA
+2.0200E+00      -5.2412E-02   NA   NA
+1.9794E+00      -4.2861E-02   NA   NA
+1.9391E+00      -3.3067E-02   NA   NA
+1.8984E+00      -2.3331E-02   NA   NA
+1.8581E+00      -1.4281E-02   NA   NA
+1.8176E+00      -6.8414E-03   NA   NA
+1.7773E+00      -2.5102E-03   NA   NA
+1.7424E+00      -9.2245E-04   NA   NA
+1.7018E+00      -2.3539E-04   NA   NA
+1.6612E+00      0.0000E+00    NA   NA
+1.6209E+00      0.0000E+00    NA   NA
+1.5804E+00      0.0000E+00    NA   NA
+1.5401E+00      0.0000E+00    NA   NA
+1.4994E+00      0.0000E+00    NA   NA
+1.4594E+00      0.0000E+00    NA   NA
+1.4186E+00      0.0000E+00    NA   NA
+1.3782E+00      0.0000E+00    NA   NA
+1.3376E+00      0.0000E+00    NA   NA
+1.3017E+00      0.0000E+00    NA   NA
+1.2613E+00      0.0000E+00    NA   NA
+1.2208E+00      0.0000E+00    NA   NA
+1.1804E+00      0.0000E+00    NA   NA
+1.1401E+00      0.0000E+00    NA   NA
+1.0999E+00      0.0000E+00    NA   NA
+1.0593E+00      0.0000E+00    NA   NA
+1.0189E+00      0.0000E+00    NA   NA
+9.7850E-01      0.0000E+00    NA   NA
+9.3800E-01      0.0000E+00    NA   NA
+8.9750E-01      0.0000E+00    NA   NA
+8.6260E-01      0.0000E+00    NA   NA
+8.2220E-01      0.0000E+00    NA   NA
+7.8220E-01      0.0000E+00    NA   NA
+7.4110E-01      0.0000E+00    NA   NA
+7.0080E-01      0.0000E+00    NA   NA
+6.6000E-01      0.0000E+00    NA   NA
+6.1990E-01      0.0000E+00    NA   NA
+5.7890E-01      0.0000E+00    NA   NA
+5.3870E-01      0.0000E+00    NA   NA
+4.9810E-01      0.0000E+00    NA   NA
+4.5820E-01      0.0000E+00    NA   NA
+4.2220E-01      0.0000E+00    NA   NA
+3.8200E-01      0.0000E+00    NA   NA
+3.4140E-01      0.0000E+00    NA   NA
+3.0110E-01      0.0000E+00    NA   NA
+2.6050E-01      0.0000E+00    NA   NA
+2.2030E-01      0.0000E+00    NA   NA
+1.7980E-01      0.0000E+00    NA   NA
+1.3960E-01      0.0000E+00    NA   NA
+9.8500E-02      0.0000E+00    NA   NA
+5.8200E-02      0.0000E+00    NA   NA
+1.7400E-02      0.0000E+00    NA   NA
+-3.30000V       305.780nA     NA   NA  
+|                             
+[Pullup]                      
+|
+6.60000V        -491.109mA   NA   NA
+3.3001E+00      -1.8163E-01  NA   NA
+3.2592E+00      -1.7740E-01  NA   NA
+3.2191E+00      -1.7403E-01  NA   NA
+3.1782E+00      -1.7153E-01  NA   NA
+3.1379E+00      -1.6985E-01  NA   NA
+3.0973E+00      -1.6876E-01  NA   NA
+3.0617E+00      -1.6792E-01  NA   NA
+3.0211E+00      -1.6703E-01  NA   NA
+2.9806E+00      -1.6614E-01  NA   NA
+2.9400E+00      -1.6523E-01  NA   NA
+2.8997E+00      -1.6402E-01  NA   NA
+2.8593E+00      -1.6274E-01  NA   NA
+2.8189E+00      -1.6181E-01  NA   NA
+2.7784E+00      -1.6087E-01  NA   NA
+2.7384E+00      -1.5993E-01  NA   NA
+2.6973E+00      -1.5892E-01  NA   NA
+2.6568E+00      -1.5786E-01  NA   NA
+2.6213E+00      -1.5692E-01  NA   NA
+2.5811E+00      -1.5582E-01  NA   NA
+2.5405E+00      -1.5477E-01  NA   NA
+2.5002E+00      -1.5373E-01  NA   NA
+2.4595E+00      -1.5256E-01  NA   NA
+2.4194E+00      -1.5139E-01  NA   NA
+2.3791E+00      -1.5002E-01  NA   NA
+2.3384E+00      -1.4870E-01  NA   NA
+2.2979E+00      -1.4743E-01  NA   NA
+2.2576E+00      -1.4610E-01  NA   NA
+2.2172E+00      -1.4467E-01  NA   NA
+2.1816E+00      -1.4334E-01  NA   NA
+2.1411E+00      -1.4181E-01  NA   NA
+2.1011E+00      -1.4029E-01  NA   NA
+2.0605E+00      -1.3861E-01  NA   NA
+2.0200E+00      -1.3659E-01  NA   NA
+1.9794E+00      -1.3454E-01  NA   NA
+1.9391E+00      -1.3254E-01  NA   NA
+1.8983E+00      -1.3047E-01  NA   NA
+1.8580E+00      -1.2818E-01  NA   NA
+1.8176E+00      -1.2588E-01  NA   NA
+1.7773E+00      -1.2330E-01  NA   NA
+1.7424E+00      -1.2087E-01  NA   NA
+1.7018E+00      -1.1815E-01  NA   NA
+1.6613E+00      -1.1512E-01  NA   NA
+1.6209E+00      -1.1207E-01  NA   NA
+1.5804E+00      -1.0812E-01  NA   NA
+1.5401E+00      -1.0468E-01  NA   NA
+1.4995E+00      -1.0094E-01  NA   NA
+1.4594E+00      -9.7148E-02  NA   NA
+1.4186E+00      -9.2741E-02  NA   NA
+1.3782E+00      -8.8340E-02  NA   NA
+1.3376E+00      -8.3710E-02  NA   NA
+1.3017E+00      -7.8937E-02  NA   NA
+1.2614E+00      -7.3612E-02  NA   NA
+1.2209E+00      -6.7690E-02  NA   NA
+1.1805E+00      -6.1316E-02  NA   NA
+1.1401E+00      -5.3841E-02  NA   NA
+1.1000E+00      -4.6080E-02  NA   NA
+1.0593E+00      -3.7787E-02  NA   NA
+1.0190E+00      -2.9424E-02  NA   NA
+9.7850E-01      -2.1173E-02  NA   NA
+9.3800E-01      -1.3393E-02  NA   NA
+8.9750E-01      -6.9002E-03  NA   NA
+8.6260E-01      -3.1215E-03  NA   NA
+8.2220E-01      -1.0709E-03  NA   NA
+7.8220E-01      -3.4054E-04  NA   NA
+7.4110E-01      -1.0517E-04  NA   NA
+7.0080E-01      0.00000E-00  NA   NA
+6.6000E-01      0.00000E-00  NA   NA
+6.1990E-01      0.00000E-00  NA   NA
+5.7890E-01      0.00000E-00  NA   NA
+5.3870E-01      0.00000E-00  NA   NA
+4.9810E-01      0.00000E-00  NA   NA
+4.5820E-01      0.00000E-00  NA   NA
+4.2210E-01      0.00000E-00  NA   NA
+3.8200E-01      0.00000E-00  NA   NA
+3.4130E-01      0.00000E-00  NA   NA
+3.0110E-01      0.00000E-00  NA   NA
+2.6040E-01      0.00000E-00  NA   NA
+2.2030E-01      0.00000E-00  NA   NA
+1.7970E-01      0.00000E-00  NA   NA
+1.3960E-01      0.00000E-00  NA   NA
+9.8400E-02      0.00000E-00  NA   NA
+5.8200E-02      0.00000E-00  NA   NA
+1.7400E-02      0.00000E-00  NA   NA
+0.00000V        0.00000E-00  NA   NA
+-2.7000E-03     0.00000E-00  NA   NA
+-3.30000V       0.00000E-00  NA   NA          
+|                                     
+[POWER Clamp]
+|
+3.90000V     0.00000A    NA   NA
+3.30000V     0.00000A    NA   NA
+2.70000V     0.00000A    NA   NA
+300.000mV    0.00000A    NA   NA
+0.00000V     0.00000A    NA   NA
+-300.000mV   0.00000A    NA   NA
+-6.30000V    0.00000A    NA   NA
+-6.60000V    0.00000A    NA   NA
+-6.90000V    0.00000A    NA   NA
+|
+|
+[Falling Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               2.32497         NA      NA
+1.2E-12         2.323795722     NA      NA
+2.4E-12         2.32411598      NA      NA
+3.6E-12         2.323902475     NA      NA
+4.8E-12         2.324009227     NA      NA
+6E-12           2.324436237     NA      NA
+7E-12           2.324009227     NA      NA
+8E-12           2.324329485     NA      NA
+9E-12           2.324863247     NA      NA
+1E-11           2.324436237     NA      NA
+1.1E-11         2.323368712     NA      NA
+1.2E-11         2.323795722     NA      NA
+1.3E-11         2.323902475     NA      NA
+1.4E-11         2.32368897      NA      NA
+1.5E-11         2.32368897      NA      NA
+1.6E-11         2.323261959     NA      NA
+1.7E-11         2.322728197     NA      NA
+1.8E-11         2.322728197     NA      NA
+1.9E-11         2.322514692     NA      NA
+2E-11           2.321340414     NA      NA
+2.1E-11         2.320699899     NA      NA
+2.2E-11         2.31909861      NA      NA
+2.3E-11         2.317070312     NA      NA
+2.4E-11         2.313227221     NA      NA
+2.5E-11         2.314828509     NA      NA
+2.6E-11         2.307782842     NA      NA
+2.7E-11         2.305541038     NA      NA
+2.8E-11         2.300843927     NA      NA
+2.9E-11         2.290168673     NA      NA
+3E-11           2.289955168     NA      NA
+3.1E-11         2.284083778     NA      NA
+3.2E-11         2.272234247     NA      NA
+3.3E-11         2.260277963     NA      NA
+3.4E-11         2.250776987     NA      NA
+3.5E-11         2.235511374     NA      NA
+3.6E-11         2.21095829      NA      NA
+3.7E-11         2.204766643     NA      NA
+3.8E-11         2.188326753     NA      NA
+3.9E-11         2.143277182     NA      NA
+4E-11           2.12971961      NA      NA
+4.1E-11         2.100255909     NA      NA
+4.2E-11         2.065454582     NA      NA
+4.3E-11         2.02958573      NA      NA
+4.4E-11         2.004712389     NA      NA
+4.5E-11         1.977490492     NA      NA
+4.6E-11         1.941194629     NA      NA
+4.7E-11         1.915040258     NA      NA
+4.8E-11         1.868175894     NA      NA
+4.9E-11         1.838498689     NA      NA
+5E-11           1.810316019     NA      NA
+5.1E-11         1.800174528     NA      NA
+5.2E-11         1.756192482     NA      NA
+5.3E-11         1.730144863     NA      NA
+5.4E-11         1.718081827     NA      NA
+5.5E-11         1.679437408     NA      NA
+5.6E-11         1.661609735     NA      NA
+5.7E-11         1.649333193     NA      NA
+5.8E-11         1.633427065     NA      NA
+5.9E-11         1.617414184     NA      NA
+6E-11           1.603322849     NA      NA
+6.1E-11         1.588057237     NA      NA
+6.2E-11         1.579837291     NA      NA
+6.3E-11         1.57012281      NA      NA
+6.4E-11         1.56126235      NA      NA
+6.5E-11         1.556992248     NA      NA
+6.6E-11         1.550160086     NA      NA
+6.7E-11         1.540552358     NA      NA
+6.8E-11         1.537776792     NA      NA
+6.9E-11         1.532759422     NA      NA
+7E-11           1.528702826     NA      NA
+7.1E-11         1.52507324      NA      NA
+7.2E-11         1.522831436     NA      NA
+7.3E-11         1.519095098     NA      NA
+7.4E-11         1.518134325     NA      NA
+7.5E-11         1.51290345      NA      NA
+7.6E-11         1.51162242      NA      NA
+7.7E-11         1.51034139      NA      NA
+7.8E-11         1.509380617     NA      NA
+7.9E-11         1.507992834     NA      NA
+8E-11           1.507245566     NA      NA
+8.1E-11         1.505964536     NA      NA
+8.2E-11         1.505003763     NA      NA
+8.3E-11         1.50447         NA      NA
+8.4E-11         1.503509227     NA      NA
+8.5E-11         1.50404299      NA      NA
+8.6E-11         1.50404299      NA      NA
+8.7E-11         1.503509227     NA      NA
+8.8E-11         1.504256495     NA      NA
+8.9E-11         1.504149742     NA      NA
+9E-11           1.504790258     NA      NA
+9.1E-11         1.504790258     NA      NA
+9.2E-11         1.505537525     NA      NA
+9.3E-11         1.50575103      NA      NA
+9.4E-11         1.50575103      NA      NA
+9.5E-11         1.505857783     NA      NA
+9.6E-11         1.505857783     NA      NA
+9.7E-11         1.505110515     NA      NA
+9.8E-11         1.50489701      NA      NA
+9.9E-11         1.504576753     NA      NA
+9.98E-11        1.50447         NA      NA 
+|
+[Rising Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               1.50447         NA      NA
+1.2E-12         1.504367116     NA      NA
+2.4E-12         1.504367116     NA      NA
+3.6E-12         1.504778652     NA      NA
+4.8E-12         1.505087304     NA      NA
+6E-12           1.505087304     NA      NA
+7E-12           1.505293072     NA      NA
+8E-12           1.504881536     NA      NA
+9E-12           1.505704608     NA      NA
+1E-11           1.505910376     NA      NA
+1.1E-11         1.506424796     NA      NA
+1.2E-11         1.5070421       NA      NA
+1.3E-11         1.5070421       NA      NA
+1.4E-11         1.507659404     NA      NA
+1.5E-11         1.508585361     NA      NA
+1.6E-11         1.509305549     NA      NA
+1.7E-11         1.510745925     NA      NA
+1.8E-11         1.511363229     NA      NA
+1.9E-11         1.512494953     NA      NA
+2E-11           1.515067053     NA      NA
+2.1E-11         1.515684357     NA      NA
+2.2E-11         1.519491066     NA      NA
+2.3E-11         1.523400658     NA      NA
+2.4E-11         1.527001599     NA      NA
+2.5E-11         1.527721787     NA      NA
+2.6E-11         1.534615016     NA      NA
+2.7E-11         1.536981348     NA      NA
+2.8E-11         1.542434201     NA      NA
+2.9E-11         1.55344279      NA      NA
+3E-11           1.553751442     NA      NA
+3.1E-11         1.560027367     NA      NA
+3.2E-11         1.569184044     NA      NA
+3.3E-11         1.579060909     NA      NA
+3.4E-11         1.589452194     NA      NA
+3.5E-11         1.6003579       NA      NA
+3.6E-11         1.617642414     NA      NA
+3.7E-11         1.624947179     NA      NA
+3.8E-11         1.632766364     NA      NA
+3.9E-11         1.664763292     NA      NA
+4E-11           1.677520909     NA      NA
+4.1E-11         1.695628495     NA      NA
+4.2E-11         1.72114373      NA      NA
+4.3E-11         1.748099342     NA      NA
+4.4E-11         1.770836708     NA      NA
+4.5E-11         1.792030815     NA      NA
+4.6E-11         1.819706614     NA      NA
+4.7E-11         1.851292006     NA      NA
+4.8E-11         1.888947555     NA      NA
+4.9E-11         1.911993574     NA      NA
+5E-11           1.935348245     NA      NA
+5.1E-11         1.948002978     NA      NA
+5.2E-11         1.989979655     NA      NA
+5.3E-11         2.017552571     NA      NA
+5.4E-11         2.034425549     NA      NA
+5.6E-11         2.07804837      NA      NA
+5.7E-11         2.099756897     NA      NA
+5.8E-11         2.123728871     NA      NA
+5.9E-11         2.142762414     NA      NA
+6E-11           2.159738276     NA      NA
+6.1E-11         2.182578527     NA      NA
+6.2E-11         2.191735204     NA      NA
+6.3E-11         2.199451505     NA      NA
+6.4E-11         2.210151442     NA      NA
+6.5E-11         2.223320596     NA      NA
+6.6E-11         2.232168621     NA      NA
+6.7E-11         2.241222414     NA      NA
+6.8E-11         2.252951191     NA      NA
+6.9E-11         2.256655016     NA      NA
+7E-11           2.262828056     NA      NA
+7.1E-11         2.268795329     NA      NA
+7.2E-11         2.272087618     NA      NA
+7.3E-11         2.278466426     NA      NA
+7.4E-11         2.282376019     NA      NA
+7.5E-11         2.289475016     NA      NA
+7.6E-11         2.292047116     NA      NA
+7.7E-11         2.294310564     NA      NA
+7.8E-11         2.298528809     NA      NA
+7.9E-11         2.300895141     NA      NA
+8E-11           2.304496082     NA      NA
+8.1E-11         2.30675953      NA      NA
+8.2E-11         2.309228746     NA      NA
+8.3E-11         2.309743166     NA      NA
+8.4E-11         2.313241223     NA      NA
+8.5E-11         2.314475831     NA      NA
+8.6E-11         2.315813323     NA      NA
+8.7E-11         2.318385423     NA      NA
+8.8E-11         2.318796959     NA      NA
+8.9E-11         2.319517147     NA      NA
+9E-11           2.320545987     NA      NA
+9.1E-11         2.321986364     NA      NA
+9.2E-11         2.322500784     NA      NA
+9.3E-11         2.322809436     NA      NA
+9.4E-11         2.32394116      NA      NA
+9.5E-11         2.324249812     NA      NA
+9.6E-11         2.324867116     NA      NA
+9.7E-11         2.325072884     NA      NA
+9.8E-11         2.324558464     NA      NA
+9.9E-11         2.325175768     NA      NA
+9.98E-11        2.32497         NA      NA
+|
+[Ramp]
+| variable typ min max
+dV/dt_r 490.984m/20.2296p   NA   NA
+dV/dt_f 490.984m/16.9502p   NA   NA
+R_load = 50.0000Ohms
+|
+|
+[Model] Output_600mV
+|
+Model_type Output_ECL
+|
+Vref=1.3000V
+Rref=50.0000ohms
+Cref=0.00000pF
+Vmeas=2.00913V 
+C_comp 0.50000pF NA NA
+|
+| variable typ    min    max
+[Voltage Range]         3.30000V  NA   NA 
+[POWER Clamp Reference] 3.30000V  NA   NA 
+[Pullup Reference]      3.30000V  NA   NA 
+[Pulldown Reference]    3.30000V  NA   NA 
+[GND Clamp Reference]   0.00000V  NA   NA 
+|                                   
+[Temperature Range] 25     NA    NA
+|
+[GND Clamp]
+|
+-7.20000V   0.00000A    NA   NA
+-6.60000V   0.00000A    NA   NA
+-6.00000V   0.00000A    NA   NA
+0.00000V    0.00000A    NA   NA
+3.00000V    0.00000A    NA   NA
+3.30000V    0.00000A    NA   NA
+3.60000V    0.00000A    NA   NA
+|
+[Pulldown]
+|
+6.60000V        -561.583mA   NA   NA 
+3.3002E+00      -1.8852E-01  NA   NA
+3.2592E+00      -1.8340E-01  NA   NA
+3.2191E+00      -1.7891E-01  NA   NA
+3.1783E+00      -1.7474E-01  NA   NA
+3.1380E+00      -1.7135E-01  NA   NA
+3.0974E+00      -1.6817E-01  NA   NA
+3.0618E+00      -1.6551E-01  NA   NA
+3.0211E+00      -1.6171E-01  NA   NA
+2.9807E+00      -1.5870E-01  NA   NA
+2.9401E+00      -1.5556E-01  NA   NA
+2.8997E+00      -1.5252E-01  NA   NA
+2.8593E+00      -1.4931E-01  NA   NA
+2.8189E+00      -1.4662E-01  NA   NA
+2.7785E+00      -1.4413E-01  NA   NA
+2.7384E+00      -1.4184E-01  NA   NA
+2.6974E+00      -1.3987E-01  NA   NA
+2.6569E+00      -1.3803E-01  NA   NA
+2.6213E+00      -1.3595E-01  NA   NA
+2.5811E+00      -1.3410E-01  NA   NA
+2.5405E+00      -1.3210E-01  NA   NA
+2.5001E+00      -1.3007E-01  NA   NA
+2.4596E+00      -1.2781E-01  NA   NA
+2.4194E+00      -1.2548E-01  NA   NA
+2.3791E+00      -1.2274E-01  NA   NA
+2.3384E+00      -1.1998E-01  NA   NA
+2.2979E+00      -1.1697E-01  NA   NA
+2.2577E+00      -1.1377E-01  NA   NA
+2.2173E+00      -1.1036E-01  NA   NA
+2.1817E+00      -1.0659E-01  NA   NA
+2.1411E+00      -1.0266E-01  NA   NA
+2.1011E+00      -9.8469E-02  NA   NA
+2.0605E+00      -9.3698E-02  NA   NA
+2.0200E+00      -8.8829E-02  NA   NA
+1.9794E+00      -8.3392E-02  NA   NA
+1.9391E+00      -7.7043E-02  NA   NA
+1.8984E+00      -7.0131E-02  NA   NA
+1.8581E+00      -6.2263E-02  NA   NA
+1.8176E+00      -5.3296E-02  NA   NA
+1.7772E+00      -4.4439E-02  NA   NA
+1.7423E+00      -3.6441E-02  NA   NA
+1.7018E+00      -2.7123E-02  NA   NA
+1.6613E+00      -1.8177E-02  NA   NA
+1.6209E+00      -1.0159E-02  NA   NA
+1.5803E+00      -4.3644E-03  NA   NA
+1.5400E+00      -1.4327E-03  NA   NA
+1.4995E+00      -4.5806E-04  NA   NA
+1.4594E+00      -1.7182E-04  NA   NA
+1.4186E+00      0.0000E+00   NA   NA
+1.3781E+00      0.0000E+00   NA   NA
+1.3375E+00      0.0000E+00   NA   NA
+1.3017E+00      0.0000E+00   NA   NA
+1.2613E+00      0.0000E+00   NA   NA
+1.2208E+00      0.0000E+00   NA   NA
+1.1804E+00      0.0000E+00   NA   NA
+1.1400E+00      0.0000E+00   NA   NA
+1.0999E+00      0.0000E+00   NA   NA
+1.0593E+00      0.0000E+00   NA   NA
+1.0189E+00      0.0000E+00   NA   NA
+9.7840E-01      0.0000E+00   NA   NA
+9.3800E-01      0.0000E+00   NA   NA
+8.9750E-01      0.0000E+00   NA   NA
+8.6250E-01      0.0000E+00   NA   NA
+8.2220E-01      0.0000E+00   NA   NA
+7.8210E-01      0.0000E+00   NA   NA
+7.4100E-01      0.0000E+00   NA   NA
+7.0070E-01      0.0000E+00   NA   NA
+6.5990E-01      0.0000E+00   NA   NA
+6.1980E-01      0.0000E+00   NA   NA
+5.7880E-01      0.0000E+00   NA   NA
+5.3870E-01      0.0000E+00   NA   NA
+4.9810E-01      0.0000E+00   NA   NA
+4.5810E-01      0.0000E+00   NA   NA
+4.2210E-01      0.0000E+00   NA   NA
+3.8190E-01      0.0000E+00   NA   NA
+3.4130E-01      0.0000E+00   NA   NA
+3.0110E-01      0.0000E+00   NA   NA
+2.6040E-01      0.0000E+00   NA   NA
+2.2020E-01      0.0000E+00   NA   NA
+1.7970E-01      0.0000E+00   NA   NA
+1.3950E-01      0.0000E+00   NA   NA
+9.8300E-02      0.0000E+00   NA   NA
+5.8100E-02      0.0000E+00   NA   NA
+-2.8000E-03     0.0000E+00   NA   NA
+-3.30000V       4.54980uA    NA   NA 
+|                             
+[Pullup]
+|
+6.60000V        -491.109mA   NA   NA
+3.3002E+00      -1.8153E-01  NA   NA
+3.2592E+00      -1.7719E-01  NA   NA
+3.2191E+00      -1.7387E-01  NA   NA
+3.1783E+00      -1.7137E-01  NA   NA
+3.1380E+00      -1.6966E-01  NA   NA
+3.0973E+00      -1.6853E-01  NA   NA
+3.0618E+00      -1.6772E-01  NA   NA
+3.0211E+00      -1.6687E-01  NA   NA
+2.9807E+00      -1.6597E-01  NA   NA
+2.9400E+00      -1.6499E-01  NA   NA
+2.8997E+00      -1.6364E-01  NA   NA
+2.8593E+00      -1.6258E-01  NA   NA
+2.8189E+00      -1.6163E-01  NA   NA
+2.7784E+00      -1.6066E-01  NA   NA
+2.7384E+00      -1.5972E-01  NA   NA
+2.6974E+00      -1.5870E-01  NA   NA
+2.6569E+00      -1.5769E-01  NA   NA
+2.6214E+00      -1.5670E-01  NA   NA
+2.5811E+00      -1.5561E-01  NA   NA
+2.5405E+00      -1.5457E-01  NA   NA
+2.5001E+00      -1.5345E-01  NA   NA
+2.4595E+00      -1.5236E-01  NA   NA
+2.4194E+00      -1.5114E-01  NA   NA
+2.3790E+00      -1.4964E-01  NA   NA
+2.3384E+00      -1.4837E-01  NA   NA
+2.2979E+00      -1.4709E-01  NA   NA
+2.2577E+00      -1.4572E-01  NA   NA
+2.2172E+00      -1.4434E-01  NA   NA
+2.1817E+00      -1.4294E-01  NA   NA
+2.1411E+00      -1.4145E-01  NA   NA
+2.1011E+00      -1.3985E-01  NA   NA
+2.0605E+00      -1.3813E-01  NA   NA
+2.0200E+00      -1.3591E-01  NA   NA
+1.9794E+00      -1.3402E-01  NA   NA
+1.9390E+00      -1.3205E-01  NA   NA
+1.8983E+00      -1.2988E-01  NA   NA
+1.8581E+00      -1.2768E-01  NA   NA
+1.8176E+00      -1.2532E-01  NA   NA
+1.7772E+00      -1.2265E-01  NA   NA
+1.7424E+00      -1.2031E-01  NA   NA
+1.7018E+00      -1.1750E-01  NA   NA
+1.6613E+00      -1.1447E-01  NA   NA
+1.6209E+00      -1.1141E-01  NA   NA
+1.5803E+00      -1.0741E-01  NA   NA
+1.5400E+00      -1.0400E-01  NA   NA
+1.4994E+00      -1.0023E-01  NA   NA
+1.4594E+00      -9.6362E-02  NA   NA
+1.4186E+00      -9.2019E-02  NA   NA
+1.3781E+00      -8.7616E-02  NA   NA
+1.3375E+00      -8.2985E-02  NA   NA
+1.3017E+00      -7.8179E-02  NA   NA
+1.2613E+00      -7.2824E-02  NA   NA
+1.2208E+00      -6.6867E-02  NA   NA
+1.1804E+00      -6.0360E-02  NA   NA
+1.1401E+00      -5.2910E-02  NA   NA
+1.0999E+00      -4.5165E-02  NA   NA
+1.0593E+00      -3.6901E-02  NA   NA
+1.0189E+00      -2.8627E-02  NA   NA
+9.7840E-01      -2.0405E-02  NA   NA
+9.3800E-01      -1.2758E-02  NA   NA
+8.9740E-01      -6.4176E-03  NA   NA
+8.6250E-01      -2.8700E-03  NA   NA
+8.2210E-01      -9.6575E-04  NA   NA
+7.8210E-01      -3.2325E-04  NA   NA
+7.4100E-01      -1.5562E-04  NA   NA
+7.0070E-01      0.0000E+00   NA   NA
+6.5990E-01      0.0000E+00   NA   NA
+6.1980E-01      0.0000E+00   NA   NA
+5.7880E-01      0.0000E+00   NA   NA
+5.3870E-01      0.0000E+00   NA   NA
+4.9810E-01      0.0000E+00   NA   NA
+4.5810E-01      0.0000E+00   NA   NA
+4.2210E-01      0.0000E+00   NA   NA
+3.8200E-01      0.0000E+00   NA   NA
+3.4130E-01      0.0000E+00   NA   NA
+3.0110E-01      0.0000E+00   NA   NA
+2.6030E-01      0.0000E+00   NA   NA
+2.2020E-01      0.0000E+00   NA   NA
+1.7960E-01      0.0000E+00   NA   NA
+1.3950E-01      0.0000E+00   NA   NA
+9.8300E-02      0.0000E+00   NA   NA
+5.8100E-02      0.0000E+00   NA   NA
+1.7300E-02      0.0000E+00   NA   NA
+0.00000V        0.0000E+00   NA   NA 
+-3.30000V       0.0000E+00   NA   NA          
+|                                     
+[POWER Clamp]
+|
+3.90000V     0.00000A    NA   NA
+3.30000V     0.00000A    NA   NA
+2.70000V     0.00000A    NA   NA
+300.000mV    0.00000A    NA   NA
+0.00000V     0.00000A    NA   NA
+-300.000mV   0.00000A    NA   NA
+-6.30000V    0.00000A    NA   NA
+-6.60000V    0.00000A    NA   NA
+-6.90000V    0.00000A    NA   NA
+|
+|
+[Falling Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               2.32497         NA      NA
+1.2E-12         2.324328483     NA      NA
+2.4E-12         2.323793886     NA      NA
+3.6E-12         2.323686967     NA      NA
+4.8E-12         2.323900806     NA      NA
+6E-12           2.324756161     NA      NA
+7.2E-12         2.323366209     NA      NA
+8.4E-12         2.324542322     NA      NA
+9.6E-12         2.32315237      NA      NA
+1.08E-11        2.323793886     NA      NA
+1.2E-11         2.323580047     NA      NA
+1.32E-11        2.324542322     NA      NA
+1.44E-11        2.324435403     NA      NA
+1.56E-11        2.324221564     NA      NA
+1.68E-11        2.324114645     NA      NA
+1.8E-11         2.322938531     NA      NA
+1.92E-11        2.322403934     NA      NA
+2.04E-11        2.32315237      NA      NA
+2.16E-11        2.322724692     NA      NA
+2.28E-11        2.323366209     NA      NA
+2.4E-11         2.321334739     NA      NA
+2.52E-11        2.322510853     NA      NA
+2.64E-11        2.322297014     NA      NA
+2.76E-11        2.322510853     NA      NA
+2.88E-11        2.320265545     NA      NA
+3E-11           2.316951043     NA      NA
+3.12E-11        2.317592559     NA      NA
+3.24E-11        2.316202607     NA      NA
+3.36E-11        2.313101943     NA      NA
+3.48E-11        2.307755972     NA      NA
+3.6E-11         2.307114455     NA      NA
+3.72E-11        2.293856445     NA      NA
+3.84E-11        2.291290379     NA      NA
+3.96E-11        2.289579668     NA      NA
+4.08E-11        2.2760009       NA      NA
+4.2E-11         2.266805829     NA      NA
+4.32E-11        2.244459668     NA      NA
+4.44E-11        2.227673318     NA      NA
+4.56E-11        2.207037867     NA      NA
+4.68E-11        2.180735687     NA      NA
+4.92E-11        2.150477488     NA      NA
+5.04E-11        2.114873318     NA      NA
+5.16E-11        2.091244123     NA      NA
+5.28E-11        2.070074076     NA      NA
+5.4E-11         2.044092654     NA      NA
+5.52E-11        2.007633128     NA      NA
+5.64E-11        1.96593455      NA      NA
+5.76E-11        1.947223649     NA      NA
+6E-11           1.907984218     NA      NA
+6.12E-11        1.874411517     NA      NA
+6.24E-11        1.85121         NA      NA
+6.36E-11        1.83805891      NA      NA
+6.48E-11        1.82116564      NA      NA
+6.6E-11         1.791228199     NA      NA
+6.72E-11        1.784492275     NA      NA
+6.84E-11        1.772517299     NA      NA
+6.96E-11        1.752309526     NA      NA
+7.08E-11        1.747498152     NA      NA
+7.2E-11         1.743007536     NA      NA
+7.4E-11         1.728466493     NA      NA
+7.5E-11         1.716812275     NA      NA
+7.6E-11         1.715422322     NA      NA
+7.7E-11         1.714887725     NA      NA
+7.8E-11         1.706761848     NA      NA
+7.9E-11         1.705906493     NA      NA
+8E-11           1.702378152     NA      NA
+8.1E-11         1.702378152     NA      NA
+8.2E-11         1.698529052     NA      NA
+8.3E-11         1.698315213     NA      NA
+8.4E-11         1.6971391       NA      NA
+8.5E-11         1.696176825     NA      NA
+8.6E-11         1.696711422     NA      NA
+8.7E-11         1.694786872     NA      NA
+8.8E-11         1.694359194     NA      NA
+8.9E-11         1.693396919     NA      NA
+9E-11           1.692541564     NA      NA
+9.1E-11         1.69147237      NA      NA
+9.2E-11         1.691044692     NA      NA
+9.3E-11         1.691579289     NA      NA
+9.4E-11         1.691793128     NA      NA
+9.5E-11         1.692434645     NA      NA
+9.6E-11         1.691686209     NA      NA
+9.7E-11         1.692648483     NA      NA
+9.8E-11         1.692969242     NA      NA
+9.9E-11         1.693183081     NA      NA
+1E-10           1.693396919     NA      NA
+1.01E-10        1.693503839     NA      NA
+1.02E-10        1.695000711     NA      NA
+1.03E-10        1.694679953     NA      NA
+1.04E-10        1.694573033     NA      NA
+1.05E-10        1.693183081     NA      NA
+1.06E-10        1.692862322     NA      NA
+1.07E-10        1.693931517     NA      NA
+1.08E-10        1.694893791     NA      NA
+1.09E-10        1.693396919     NA      NA
+1.1E-10         1.693503839     NA      NA
+1.108E-10       1.69329         NA      NA 
+|
+[Rising Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               1.69329         NA      NA
+1.2E-12         1.693703133     NA      NA
+2.4E-12         1.693393283     NA      NA
+3.6E-12         1.693909699     NA      NA
+4.8E-12         1.693496566     NA      NA
+6E-12           1.693806416     NA      NA
+7.2E-12         1.693909699     NA      NA
+8.4E-12         1.694529398     NA      NA
+9.6E-12         1.693703133     NA      NA
+1.08E-11        1.694322832     NA      NA
+1.2E-11         1.694426115     NA      NA
+1.32E-11        1.694942531     NA      NA
+1.44E-11        1.695665513     NA      NA
+1.56E-11        1.695768797     NA      NA
+1.68E-11        1.696285213     NA      NA
+1.8E-11         1.696801629     NA      NA
+1.92E-11        1.696801629     NA      NA
+2.04E-11        1.696904912     NA      NA
+2.16E-11        1.698867292     NA      NA
+2.28E-11        1.699693558     NA      NA
+2.4E-11         1.702069071     NA      NA
+2.52E-11        1.702895337     NA      NA
+2.64E-11        1.7055807       NA      NA
+2.76E-11        1.706820098     NA      NA
+2.88E-11        1.709918594     NA      NA
+3E-11           1.714153205     NA      NA
+3.12E-11        1.7178714       NA      NA
+3.24E-11        1.721383028     NA      NA
+3.36E-11        1.724378241     NA      NA
+3.48E-11        1.732331046     NA      NA
+3.6E-11         1.739147737     NA      NA
+3.72E-11        1.745654578     NA      NA
+3.84E-11        1.75639603      NA      NA
+3.96E-11        1.763419287     NA      NA
+4.08E-11        1.776329686     NA      NA
+4.2E-11         1.779015049     NA      NA
+4.32E-11        1.80235705      NA      NA
+4.44E-11        1.819192211     NA      NA
+4.56E-11        1.838093035     NA      NA
+4.68E-11        1.849041053     NA      NA
+4.8E-11         1.861848169     NA      NA
+4.92E-11        1.884467188     NA      NA
+5.04E-11        1.909978136     NA      NA
+5.16E-11        1.928775677     NA      NA
+5.28E-11        1.952014395     NA      NA
+5.4E-11         1.972671033     NA      NA
+5.52E-11        2.005205239     NA      NA
+5.64E-11        2.02885709      NA      NA
+5.76E-11        2.049823578     NA      NA
+5.88E-11        2.058292799     NA      NA
+6E-11           2.085559562     NA      NA
+6.12E-11        2.114478855     NA      NA
+6.24E-11        2.133586246     NA      NA
+6.36E-11        2.152383787     NA      NA
+6.48E-11        2.158580778     NA      NA
+6.6E-11         2.181509647     NA      NA
+6.72E-11        2.193387214     NA      NA
+6.84E-11        2.207020595     NA      NA
+6.96E-11        2.222822923     NA      NA
+7.08E-11        2.236043172     NA      NA
+7.2E-11         2.241310615     NA      NA
+7.4E-11         2.253084899     NA      NA
+7.5E-11         2.263000085     NA      NA
+7.6E-11         2.267234696     NA      NA
+7.7E-11         2.272089006     NA      NA
+7.8E-11         2.277666298     NA      NA
+7.9E-11         2.283037024     NA      NA
+8E-11           2.28582567      NA      NA
+8.1E-11         2.28840775      NA      NA
+8.2E-11         2.292642361     NA      NA
+8.3E-11         2.296567122     NA      NA
+8.4E-11         2.297599954     NA      NA
+8.5E-11         2.300182034     NA      NA
+8.6E-11         2.303073963     NA      NA
+8.7E-11         2.304519928     NA      NA
+8.8E-11         2.30782499      NA      NA
+8.9E-11         2.308961105     NA      NA
+9E-11           2.312576017     NA      NA
+9.1E-11         2.313815415     NA      NA
+9.2E-11         2.314744964     NA      NA
+9.3E-11         2.315364663     NA      NA
+9.4E-11         2.31753361      NA      NA
+9.5E-11         2.318153309     NA      NA
+9.6E-11         2.318979575     NA      NA
+9.7E-11         2.320012407     NA      NA
+9.8E-11         2.321148522     NA      NA
+9.9E-11         2.321664938     NA      NA
+1E-10           2.32238792      NA      NA
+1.01E-10        2.32238792      NA      NA
+1.02E-10        2.323214186     NA      NA
+1.03E-10        2.323317469     NA      NA
+1.04E-10        2.323420752     NA      NA
+1.05E-10        2.324247018     NA      NA
+1.06E-10        2.323937168     NA      NA
+1.07E-10        2.323730602     NA      NA
+1.08E-10        2.324247018     NA      NA
+1.09E-10        2.324763434     NA      NA
+1.1E-10         2.324350301     NA      NA
+1.108E-10       2.32497         NA      NA 
+|
+[Ramp]
+| variable typ min max
+dV/dt_r 373.326m/23.0588p NA NA
+dV/dt_f 373.326m/18.0013p NA NA
+R_load = 50.0000Ohms
+|
+|
+[Model] Output_400mV
+|
+Model_type Output_ECL
+|
+Vref=1.3000V
+Rref=50.0000ohms
+Cref=0.00000pF
+Vmeas=2.10935V
+C_comp 0.50000pF NA NA
+|
+| variable typ    min    max
+[Voltage Range]         3.30000V  NA   NA 
+[POWER Clamp Reference] 3.30000V  NA   NA 
+[Pullup Reference]      3.30000V  NA   NA 
+[Pulldown Reference]    3.30000V  NA   NA 
+[GND Clamp Reference]   0.00000V  NA   NA 
+|                                   
+[Temperature Range] 25     NA    NA
+|
+[GND Clamp]
+|
+-7.20000V   0.00000A    NA   NA
+-6.60000V   0.00000A    NA   NA
+-6.00000V   0.00000A    NA   NA
+0.00000V    0.00000A    NA   NA
+3.00000V    0.00000A    NA   NA
+3.30000V    0.00000A    NA   NA
+3.60000V    0.00000A    NA   NA
+|
+[Pulldown]
+|
+6.60000V        -511.796mA   NA   NA 
+3.3001E+00      -1.8994E-01  NA   NA
+3.30000V        -189.926mA   NA   NA 
+3.2592E+00      -1.8532E-01  NA   NA
+3.2191E+00      -1.8134E-01  NA   NA
+3.1783E+00      -1.7783E-01  NA   NA
+3.1380E+00      -1.7468E-01  NA   NA
+3.0974E+00      -1.7176E-01  NA   NA
+3.0618E+00      -1.6911E-01  NA   NA
+3.0211E+00      -1.6616E-01  NA   NA
+2.9807E+00      -1.6250E-01  NA   NA
+2.9401E+00      -1.5962E-01  NA   NA
+2.8997E+00      -1.5680E-01  NA   NA
+2.8593E+00      -1.5419E-01  NA   NA
+2.8190E+00      -1.5191E-01  NA   NA
+2.7785E+00      -1.4971E-01  NA   NA
+2.7384E+00      -1.4805E-01  NA   NA
+2.6974E+00      -1.4658E-01  NA   NA
+2.6569E+00      -1.4524E-01  NA   NA
+2.6214E+00      -1.4400E-01  NA   NA
+2.5811E+00      -1.4254E-01  NA   NA
+2.5406E+00      -1.4108E-01  NA   NA
+2.5002E+00      -1.3957E-01  NA   NA
+2.4596E+00      -1.3793E-01  NA   NA
+2.4194E+00      -1.3578E-01  NA   NA
+2.3791E+00      -1.3394E-01  NA   NA
+2.3385E+00      -1.3200E-01  NA   NA
+2.2979E+00      -1.2989E-01  NA   NA
+2.2577E+00      -1.2767E-01  NA   NA
+2.2173E+00      -1.2528E-01  NA   NA
+2.1817E+00      -1.2287E-01  NA   NA
+2.1411E+00      -1.2011E-01  NA   NA
+2.1011E+00      -1.1725E-01  NA   NA
+2.0605E+00      -1.1412E-01  NA   NA
+2.0200E+00      -1.1079E-01  NA   NA
+1.9794E+00      -1.0651E-01  NA   NA
+1.9391E+00      -1.0275E-01  NA   NA
+1.8984E+00      -9.8642E-02  NA   NA
+1.8581E+00      -9.4040E-02  NA   NA
+1.8176E+00      -8.9413E-02  NA   NA
+1.7773E+00      -8.4286E-02  NA   NA
+1.7424E+00      -7.9179E-02  NA   NA
+1.7018E+00      -7.2930E-02  NA   NA
+1.6613E+00      -6.5877E-02  NA   NA
+1.6209E+00      -5.8069E-02  NA   NA
+1.5804E+00      -4.9368E-02  NA   NA
+1.5401E+00      -4.0584E-02  NA   NA
+1.4995E+00      -3.1619E-02  NA   NA
+1.4595E+00      -2.2736E-02  NA   NA
+1.4186E+00      -1.4309E-02  NA   NA
+1.3782E+00      -7.2419E-03  NA   NA
+1.3376E+00      -2.7948E-03  NA   NA
+1.3017E+00      -1.0295E-03  NA   NA
+1.2614E+00      -3.2582E-04  NA   NA
+1.2209E+00      -1.1578E-04  NA   NA
+1.1804E+00      0.0000E+00   NA   NA
+1.1401E+00      0.0000E+00   NA   NA
+1.0999E+00      0.0000E+00   NA   NA
+1.0593E+00      0.0000E+00   NA   NA
+1.0189E+00      0.0000E+00   NA   NA
+9.7850E-01      0.0000E+00   NA   NA
+9.3800E-01      0.0000E+00   NA   NA
+8.9750E-01      0.0000E+00   NA   NA
+8.6260E-01      0.0000E+00   NA   NA
+8.2220E-01      0.0000E+00   NA   NA
+7.8220E-01      0.0000E+00   NA   NA
+7.4110E-01      0.0000E+00   NA   NA
+7.0080E-01      0.0000E+00   NA   NA
+6.6000E-01      0.0000E+00   NA   NA
+6.1990E-01      0.0000E+00   NA   NA
+5.7890E-01      0.0000E+00   NA   NA
+5.3870E-01      0.0000E+00   NA   NA
+4.9810E-01      0.0000E+00   NA   NA
+4.5820E-01      0.0000E+00   NA   NA
+4.2220E-01      0.0000E+00   NA   NA
+3.8210E-01      0.0000E+00   NA   NA
+3.4140E-01      0.0000E+00   NA   NA
+3.0120E-01      0.0000E+00   NA   NA
+2.6040E-01      0.0000E+00   NA   NA
+2.2040E-01      0.0000E+00   NA   NA
+1.7970E-01      0.0000E+00   NA   NA
+1.3960E-01      0.0000E+00   NA   NA
+9.8500E-02      0.0000E+00   NA   NA
+5.8200E-02      0.0000E+00   NA   NA
+1.7500E-02      0.0000E+00   NA   NA
+-3.30000V       11.2530uA    NA   NA
+|                            
+[Pullup]
+|
+6.60000V        -491.109mA     NA   NA
+3.3001E+00      -1.8141E-01    NA   NA
+3.2592E+00      -1.7709E-01    NA   NA
+3.2191E+00      -1.7372E-01    NA   NA
+3.1783E+00      -1.7118E-01    NA   NA
+3.1379E+00      -1.6948E-01    NA   NA
+3.0974E+00      -1.6841E-01    NA   NA
+3.0617E+00      -1.6759E-01    NA   NA
+3.0211E+00      -1.6669E-01    NA   NA
+2.9806E+00      -1.6578E-01    NA   NA
+2.9400E+00      -1.6479E-01    NA   NA
+2.8997E+00      -1.6344E-01    NA   NA
+2.8593E+00      -1.6242E-01    NA   NA
+2.8189E+00      -1.6150E-01    NA   NA
+2.7784E+00      -1.6056E-01    NA   NA
+2.7384E+00      -1.5961E-01    NA   NA
+2.6974E+00      -1.5859E-01    NA   NA
+2.6568E+00      -1.5752E-01    NA   NA
+2.6213E+00      -1.5655E-01    NA   NA
+2.5810E+00      -1.5548E-01    NA   NA
+2.5405E+00      -1.5443E-01    NA   NA
+2.5002E+00      -1.5333E-01    NA   NA
+2.4596E+00      -1.5223E-01    NA   NA
+2.4193E+00      -1.5105E-01    NA   NA
+2.3791E+00      -1.4958E-01    NA   NA
+2.3384E+00      -1.4835E-01    NA   NA
+2.2979E+00      -1.4702E-01    NA   NA
+2.2577E+00      -1.4565E-01    NA   NA
+2.2172E+00      -1.4431E-01    NA   NA
+2.1817E+00      -1.4294E-01    NA   NA
+2.1411E+00      -1.4144E-01    NA   NA
+2.1011E+00      -1.3983E-01    NA   NA
+2.0605E+00      -1.3816E-01    NA   NA
+2.0200E+00      -1.3592E-01    NA   NA
+1.9793E+00      -1.3398E-01    NA   NA
+1.9391E+00      -1.3204E-01    NA   NA
+1.8983E+00      -1.2987E-01    NA   NA
+1.8581E+00      -1.2766E-01    NA   NA
+1.8175E+00      -1.2532E-01    NA   NA
+1.7773E+00      -1.2263E-01    NA   NA
+1.7424E+00      -1.2037E-01    NA   NA
+1.7018E+00      -1.1757E-01    NA   NA
+1.6613E+00      -1.1456E-01    NA   NA
+1.6209E+00      -1.1150E-01    NA   NA
+1.5803E+00      -1.0753E-01    NA   NA
+1.5400E+00      -1.0410E-01    NA   NA
+1.4995E+00      -1.0039E-01    NA   NA
+1.4595E+00      -9.6491E-02    NA   NA
+1.4186E+00      -9.2134E-02    NA   NA
+1.3782E+00      -8.7722E-02    NA   NA
+1.3376E+00      -8.3024E-02    NA   NA
+1.3017E+00      -7.8222E-02    NA   NA
+1.2614E+00      -7.2897E-02    NA   NA
+1.2208E+00      -6.6875E-02    NA   NA
+1.1804E+00      -6.0380E-02    NA   NA
+1.1401E+00      -5.2882E-02    NA   NA
+1.0999E+00      -4.5121E-02    NA   NA
+1.0593E+00      -3.6782E-02    NA   NA
+1.0189E+00      -2.8473E-02    NA   NA
+9.7850E-01      -2.0223E-02    NA   NA 
+9.3800E-01      -1.2587E-02    NA   NA
+8.9750E-01      -6.3082E-03    NA   NA
+8.6250E-01      -2.8059E-03    NA   NA
+8.2220E-01      -9.1657E-04    NA   NA
+7.8210E-01      -2.7176E-04    NA   NA
+7.4100E-01      -1.0056E-04    NA   NA
+7.0070E-01      0.0000E+00     NA   NA
+6.5990E-01      0.0000E+00     NA   NA
+6.1980E-01      0.0000E+00     NA   NA
+5.7880E-01      0.0000E+00     NA   NA
+5.3870E-01      0.0000E+00     NA   NA
+4.9810E-01      0.0000E+00     NA   NA
+4.5810E-01      0.0000E+00     NA   NA
+4.2210E-01      0.0000E+00     NA   NA
+3.8200E-01      0.0000E+00     NA   NA
+3.4130E-01      0.0000E+00     NA   NA
+3.0110E-01      0.0000E+00     NA   NA
+2.6030E-01      0.0000E+00     NA   NA
+2.2020E-01      0.0000E+00     NA   NA
+1.7970E-01      0.0000E+00     NA   NA
+1.3950E-01      0.0000E+00     NA   NA
+9.8400E-02      0.0000E+00     NA   NA
+5.8100E-02      0.0000E+00     NA   NA
+1.7300E-02      0.0000E+00     NA   NA
+0.00000V        0.0000E+00     NA   NA 
+-2.7000E-03     0.0000E+00     NA   NA 
+-3.30000V       0.0000E+00     NA   NA          
+|                                       
+[POWER Clamp]                  
+|
+3.90000V     0.00000A    NA   NA
+3.30000V     0.00000A    NA   NA
+2.70000V     0.00000A    NA   NA
+300.000mV    0.00000A    NA   NA
+0.00000V     0.00000A    NA   NA
+-300.000mV   0.00000A    NA   NA
+-6.30000V    0.00000A    NA   NA
+-6.60000V    0.00000A    NA   NA
+-6.90000V    0.00000A    NA   NA
+|
+|
+[Falling Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               2.32497         NA      NA
+1.2E-12         2.32497         NA      NA
+2.4E-12         2.325284434     NA      NA
+3.6E-12         2.325179623     NA      NA
+4.8E-12         2.32497         NA      NA
+6E-12           2.325494057     NA      NA
+7E-12           2.32570368      NA      NA
+8E-12           2.32497         NA      NA
+9E-12           2.324550754     NA      NA
+1E-11           2.324655566     NA      NA
+1.1E-11         2.325179623     NA      NA
+1.2E-11         2.324550754     NA      NA
+1.3E-11         2.324760377     NA      NA
+1.4E-11         2.323921886     NA      NA
+1.5E-11         2.32423632      NA      NA
+1.6E-11         2.324550754     NA      NA
+1.7E-11         2.324026697     NA      NA
+1.8E-11         2.323817075     NA      NA
+1.9E-11         2.322873772     NA      NA
+2E-11           2.322559338     NA      NA
+2.1E-11         2.322664149     NA      NA
+2.2E-11         2.320672733     NA      NA
+2.3E-11         2.320148676     NA      NA
+2.4E-11         2.319310185     NA      NA
+2.5E-11         2.31815726      NA      NA
+2.6E-11         2.314069615     NA      NA
+2.7E-11         2.313440747     NA      NA
+2.8E-11         2.31061084      NA      NA
+2.9E-11         2.305055836     NA      NA
+3E-11           2.30233074      NA      NA
+3.1E-11         2.295937245     NA      NA
+3.2E-11         2.291220733     NA      NA
+3.3E-11         2.289229316     NA      NA
+3.4E-11         2.278852989     NA      NA
+3.5E-11         2.269524775     NA      NA
+3.6E-11         2.264913074     NA      NA
+3.7E-11         2.255270426     NA      NA
+3.8E-11         2.243950796     NA      NA
+3.9E-11         2.237662112     NA      NA
+4E-11           2.223827009     NA      NA
+4.1E-11         2.210201528     NA      NA
+4.2E-11         2.194584631     NA      NA
+4.3E-11         2.18766708      NA      NA
+4.4E-11         2.175089713     NA      NA
+4.5E-11         2.148048374     NA      NA
+4.6E-11         2.138615349     NA      NA
+4.7E-11         2.13190742      NA      NA
+4.8E-11         2.109897028     NA      NA
+4.9E-11         2.098577398     NA      NA
+5E-11           2.083274936     NA      NA
+5.1E-11         2.066924359     NA      NA
+5.2E-11         2.050678593     NA      NA
+5.3E-11         2.034118394     NA      NA
+5.4E-11         2.02552386      NA      NA
+5.5E-11         2.013994607     NA      NA
+5.6E-11         2.003408657     NA      NA
+5.7E-11         1.987162891     NA      NA
+5.8E-11         1.976891375     NA      NA
+5.9E-11         1.967353539     NA      NA
+6E-11           1.962532215     NA      NA
+6.2E-11         1.947439375     NA      NA
+6.3E-11         1.93957852      NA      NA
+6.4E-11         1.928678136     NA      NA
+6.5E-11         1.923752        NA      NA
+6.6E-11         1.917777751     NA      NA
+6.7E-11         1.916729637     NA      NA
+6.8E-11         1.913375673     NA      NA
+6.9E-11         1.908554349     NA      NA
+7E-11           1.90331378      NA      NA
+7.1E-11         1.90111274      NA      NA
+7.2E-11         1.899226135     NA      NA
+7.3E-11         1.898178021     NA      NA
+7.4E-11         1.896501039     NA      NA
+7.5E-11         1.895872171     NA      NA
+7.6E-11         1.895243303     NA      NA
+7.7E-11         1.8943          NA      NA
+7.8E-11         1.892937452     NA      NA
+7.9E-11         1.893042263     NA      NA
+8E-11           1.892937452     NA      NA
+8.1E-11         1.893356697     NA      NA
+8.2E-11         1.892623018     NA      NA
+8.3E-11         1.892203772     NA      NA
+8.4E-11         1.893147075     NA      NA
+8.5E-11         1.892832641     NA      NA
+8.6E-11         1.893356697     NA      NA
+8.7E-11         1.892832641     NA      NA
+8.8E-11         1.893356697     NA      NA
+8.9E-11         1.893671132     NA      NA
+9E-11           1.893461509     NA      NA
+9.1E-11         1.893671132     NA      NA
+9.2E-11         1.894195189     NA      NA
+9.3E-11         1.893775943     NA      NA
+9.4E-11         1.893985566     NA      NA
+9.5E-11         1.8943          NA      NA
+9.6E-11         1.894195189     NA      NA
+9.7E-11         1.894404811     NA      NA
+9.8E-11         1.894824057     NA      NA
+9.9E-11         1.894195189     NA      NA
+9.98E-11        1.8943          NA      NA 
+|
+[Rising Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               1.8943          NA      NA
+1.2E-12         1.894508709     NA      NA
+2.4E-12         1.894613063     NA      NA
+3.6E-12         1.895134834     NA      NA
+4.8E-12         1.894613063     NA      NA
+6E-12           1.895447897     NA      NA
+7E-12           1.895656605     NA      NA
+8E-12           1.896178377     NA      NA
+9E-12           1.896282731     NA      NA
+1E-11           1.896804502     NA      NA
+1.1E-11         1.897117565     NA      NA
+1.2E-11         1.897952399     NA      NA
+1.3E-11         1.898578524     NA      NA
+1.4E-11         1.89993513      NA      NA
+1.5E-11         1.901396089     NA      NA
+1.6E-11         1.90191786      NA      NA
+1.7E-11         1.903274466     NA      NA
+1.8E-11         1.906092031     NA      NA
+1.9E-11         1.907970407     NA      NA
+2E-11           1.908700887     NA      NA
+2.1E-11         1.912040223     NA      NA
+2.2E-11         1.915275205     NA      NA
+2.3E-11         1.917884061     NA      NA
+2.4E-11         1.921640814     NA      NA
+2.5E-11         1.925606276     NA      NA
+2.6E-11         1.934685096     NA      NA
+2.7E-11         1.937085244     NA      NA
+2.8E-11         1.940111517     NA      NA
+2.9E-11         1.95148613      NA      NA
+3E-11           1.959103991     NA      NA
+3.1E-11         1.962652035     NA      NA
+3.2E-11         1.971939564     NA      NA
+3.3E-11         1.976322442     NA      NA
+3.4E-11         1.991558163     NA      NA
+3.5E-11         1.997402001     NA      NA
+3.6E-11         2.004185028     NA      NA
+3.7E-11         2.019107686     NA      NA
+3.8E-11         2.035700012     NA      NA
+3.9E-11         2.041752559     NA      NA
+4E-11           2.051874921     NA      NA
+4.1E-11         2.066484517     NA      NA
+4.2E-11         2.084433448     NA      NA
+4.3E-11         2.094868873     NA      NA
+4.4E-11         2.104886882     NA      NA
+4.5E-11         2.124088064     NA      NA
+4.6E-11         2.140158619     NA      NA
+4.7E-11         2.144750206     NA      NA
+4.8E-11         2.160612052     NA      NA
+4.9E-11         2.169064747     NA      NA
+5E-11           2.183987405     NA      NA
+5.1E-11         2.197449103     NA      NA
+5.2E-11         2.204858255     NA      NA
+5.3E-11         2.217693828     NA      NA
+5.4E-11         2.222702833     NA      NA
+5.5E-11         2.23073811      NA      NA
+5.6E-11         2.237834199     NA      NA
+5.7E-11         2.248687041     NA      NA
+5.8E-11         2.256200548     NA      NA
+5.9E-11         2.261105197     NA      NA
+6E-11           2.262461803     NA      NA
+6.1E-11         2.273001582     NA      NA
+6.2E-11         2.274566896     NA      NA
+6.3E-11         2.2795759       NA      NA
+6.4E-11         2.286150218     NA      NA
+6.5E-11         2.288341657     NA      NA
+6.6E-11         2.292307119     NA      NA
+6.7E-11         2.29502033      NA      NA
+6.8E-11         2.297524832     NA      NA
+6.9E-11         2.300342396     NA      NA
+7E-11           2.303994795     NA      NA
+7.1E-11         2.307960257     NA      NA
+7.2E-11         2.309108154     NA      NA
+7.3E-11         2.309421216     NA      NA
+7.4E-11         2.312343135     NA      NA
+7.5E-11         2.312969261     NA      NA
+7.6E-11         2.313595386     NA      NA
+7.7E-11         2.31662166      NA      NA
+7.8E-11         2.317560848     NA      NA
+7.9E-11         2.318813099     NA      NA
+8E-11           2.319021808     NA      NA
+8.1E-11         2.320274059     NA      NA
+8.2E-11         2.32152631      NA      NA
+8.3E-11         2.321943727     NA      NA
+8.4E-11         2.322569852     NA      NA
+8.5E-11         2.322987269     NA      NA
+8.6E-11         2.323404686     NA      NA
+8.7E-11         2.324865646     NA      NA
+8.8E-11         2.324656937     NA      NA
+8.9E-11         2.325178709     NA      NA
+9E-11           2.32497         NA      NA
+9.1E-11         2.32570048      NA      NA
+9.2E-11         2.32570048      NA      NA
+9.3E-11         2.325596126     NA      NA
+9.4E-11         2.325387417     NA      NA
+9.5E-11         2.32570048      NA      NA
+9.6E-11         2.325283063     NA      NA
+9.7E-11         2.325804834     NA      NA
+9.8E-11         2.325804834     NA      NA
+9.9E-11         2.325178709     NA      NA
+9.98E-11        2.32497         NA      NA
+|
+[Ramp]
+| variable typ min max
+dV/dt_r 256.501m/22.7882p NA NA
+dV/dt_f 256.501m/19.2062p NA NA
+R_load = 50.0000Ohms
+|
+|
+[Model] Output_200mV
+|
+Model_type Output_ECL
+|
+Vref=1.3000V
+Rref=50.0000ohms
+Cref=0.00000pF
+Vmeas=2.21338V
+C_comp 0.50000pF NA NA
+|
+| variable typ    min    max
+[Voltage Range]         3.30000V  NA   NA 
+[POWER Clamp Reference] 3.30000V  NA   NA 
+[Pullup Reference]      3.30000V  NA   NA 
+[Pulldown Reference]    3.30000V  NA   NA 
+[GND Clamp Reference]   0.00000V  NA   NA 
+|                                   
+[Temperature Range] 25     NA    NA
+|
+[GND Clamp]
+|
+-7.20000V   0.00000A    NA   NA
+-6.60000V   0.00000A    NA   NA
+-6.00000V   0.00000A    NA   NA
+0.00000V    0.00000A    NA   NA
+3.00000V    0.00000A    NA   NA
+3.30000V    0.00000A    NA   NA
+3.60000V    0.00000A    NA   NA
+|
+[Pulldown]
+|
+6.60000V        -504.101mA   NA   NA
+3.3002E+00      -1.9222E-01  NA   NA 
+3.2592E+00      -1.8766E-01  NA   NA 
+3.2191E+00      -1.8421E-01  NA   NA 
+3.1783E+00      -1.8117E-01  NA   NA 
+3.1379E+00      -1.7827E-01  NA   NA 
+3.0973E+00      -1.7528E-01  NA   NA 
+3.0618E+00      -1.7278E-01  NA   NA 
+3.0211E+00      -1.6986E-01  NA   NA 
+2.9807E+00      -1.6710E-01  NA   NA 
+2.9401E+00      -1.6403E-01  NA   NA 
+2.8997E+00      -1.6117E-01  NA   NA 
+2.8593E+00      -1.5888E-01  NA   NA 
+2.8189E+00      -1.5687E-01  NA   NA 
+2.7785E+00      -1.5531E-01  NA   NA 
+2.7384E+00      -1.5406E-01  NA   NA 
+2.6974E+00      -1.5292E-01  NA   NA 
+2.6569E+00      -1.5179E-01  NA   NA 
+2.6214E+00      -1.5070E-01  NA   NA 
+2.5811E+00      -1.4932E-01  NA   NA 
+2.5405E+00      -1.4814E-01  NA   NA 
+2.5002E+00      -1.4688E-01  NA   NA 
+2.4596E+00      -1.4559E-01  NA   NA 
+2.4194E+00      -1.4421E-01  NA   NA 
+2.3791E+00      -1.4276E-01  NA   NA 
+2.3385E+00      -1.4127E-01  NA   NA 
+2.2980E+00      -1.3972E-01  NA   NA 
+2.2577E+00      -1.3806E-01  NA   NA 
+2.2173E+00      -1.3585E-01  NA   NA 
+2.1817E+00      -1.3424E-01  NA   NA 
+2.1411E+00      -1.3232E-01  NA   NA 
+2.1012E+00      -1.3020E-01  NA   NA 
+2.0605E+00      -1.2796E-01  NA   NA 
+2.0201E+00      -1.2564E-01  NA   NA 
+1.9794E+00      -1.2298E-01  NA   NA 
+1.9391E+00      -1.2020E-01  NA   NA 
+1.8984E+00      -1.1737E-01  NA   NA 
+1.8581E+00      -1.1425E-01  NA   NA 
+1.8176E+00      -1.1100E-01  NA   NA 
+1.7773E+00      -1.0689E-01  NA   NA 
+1.7424E+00      -1.0376E-01  NA   NA 
+1.7018E+00      -9.9810E-02  NA   NA 
+1.6613E+00      -9.5456E-02  NA   NA 
+1.6209E+00      -9.1002E-02  NA   NA 
+1.5803E+00      -8.6241E-02  NA   NA 
+1.5401E+00      -8.0797E-02  NA   NA 
+1.4995E+00      -7.5165E-02  NA   NA 
+1.4595E+00      -6.9008E-02  NA   NA 
+1.4187E+00      -6.1954E-02  NA   NA 
+1.3782E+00      -5.3823E-02  NA   NA 
+1.3376E+00      -4.5499E-02  NA   NA 
+1.3017E+00      -3.7840E-02  NA   NA 
+1.2613E+00      -2.9210E-02  NA   NA 
+1.2208E+00      -2.0538E-02  NA   NA 
+1.1804E+00      -1.2576E-02  NA   NA 
+1.1400E+00      -6.1179E-03  NA   NA 
+1.0999E+00      -2.2877E-03  NA   NA 
+1.0593E+00      -7.4284E-04  NA   NA 
+1.0188E+00      -2.5458E-04  NA   NA 
+9.7850E-01      -1.3567E-04  NA   NA 
+9.3800E-01      0.0000E+00   NA   NA 
+8.9750E-01      0.0000E+00   NA   NA 
+8.6250E-01      0.0000E+00   NA   NA 
+8.2220E-01      0.0000E+00   NA   NA 
+7.8210E-01      0.0000E+00   NA   NA 
+7.4100E-01      0.0000E+00   NA   NA 
+7.0070E-01      0.0000E+00   NA   NA 
+6.5990E-01      0.0000E+00   NA   NA 
+6.1980E-01      0.0000E+00   NA   NA 
+5.7890E-01      0.0000E+00   NA   NA 
+5.3870E-01      0.0000E+00   NA   NA 
+4.9810E-01      0.0000E+00   NA   NA 
+4.5820E-01      0.0000E+00   NA   NA 
+4.2210E-01      0.0000E+00   NA   NA 
+3.8190E-01      0.0000E+00   NA   NA 
+3.4130E-01      0.0000E+00   NA   NA 
+3.0110E-01      0.0000E+00   NA   NA 
+2.6040E-01      0.0000E+00   NA   NA 
+2.2030E-01      0.0000E+00   NA   NA 
+1.7970E-01      0.0000E+00   NA   NA 
+1.3950E-01      0.0000E+00   NA   NA 
+9.8400E-02      0.0000E+00   NA   NA 
+5.8200E-02      0.0000E+00   NA   NA 
+1.7400E-02      0.0000E+00   NA   NA 
+-3.30000V       8.68180uA    NA   NA  
+|                            
+[Pullup]                      
+|
+6.60000V        -491.109mA   NA   NA
+3.3001E+00      -1.8163E-01  NA   NA
+3.2592E+00      -1.7740E-01  NA   NA
+3.2191E+00      -1.7403E-01  NA   NA
+3.1782E+00      -1.7153E-01  NA   NA
+3.1379E+00      -1.6985E-01  NA   NA
+3.0973E+00      -1.6876E-01  NA   NA
+3.0617E+00      -1.6792E-01  NA   NA
+3.0211E+00      -1.6703E-01  NA   NA
+2.9806E+00      -1.6614E-01  NA   NA
+2.9400E+00      -1.6523E-01  NA   NA
+2.8997E+00      -1.6402E-01  NA   NA
+2.8593E+00      -1.6274E-01  NA   NA
+2.8189E+00      -1.6181E-01  NA   NA
+2.7784E+00      -1.6087E-01  NA   NA
+2.7384E+00      -1.5993E-01  NA   NA
+2.6973E+00      -1.5892E-01  NA   NA
+2.6568E+00      -1.5786E-01  NA   NA
+2.6213E+00      -1.5692E-01  NA   NA
+2.5811E+00      -1.5582E-01  NA   NA
+2.5405E+00      -1.5477E-01  NA   NA
+2.5002E+00      -1.5373E-01  NA   NA
+2.4595E+00      -1.5256E-01  NA   NA
+2.4194E+00      -1.5139E-01  NA   NA
+2.3791E+00      -1.5002E-01  NA   NA
+2.3384E+00      -1.4870E-01  NA   NA
+2.2979E+00      -1.4743E-01  NA   NA
+2.2576E+00      -1.4610E-01  NA   NA
+2.2172E+00      -1.4467E-01  NA   NA
+2.1816E+00      -1.4334E-01  NA   NA
+2.1411E+00      -1.4181E-01  NA   NA
+2.1011E+00      -1.4029E-01  NA   NA
+2.0605E+00      -1.3861E-01  NA   NA
+2.0200E+00      -1.3659E-01  NA   NA
+1.9794E+00      -1.3454E-01  NA   NA
+1.9391E+00      -1.3254E-01  NA   NA
+1.8983E+00      -1.3047E-01  NA   NA
+1.8580E+00      -1.2818E-01  NA   NA
+1.8176E+00      -1.2588E-01  NA   NA
+1.7773E+00      -1.2330E-01  NA   NA
+1.7424E+00      -1.2087E-01  NA   NA
+1.7018E+00      -1.1815E-01  NA   NA
+1.6613E+00      -1.1512E-01  NA   NA
+1.6209E+00      -1.1207E-01  NA   NA
+1.5804E+00      -1.0812E-01  NA   NA
+1.5401E+00      -1.0468E-01  NA   NA
+1.4995E+00      -1.0094E-01  NA   NA
+1.4594E+00      -9.7148E-02  NA   NA
+1.4186E+00      -9.2741E-02  NA   NA
+1.3782E+00      -8.8340E-02  NA   NA
+1.3376E+00      -8.3710E-02  NA   NA
+1.3017E+00      -7.8937E-02  NA   NA
+1.2614E+00      -7.3612E-02  NA   NA
+1.2209E+00      -6.7690E-02  NA   NA
+1.1805E+00      -6.1316E-02  NA   NA
+1.1401E+00      -5.3841E-02  NA   NA
+1.1000E+00      -4.6080E-02  NA   NA
+1.0593E+00      -3.7787E-02  NA   NA
+1.0190E+00      -2.9424E-02  NA   NA
+9.7850E-01      -2.1173E-02  NA   NA
+9.3800E-01      -1.3393E-02  NA   NA
+8.9750E-01      -6.9002E-03  NA   NA
+8.6260E-01      -3.1215E-03  NA   NA
+8.2220E-01      -1.0709E-03  NA   NA
+7.8220E-01      -3.4054E-04  NA   NA
+7.4110E-01      -1.0517E-04  NA   NA
+7.0080E-01      0.00000E-00  NA   NA
+6.6000E-01      0.00000E-00  NA   NA
+6.1990E-01      0.00000E-00  NA   NA
+5.7890E-01      0.00000E-00  NA   NA
+5.3870E-01      0.00000E-00  NA   NA
+4.9810E-01      0.00000E-00  NA   NA
+4.5820E-01      0.00000E-00  NA   NA
+4.2210E-01      0.00000E-00  NA   NA
+3.8200E-01      0.00000E-00  NA   NA
+3.4130E-01      0.00000E-00  NA   NA
+3.0110E-01      0.00000E-00  NA   NA
+2.6040E-01      0.00000E-00  NA   NA
+2.2030E-01      0.00000E-00  NA   NA
+1.7970E-01      0.00000E-00  NA   NA
+1.3960E-01      0.00000E-00  NA   NA
+9.8400E-02      0.00000E-00  NA   NA
+5.8200E-02      0.00000E-00  NA   NA
+1.7400E-02      0.00000E-00  NA   NA
+0.00000V        0.00000E-00  NA   NA
+-2.7000E-03     0.00000E-00  NA   NA
+-3.30000V       0.00000E-00  NA   NA      
+|                                      
+[POWER Clamp]
+|
+3.90000V     0.00000A    NA   NA
+3.30000V     0.00000A    NA   NA
+2.70000V     0.00000A    NA   NA
+300.000mV    0.00000A    NA   NA
+0.00000V     0.00000A    NA   NA
+-300.000mV   0.00000A    NA   NA
+-6.30000V    0.00000A    NA   NA
+-6.60000V    0.00000A    NA   NA
+-6.90000V    0.00000A    NA   NA
+|
+|
+[Falling Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               2.32497         NA      NA
+1.2E-12         2.324866819     NA      NA
+2.4E-12         2.324660458     NA      NA
+3.6E-12         2.32497         NA      NA
+4.8E-12         2.324454096     NA      NA
+6E-12           2.324660458     NA      NA
+7E-12           2.324866819     NA      NA
+8E-12           2.325382723     NA      NA
+9E-12           2.324660458     NA      NA
+1E-11           2.324660458     NA      NA
+1.1E-11         2.324557277     NA      NA
+1.2E-11         2.324866819     NA      NA
+1.3E-11         2.324866819     NA      NA
+1.4E-11         2.324557277     NA      NA
+1.5E-11         2.325073181     NA      NA
+1.6E-11         2.324041373     NA      NA
+1.7E-11         2.324041373     NA      NA
+1.8E-11         2.323731831     NA      NA
+1.9E-11         2.323835012     NA      NA
+2E-11           2.323835012     NA      NA
+2.1E-11         2.323835012     NA      NA
+2.2E-11         2.323215927     NA      NA
+2.3E-11         2.323525469     NA      NA
+2.4E-11         2.323215927     NA      NA
+2.5E-11         2.322493662     NA      NA
+2.6E-11         2.322080939     NA      NA
+2.7E-11         2.322184119     NA      NA
+2.8E-11         2.320430046     NA      NA
+2.9E-11         2.32094595      NA      NA
+3E-11           2.319707781     NA      NA
+3.1E-11         2.3169219       NA      NA
+3.2E-11         2.315993273     NA      NA
+3.3E-11         2.314755104     NA      NA
+3.4E-11         2.314032839     NA      NA
+3.5E-11         2.31021515      NA      NA
+3.6E-11         2.306500643     NA      NA
+3.7E-11         2.305262473     NA      NA
+3.8E-11         2.3035084       NA      NA
+3.9E-11         2.298452543     NA      NA
+4E-11           2.294428493     NA      NA
+4.1E-11         2.286070851     NA      NA
+4.2E-11         2.282356343     NA      NA
+4.3E-11         2.278951378     NA      NA
+4.4E-11         2.267601493     NA      NA
+4.5E-11         2.260894743     NA      NA
+4.6E-11         2.256251609     NA      NA
+4.7E-11         2.248925774     NA      NA
+4.8E-11         2.242528567     NA      NA
+4.9E-11         2.230043694     NA      NA
+5.1E-11         2.217708317     NA      NA
+5.2E-11         2.203010333     NA      NA
+5.3E-11         2.192176352     NA      NA
+5.4E-11         2.186604591     NA      NA
+5.5E-11         2.182167818     NA      NA
+5.6E-11         2.172572006     NA      NA
+5.7E-11         2.166793883     NA      NA
+5.8E-11         2.157817157     NA      NA
+5.9E-11         2.151316768     NA      NA
+6E-11           2.146673634     NA      NA
+6.1E-11         2.137903269     NA      NA
+6.2E-11         2.133879219     NA      NA
+6.3E-11         2.129855169     NA      NA
+6.5E-11         2.124799311     NA      NA
+6.6E-11         2.119021188     NA      NA
+6.7E-11         2.11654485      NA      NA
+6.8E-11         2.113139884     NA      NA
+6.9E-11         2.1098381       NA      NA
+7E-11           2.109115834     NA      NA
+7.1E-11         2.107980846     NA      NA
+7.2E-11         2.106536315     NA      NA
+7.3E-11         2.10581405      NA      NA
+7.4E-11         2.103750435     NA      NA
+7.5E-11         2.102821808     NA      NA
+7.6E-11         2.10179         NA      NA
+7.7E-11         2.101274096     NA      NA
+7.8E-11         2.102305904     NA      NA
+7.9E-11         2.100758192     NA      NA
+8E-11           2.100964554     NA      NA
+8.1E-11         2.100345469     NA      NA
+8.2E-11         2.100551831     NA      NA
+8.3E-11         2.099932746     NA      NA
+8.4E-11         2.100551831     NA      NA
+8.5E-11         2.100345469     NA      NA
+8.6E-11         2.100551831     NA      NA
+8.7E-11         2.100139108     NA      NA
+8.8E-11         2.099726385     NA      NA
+8.9E-11         2.100345469     NA      NA
+9E-11           2.100242288     NA      NA
+9.1E-11         2.100242288     NA      NA
+9.2E-11         2.100655012     NA      NA
+9.3E-11         2.100964554     NA      NA
+9.4E-11         2.100861373     NA      NA
+9.5E-11         2.101274096     NA      NA
+9.6E-11         2.100655012     NA      NA
+9.7E-11         2.101170915     NA      NA
+9.8E-11         2.101274096     NA      NA
+9.9E-11         2.101274096     NA      NA
+9.98E-11        2.10179         NA      NA 
+|
+[Rising Waveform]
+R_fixture = 50.0000
+V_fixture = 1.30000
+0               2.10179         NA      NA
+1.2E-12         2.101896683     NA      NA
+2.4E-12         2.101256587     NA      NA
+3.6E-12         2.102003365     NA      NA
+4.8E-12         2.101149904     NA      NA
+6E-12           2.102323413     NA      NA
+7E-12           2.102110048     NA      NA
+8E-12           2.102536778     NA      NA
+9E-12           2.102536778     NA      NA
+1E-11           2.103390239     NA      NA
+1.1E-11         2.102643461     NA      NA
+1.2E-11         2.103710287     NA      NA
+1.3E-11         2.103070191     NA      NA
+1.4E-11         2.103816969     NA      NA
+1.5E-11         2.105203843     NA      NA
+1.6E-11         2.105310526     NA      NA
+1.7E-11         2.105843939     NA      NA
+1.8E-11         2.106377352     NA      NA
+1.9E-11         2.107337495     NA      NA
+2E-11           2.108084273     NA      NA
+2.1E-11         2.109471147     NA      NA
+2.2E-11         2.109684512     NA      NA
+2.3E-11         2.111391434     NA      NA
+2.5E-11         2.113525086     NA      NA
+2.6E-11         2.115658738     NA      NA
+2.7E-11         2.11779239      NA      NA
+2.9E-11         2.121739646     NA      NA
+3E-11           2.125153489     NA      NA
+3.1E-11         2.129634159     NA      NA
+3.2E-11         2.131447763     NA      NA
+3.3E-11         2.135288337     NA      NA
+3.4E-11         2.13624848      NA      NA
+3.5E-11         2.142116023     NA      NA
+3.6E-11         2.148410296     NA      NA
+3.7E-11         2.149157075     NA      NA
+3.8E-11         2.150863996     NA      NA
+3.9E-11         2.157798365     NA      NA
+4E-11           2.163879273     NA      NA
+4.1E-11         2.169213403     NA      NA
+4.2E-11         2.175187629     NA      NA
+4.3E-11         2.178708155     NA      NA
+4.4E-11         2.188843002     NA      NA
+4.5E-11         2.190549924     NA      NA
+4.6E-11         2.193323671     NA      NA
+4.7E-11         2.203458518     NA      NA
+4.8E-11         2.208152553     NA      NA
+4.9E-11         2.214553509     NA      NA
+5E-11           2.219887639     NA      NA
+5.1E-11         2.221701243     NA      NA
+5.2E-11         2.23226282      NA      NA
+5.3E-11         2.241010793     NA      NA
+5.4E-11         2.243251128     NA      NA
+5.5E-11         2.247091702     NA      NA
+5.6E-11         2.254772849     NA      NA
+5.7E-11         2.256693136     NA      NA
+5.8E-11         2.263627505     NA      NA
+5.9E-11         2.267254713     NA      NA
+6E-11           2.270348509     NA      NA
+6.1E-11         2.276002686     NA      NA
+6.2E-11         2.279629895     NA      NA
+6.3E-11         2.282510325     NA      NA
+6.5E-11         2.286350899     NA      NA
+6.6E-11         2.29051152      NA      NA
+6.7E-11         2.292645172     NA      NA
+6.8E-11         2.297552572     NA      NA
+6.9E-11         2.298939446     NA      NA
+7E-11           2.300859732     NA      NA
+7.1E-11         2.302246606     NA      NA
+7.2E-11         2.30363348      NA      NA
+7.3E-11         2.304380258     NA      NA
+7.4E-11         2.306833958     NA      NA
+7.5E-11         2.308220832     NA      NA
+7.6E-11         2.310674532     NA      NA
+7.7E-11         2.311207945     NA      NA
+7.8E-11         2.312061405     NA      NA
+7.9E-11         2.313981692     NA      NA
+8E-11           2.313448279     NA      NA
+8.1E-11         2.315155201     NA      NA
+8.2E-11         2.316008662     NA      NA
+8.3E-11         2.318142314     NA      NA
+8.4E-11         2.318142314     NA      NA
+8.5E-11         2.318782409     NA      NA
+8.6E-11         2.319315822     NA      NA
+8.7E-11         2.3200626       NA      NA
+8.8E-11         2.321662839     NA      NA
+8.9E-11         2.321236109     NA      NA
+9E-11           2.321236109     NA      NA
+9.1E-11         2.322409618     NA      NA
+9.2E-11         2.322943031     NA      NA
+9.3E-11         2.323369761     NA      NA
+9.4E-11         2.323903174     NA      NA
+9.5E-11         2.323263078     NA      NA
+9.6E-11         2.324223222     NA      NA
+9.7E-11         2.323583126     NA      NA
+9.8E-11         2.323796491     NA      NA
+9.9E-11         2.324436587     NA      NA
+9.98E-11        2.32497         NA      NA 
+|
+[Ramp]
+| variable typ min max
+dV/dt_r 131.303m/26.5775p NA NA
+dV/dt_f 131.303m/17.5150p NA NA
+R_load = 50.0000Ohms
+|
+|
+[Model]          Series_50
+Model_type       Series
+C_comp           0  NA   NA
+|
+[Voltage Range]  3.3        NA   NA
+[R series]       50         NA   NA
+|
+[End]
+

@@ -1,0 +1,195 @@
+#*******************************************************************************
+#*                                                                             *
+#*                                                                             *
+#*                                                                             *
+#*        #############################################################        *
+#*        #                                                           #        *
+#*        #                     MMD3P03BJT                            #        *
+#*        #                                                           #        *
+#*        #                   Motorola Power BJT                      #        *
+#*        #                   Icmax -5.0 AMPERES                      #        *
+#*        #                   VCEO -30 VOLTS                          #        *
+#*        #                   Package = SO-8                          #        *
+#*        #                                                           #        *
+#*        #               This model was developed by                 #        *
+#*        #                      Analogy, Inc.                        #        *
+#*        #                    9205 SW Gemini Dr.                     #        *
+#*        #                   Beaverton, OR  97005                    #        *
+#*        #               Copyright 1994 Analogy, Inc.                #        *
+#*        #                  All Rights Reserved                      #        *
+#*        #                                                           #        *
+#*        #    The content of this model is subject to change         #        *
+#*        #    without notice and may not be modified or altered      #        *
+#*        #    without permission from Motorola, Inc.  This model     #        *
+#*        #    has been carefully checked and is believed to be       #        *
+#*        #    accurate, however neither Analogy nor Motorola         #        *
+#*        #    assume liability for the use of this model or the      #        *
+#*        #    results obtained from using it.                        #        *
+#*        #                                                           #        *
+#*        #    For more information regarding modeling services,      #        *
+#*        #    model libraries or simulation products, please         #        *
+#*        #    Analogy, Inc. (503) 626-9700.                          #        *
+#*        #                                                           #        *
+#*        #############################################################        *
+#*                                                                             *
+#*                                                                             *
+#*                                                                             *
+#*******************************************************************************
+#mfr_start
+# rev: 930315 Added support for stress analysis and MAST enhancements
+# date:10/30/96 symbol:undef mfr_pn:mmd3p03bjt mfr:Motorola case:SO-8
+# icbo_min:undef icbo_typ:undef icbo_max:-200n icbo_ic:undef icbo_ib:undef
+# iebo_min:undef iebo_typ:undef iebo_max:-50u iebo_ic:0
+# iebo_ib:undef vcesat_min:undef vcesat_typ:-.170 vcesat_max:-.215
+# vcesat_ic:-1.2 vcesat_ib:-20m vcesat1_min:undef
+# vcesat1_typ:undef vcesat1_max:-.535 vcesat1_ic:-5.0
+# vcesat1_ib:-1.0 vbesat_min:undef vbesat_typ:undef
+# vbesat_max:-1.25 vbesat_ic:-5.0 vbesat_ib:-1.00
+# vbesat1_min:undef vbesat1_typ:undef vbesat1_max:undef
+# vbesat1_ic:undef vbesat1_ib:undef vbeon_min:undef
+# vbeon_typ:undef vbeon_max:-1.1 vbeon_ic:-3.0 vbeon_ib:undef
+# beta_min:180 beta_typ:undef beta_max:undef beta_ic:-1.2 beta_ib:undef
+# beta1_min:110 beta1_typ:undef beta1_max:undef beta1_ic:-5.0
+# beta1_ib:undef cc_min:undef cc_typ:undef cc_max:110p
+# cc_vcb:undef cc_ie:undef ce_min:undef ce_typ:undef ce_max:undef
+# ce_vcb:undef ce_ie:undef ft_min:undef ft_typ:undef ft_max:undef
+# ft_ic:undef ft_vce:undef td_min:undef td_typ:undef td_max:undef
+# tr_min:undef tr_typ:undef tr_max:undef ts_min:undef ts_typ:undef
+# ts_max:undef tf_min:undef tf_typ:undef tf_max:undef t_vcc:undef
+# t_ic:undef t_ib1:undef t_ib2:undef
+#
+# For explanatory comments see undefined template uq.sin or manual.
+#mfr_end
+electrical c,b,e
+external number temp, include_stress
+string part_type  = "bjt"
+string part_class  = "pnp hi_pwr amp"
+qtypesat..model_typ model=()
+qtypesat..tol       tol=()
+qtypesat..change        change=()
+qtypesat..group     group=typical
+qtypesat..mc        mc=yes
+# STRESS RATINGS
+qtypesat..ratings ratings = (vcemax = -30, vcbmax = -45, vebmax = -8, icavg = -
+3.0,
+    icmax = -5.0, ibavg = -1.0, ibmax = undef, pdmax_ja = 2.0, pdmax_jc = undef,
+    sb = [inf,inf,inf,inf], tjmax = 150, tjmin = -55)
+number rth_ja = undef, rth_jc = 62.5, rth_hs = undef
+export val i  icc, iee
+export val p  pwrd
+export val tc tempj
+number area = 1, ic[2]=[undef,undef]
+{
+    qtypesat..model_cfg model_cfg=()
+    number  enums=model_cfg->enums, numbers=model_cfg->numbers,
+        index = 1
+<qchoicesat.sin
+!crypt_start
+008aba86f7c2526a8a6
+064be73522dc992e1e0e15808200c0957004d3a1c0b08094808b6e77a38c5340f10b9e056b58b306
+d40f59b017a7e04ad474d571d16dc94f2b85c1308582741e303
+064eaa655578b326901f0bf0bf2872d771db2a1085657410b01b5f209246826f2b3140e5f1e39039
+e0f943e177e39b818a9e5a400ed38be15a9bbbf163a9ed4a1b0
+104bb29447cd6baa0b8b3a3164b3a282f6ce12b167d515b0c53a986122b3b56f317dec80a5a7a2b7
+a3daebe15026824f4b4b3a1105022373568fba056ec9b300206f5a8397c743bf1e3c499102dd8475
+40debae3e7c85321e01face1ff27726edb6afb306472cac0da7
+040bb2b487cd6baa0b8ebf822228095cca9fba30eed1d26f3aac4851047c0215356ffb31ded89d6a
+3b3
+048fda703f422a01ebee7f0d1c884410006e8a74055364f9811e9a93b7d39a201b4e2c3227486d4b
+fb6e327066c2cac0da7
+080bb374f17dbdcf7b4e7a9d0c83cba1eb417035e54862a0103171f5e25862a01034d1e07232d2ba
+5b4fca9cec981790401ac86102a9dd6a4abbeb023793ca118abfece05f47726a6abe327066c6636e
+3a6
+056f0874f326b2d2500f8a107ed4e53ee10e7abd0d580cca6e0f7b33a0922b81db6eafb3c3feb751
+e44f8a9ddc857bc1dab94b31fe1963c1210
+056afae6717352ba6b4e5f603af274df37ebebf7d5f7726edb0b2bd08563d4df31bf96216227e629
+eaaa887013057bc1dab94b9ccc42cac0da7
+040ed9b522c6b422a66090e420a3e7b45779434127f8e2f1c09b58f0b25753aedb2b7970f3c39a01
+bda
+104bb29447cc2baa0b8ebae3e6050590a5cf5b23e79762ef2b4f9a61df93e2b286adec80a5ac4d3f
+3f7aebe100220212b6bff37107f274fee15f1a556ec264df315b7810f2c80cca9e0c499102dd8474
+00d09035e4883cfbdb4face1ff27726edb6afb306472cac0da7
+032afb2607c344df2bbf9ebcc8a3cf870abb1a31b4bed2c021c64134258414c1844
+080adaa6f623424fedd00055e56525b1456feaeccd75258084adee60a3c3e2bb1e5b5fa6a226e14a
+50fbef868299a78475e86eb2217ce21445fa7fd848a04195e48bef868299a78475e86be226c963c1
+210
+064f08657327c292500fd32137e87cfbdb508015a489a29021ef1c86efc9c82f8f6f8a01df058410
+c01f7af3d6122e915bfe8b32229812a1c07a8970f3c1b36efa6
+032bda35a9a7fb14eb6e5f0d0906a3af3db4a030d543c292500b5970c3c5339347b
+056b5aa6d7e7b3898b7feb5ccd33f2d36690847405453310c53a13745603a51fe78e5abd087eb721
+e44046e354880cdbdb5b5971c3c2b41e303
+064f1aa44508b326900b5a00a4b3db503beb7c50d7534a019dae1ab1b50ebd3a3abfb301e6069b90
+0b7e7a9d2c8d5d4bcb5b7820c2b862e0202fbb36ee19cc1b1a5
+096a9ab6c622b26feddfeaed1d13da201b7fe36177b9cd4a1abfe377b174d514a01b7990c2c3a4df
+a17f9a9d2ca7f26f2aafc731e607f4bfab2bba985ca505c053ff9bd05f17f3af7b3ff371660382c2
+16fe7c4d0d17622f5bff7be2e6c2e39387b
+104f7bd5456d347000d0d1f564d575c5d49a887123155090052b6f60a513a59ed17140e5e1b3b6b4
+57792a403f69ed1a1b3e5aed0d39ed1a1b3b5800c2b982c0206c4ec1021c22d405314015e416825f
+3b6efad227c21bc1da9baa3144984d1bda8b3b3154b58310a50
+072ed994e286d422a66eeb2377a88d1f4a8efae206139e914bffffcccdc38b503b2b4d20c76807f6
+f1cf2317d743d20366bfebd56f52335296bffb5d4d488d0f4a8f9b36ee19a3c1210
+0564f050456045c053fab800e323d292f77fc33147453421454fbfcd08e380c9e0fbea27d54515c1
+650b59b0c2d2552f713a99b12417227f3b5
+056ed865a31337c436e090242557173edb3f9f61ff43f29366be4ffd09032199e0ff4b5bbd2772ef
+6a8fe32137d98300a06f5be366c574c6548
+056adad7a622026fedd0c005a4d53421454f8a200f0222e2875f0f507b53ee570abe6ab557c505c1
+65dafa4154b2028206be127106c3b4df17e
+072aaa159ef6fbe10dcfda9d0d580310555afbe15022550f015a8840c2c9a29061eecb23a11045c1
+555bfac8aca6851fe78b2a51649595c0d48a9860d2c4d5a084af8b302e13b394577
+08054070456025c053fb3a31e5354421454f1ab06f14d58084afcae6ea29a764a5380b23f114d5d0
+948afad7c75364f9815b0bf155e83d1f4a8eaa6207c763bf7e3e5fcd1d2982f0109b4970c3c36394
+577
+096bb375261c2baa0b8e7b4d0c87727fab3091f40495159095de4a203f422b51db6c4ec10213224b
+7f4a984122c515e0854b5a10a573cbc03b7f9a9d3d43837346bb3eb144b3cd11eb1f7bf4455364f9
+811fbce1df37438efb4afb306472cac0da7
+080beaf697d7b3898b7b5990d2d683af2b7a88a0d75ed82bdf792b5d0d79ed9a7bcff370860575f0
+15cade7104b89bca9b6bbfd50b408370959adf656a56d0fef56afc4cc82c584ffe1afb30647414c1
+844
+080bb725417d3dcf8b7a163422204195e48aa61402920e858e9925c0a716be14ceab2f6435621a01
+db0b4870c313c04ef12fec2bdd96a79b2e508560b49264df211f6af3f6184791e01e9be536c9a3c1
+210
+072b92949788dd0cab7ffb5ccd284320304b1fb174b3f3ced15f1f74509d694acdefcd15a794d084
+d0ae32b53112870a7e3b7365262df290f6be5a8d5ca9829031c94b9ccc42cac0da7
+024afbf50f831a276b7a9ea12253737346baab306472b41e303
+024b8ed94857212b346e7ebceed321faceaae274865d134570d
+02448471a19181f4801173a4071d495f8f6ab274f65353eb7bb
+032aaea7a2d3f65b3e3f59720277a7a6a3ad2b67a71347da2e5f2be2e6c90c1b1a5
+040f2e75206cf6f4255adcc08087b15b14c5d5c070a7811b72abda48f90e96f5659e1b9c9c42cac0
+da7
+024be73522dc992e1e0e12708206604ac4754131d587948fe0b
+024f2e75206cf6f4255adb3080b0c095700f4974f3c0545054c
+016e5b34909c47b5759a4b35ce105184b01
+016b9f652b57ee94ceabbb340e1963c4910
+040b2be686c6636e3a6110e0945c291fef0a1f089852171abd9a7f61aa52ce20dee41134e585c4c1
+856
+040aa274a2ac388f4a5b18a5b213466acf351560708d792f9daacfc84804802180dfbb306473641e
+310
+040e6b34a01c5755710f3a36971c291fef0f5d95375c17d6d57e66206286678e3efe1971c3c31ac0
+db3
+040acb35fa77fe548a7e73a4171c46c5d45b7fb61297bfc72f4e7f60f03908fb1ec41134e5831ac0
+db2
+040acb98c827808a603abae415a7efc42f2aa274b6c3a41ea03e9f613a596721259e1971c3c3641e
+315
+0405c13021e12055d44e1ae54fc7911ac56e6b34b47534c114419564e1c6678e3efa3be2e6c5c4c1
+853
+072a4fc40ac7eac0dbae7e655096e04b70ba262552e20e143f2bbbb40b39c85f0e1eef752033577e
+aaaeb9e1470637c773fb5df5d7f223ea7f4a0634f22d388f4defc97443c1b36eaaa
+056e2f2420fd27f4018b5fa692869ed04aba9ff26602b3fb0e2e7f442097eed05f5fcd3157d22357
+538adba41b59892f5ecb5971c3c6636e3a6
+040ae6b4223d495e3adb0c310346dfe49e3bbe152b16d35737256471a0bd9756d54f2be2e6c2e393
+87b
+00844134e58414c1844
+064e8974f2d6f686c75fa971c7f6eac0de2f23a0620db795d54a4fc93967900ef03a8b30eedd180e
+3e0a0eb83c45c40510758411a45676a763cbabe7a6065ff43e0
+0484b411a45090d670eafec666c53a047e6edc3546e51247238f1c3636e0b4c5b48a1fb6cb52e64b
+0bb96b35be17d39347b
+048e9c75d657c6d6c04acedddbb3662a2f4e0c54c7d69fc01a7ed8a636fd56f5e51b9f881883475b
+7d9bab993c4963c1210
+024b9b997d97941a703ef74563d79316a3fa8b347e12548b212
+0244d130b450c4c480ef7e04316db34425ae2b35247683fb2b7
+024f0975f216d39387b19404e09df345153ae27526c683fb2b7
+024b2be6b712336e3a6e9e013b008445d01a8b994c422a55cb6
+016fafb6d133462baf6a7b357e12e39387b
+}
+
+

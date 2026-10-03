@@ -1,0 +1,60 @@
+* ------------------------------------------------------------ *
+*
+* ON Semiconductor
+* MC33170 model adapted by Christophe BASSO, Toulouse (FRANCE)
+* Designed by Ladislav MATYAS, Roznov (CZECH Republic)
+* e-mail: christophe.basso@onsemi.com
+* INTUSOFT's IsSpice4 compatible
+*
+* Last modified: 11/3/99
+*
+* ------------------------------------------------------------ *
+**********
+*SRC=MC33170;MC33170;MOTOROLA;Companion chip;
+*SYM=MC33170
+.SUBCKT MC33170 INV NINV VBOOST VEE OUT
+Ibias VBOOST BIAS DC=10uA
+M14 3 3 VBOOST VBOOST MOD4 
+M17 5 3 VBOOST VBOOST MOD4 
+R1 6 VEE 1.59k
+C1 13 OUT 15pF
+M16 8 3 VBOOST VBOOST MOD4 
+M15 11 3 VBOOST VBOOST MOD4 
+R2 9 VEE 1.59k
+R3 5 8 1.62K
+M13 13 3 VBOOST VBOOST MOD4 
+M12 19 3 VBOOST VBOOST MOD4 
+R4 23 16 15.7K
+R5 16 VEE 14.2K
+Q208 6 INV 5 PNPV 
+Q35 19 19 4 npnl 
+Q33 4 4 VEE npnl
+Q34 VBOOST 19 20 npnl
+Q209 9 NINV 8 PNPV 
+Q32 20 23 VEE npnl 2 
+Q37 21 20 VEE npnl
+Q21 21 21 VBOOST PNPV 1 
+Q19 OUT 21 VBOOST PNPV 40 
+Q38 OUT 23 VEE npnl 12 
+Q27 BIAS BIAS VEE npnl 
+Q26 3 BIAS VEE npnl 2 
+Q7 VBOOST 11 12 npnl 
+Q36 13 12 9 npnl
+Q39 11 12 6 npnl 
+Q40 VBOOST 13 23 npnl 2
+.ENDS
+*INCLUDE MC33170.LIB
+**********
+**** PMOS MODELS ****
+.model MOD4 pmos (level=2 UO=238.6 UCRIT=4.42e+4 UEXP=1.35e-1 VTO=-1.433 NSS=3e+10 TOX=60e-9 NSUB=2.667e+15
++ KP=1.127e-5 GAMMA=0.629 PHI=0.630 RSH=746.2 XJ=2.686e-6 LD=1.365e-6 PB=6.526e-1  JS=5.273e-5
++ CJ=1.316e-4 CJSW=6.891e-10 CGSO=1.307e-10 CGDO=1.307e-10)
+**** BIPOLAR MODELS ****
+.model npnl npn (IS=2.340e-16 BF=104 XTI=4.069 XTB=0.3838 EG=1.115 VAF=475 IKF=1.2e-3 ISE=3.0e-16 NE=2 ISC 1.226e-16
++ NC=1.3 CJE=1.304e-13 VJE=0.7434 CJC=8.249e-14 VJC=1.078 TF=2.90e-10 TR=4.500e-9 IRB=1.1e-4 RE=1.0e+1 
++ RBM=3e+1 RB=4e+2 RC=1e+2 NF=1.02 BR=3e-2 NR=1.05 VAR=25 IKR=1.212e-3 XTF=1.2 VTF=2.2 ITF=2.4e-3 MJE=0.393 MJC=0.6255)
+**** 
+.MODEL PNPV PNP(IS=4E-14 BF=400 VAF=50 IKF=.02 ISE=7E-15  
++ BR=7.5  RC=2.4  XTB=1.5 NE=1.16
++ CJE=6.3PF TR=23E-9 CJC=5.8PF TF=5E-10 KF=6E-16 AF=1.0) 
+*****

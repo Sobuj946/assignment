@@ -1,0 +1,436 @@
+****************************************************
+*  Format this file using a monospace font.        *
+*  Courier nine point type is the original format. *
+****************************************************
+*
+* Motorola Semiconductor Products Sector
+* Logic and Analog Technologies Group
+* Logic Integrated Circuits Division
+* 
+* File: 
+* SSDT release ID: 
+* Filename: lcx00.g55j
+* Device:  LCX00 (G55J)
+* Output type: non-tristating
+* Model parameters: SPICE Level 3
+* Date:  4/5/96
+* Rev:   1.0
+* ----------------------------------------------------------------------------
+* Dear Customer,
+* 
+*    Presented below are an input/output device netlist and model cards.  Before
+* proceeding with the modeling of this device, there are several points of which
+* you should be aware: 
+*    First, the netlist below is not intended to represent the entire device, 
+* and should not be used to simulate propagation delays through the device,  
+* rather, the netlist should be used only to gauge output performance and input 
+* loading.
+*    Second, this netlist does not include the five volt tolerant circuitry 
+* utilized on the outputs, as that circuitry is proprietary. For this reason, 
+* any attempt to simulate a five volt tolerant situation on the outputs
+* will be non-functional.  However, the information conveyed by simulation of
+* the netlist will still be accurate for systems design, as deletion of the five
+* volt tolerant circuitry will only marginally affect the output characteristics
+* under normal operating conditions.
+*    Last, please be advised that this device was designed using a Motorola 
+* proprietary model, and that these models were not used in the actual device's
+* design.  However, the parameters have been extracted directly from the 
+* Motorola process used for the fabrication of these parts, and hence should 
+* reflect its behavior reasonably well.
+*   Should you need additional assistance or information, please contact your
+* Motorola applications engineer.
+*                                                              
+* ----------------------------------------------------------------------------
+* Simulation notes:
+*
+* This  text is not intended to be a full tutorial regarding the simulation of 
+* LCX parts in systems.  For more detailed information, please refer to the 
+* current revision data book.
+*
+*
+* 1)  Data to output 
+*     A)  Pulse node inAn full range, with 0V and Vcc endpoints.  This node is
+*         internal to the chip, and, as such, has a higher switching speed than
+*         that specified for LCX inputs.  It is best to use a typical internal
+*         rise and fall times of 1ns, full range, 0V to Vcc.  The output, On, 
+*         will be inverted relative to the input.
+*     B)  Force Vcc at the appropriate voltage: 2.7V, 3V, 3.3V or 3.6V
+*     C)  Force the An node to 0V or 2.7V.  The state is irrelevant, but it must 
+*         be forced to avoid simulator failures during convergence.
+*     D)  Set the operating junction temperature.
+*
+* 2) The An, port is fully represented in the netlist.  To simulate bus loading *    of the inputs, use the appropriate input structures, as partitioned below, 
+*    in the netlist.
+* 3) The DW and XQC parameters have been commented out of the models, as many 
+*    SPICE level 3 simulators will not accept these input variables.
+*
+* Additional simulation notes:
+*
+* The user is assigned the responsibility of placing the appropriate forces on 
+* the desired nodes.  The LAn, lvcc and lgnd lead inductances are all defaulted 
+* to 2.5nh.  These elements are placed early in the netlist, as are the 
+* operating and nominal temperatures, for easy access and simulation control.  
+*
+* Please note that the lead inductance on the On pad (2.5nh, attached at node 
+* 505), must be added by the user, as some simulators will not accept a floating 
+* inductor lead, thus causing the simulator to halt.
+*
+************************  Top Level Schematic  ********************************
+*
+*  Please note inductances, resistances and input protection devices are not
+*  represented in this schematic.  It is intended only to give the user an
+*  idea of the circuit topology without direct schematic transfer.
+*
+*                           |\
+*                           | \
+*      An (Node 504)  o-----|  \o-------o AnB (Node 510)        VCC (node 502)
+*                           |  /
+*                           | /
+*                           |/
+*
+*                           |\
+*                           | \
+*      inAn (Node 506)o-----|  \o-------o On (Node 505)
+*                           |  /
+*                           | /
+*                           |/
+*
+********************************************************************************
+*
+* Net summary
+*
+* Port                        Node Number Force
+* An                              504     0V or Vcc
+* inAn                            506     Pulse 0V to Vcc, 1ns 0 to 100%
+* On                              505     Data output monitor
+* AnB                             510     Output of An inverter interface to the
+*                                         internal chip.  Lead inductance, input *                                         protection devices, and pad 
+*                                         capacitance occur between 
+*                                         this port and the An input.
+* internal (chip) vcc (ivcc)      509     N/A  (couples to global VCC via LVCC)
+* Global (system) VCC             502     2.7V, 3V, 3.3V or 3.6V
+* internal (chip) gnd (ignd)      511     N/A  (couples to global GND via LGND)
+* Global (system) GND             0       0V
+*
+* Note that you must provide forces on the following nodes for the simulation to
+* function properly:  
+* 
+* An                              504
+* inAn                            506
+* VCC                             505
+*******************************************************************************
+*
+* SPICE format circuit netlist 
+*
+*******************************************************************************
+*
+* Run control
+
+* Example forces for data in (inAn, node 506) to output (On, node 505)
+
+Vdz0 504 0 DC 3                                  * An
+Vdz1 506 0 PULSE 0 3 0 1e-09 1e-09 5e-08 1e-07   * inAn
+Vdz2 502 0 DC 3                                  * Vcc
+
+* Temperature
+
+.options  tnom=27   
+.temp=27   
+
+* Transient
+
+.tran 1e-10 1e-07 0    
+
+* Lead inductances
+
+* Please note that the lead inductance on the On pad (node 505), must be added 
+* by the user, as most simulators will not accept an inductor lead directly 
+* attached to an unforced (output) port.  For this situation, the user should 
+* attach an appropriate load, representing the bus, between the added inductor
+* and the On output lead, node 505.
+
+* Internal (chip) ground to global ground inductance
+
+
+lgnd 511 0  2.5nH   
+
+
+* Internal (chip) ground to global Vcc inductance
+
+lvcc 502 509  2.5nH   
+
+
+* A(n) input section
+
+lan 504 503  2.5nH   
+Mamnjznm 503 511 511 511 NMOS  AD=7150P AS=1950P W=650U 
++ NRD=0.007692 NRS=0.001538 PD=1322U PS=1306U L=1U   
+Mahvpmos 503 509 509 509 PMOSHV  AD=4950P AS=2700P L=1U NRD=0.005556 NRS=0.001111
++ PD=922U PS=1812U W=900U   
+ran 503 501  250   
+can 503 511 0.882P   
+Miz5zpmo 510 501 509 509 PMOS  AD=120P AS=180P L=1U NRD=0.0125 NRS=0.0125 PD=92U
++ PS=138U W=80U   
+Miz6zpmo 510 501 509 509 PMOS  AD=60P AS=60P L=1U NRD=0.05 NRS=0.05 PD=46U PS=46U
++ W=20U   
+Miz2znmo 510 501 511 511 NMOS  AD=120P AS=180P W=80U NRD=0.0125 NRS=0.0125 PD=92U
++ PS=138U L=1U   
+
+* end A(n) input section
+
+
+* Begin output O(n) section
+
+Rmosnczg 527 526  536   
+rnn7 539 535  536   
+rnn9 535 533  536   
+rnn12 532 531  536   
+rnn13 533 523  536   
+rnn15 529 525  536   
+rnn16 531 524  536   
+rnn19 521 517  536   
+rnn20 522 514  536   
+rnn21 518 516  536   
+rnn22 512 543  536   
+rnn23 513 544  536   
+rnn24 517 541  536   
+rnn25 538 534  536   
+rnn26 536 539  536   
+rnn27 519 512  536   
+rnn28 541 545  294   
+rnn29 545 540  294   
+rnn30 515 542  536   
+rnn31 519 526  294   
+rnn32 543 544  294   
+rnn33 542 541  294   
+rnn34 507 537  1E-7   
+rnn35 537 538  536   
+rnn36 540 543  294   
+rnn37 514 545  536   
+rnn38 518 519  294   
+rnn39 536 537  294   
+rnn40 530 532  294   
+rnn41 528 530  294   
+rnn42 516 540  536   
+rnn43 526 513  536   
+rnn44 532 535  294   
+rnn45 520 521  294   
+rnn46 520 515  536   
+rnn47 535 534  294   
+rnn48 524 523  294   
+rnn49 526 525  294   
+rnn50 530 529  536   
+rnn51 521 522  294   
+rnn52 528 527  536   
+rnn53 525 524  294   
+rnn54 522 518  294   
+rpoly 507 508  200   
+con 505 511 0.882P   
+Miz22znm 507 506 511 511 NMOS  AD=150P AS=225P W=100U NRD=0.01 NRS=0.01 PD=112U
++ PS=168U L=1U   
+mosnczg5 526 506 511 511 NMOS  AD=75P AS=75P W=25U NRD=0.04 NRS=0.04 PD=56U PS=56U
++ L=1U   
+mnn1 505 517 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn2 505 531 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn3 505 516 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn4 505 514 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn5 505 529 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn6 505 539 511 511 NMOS  AD=46.5P AS=46.5P W=15.5U NRD=0.064516 NRS=0.064516
++ PD=37U PS=37U L=1U   
+mnn8 505 538 511 511 NMOS  AD=46.5P AS=46.5P W=15.5U NRD=0.064516 NRS=0.064516
++ PD=37U PS=37U L=1U   
+mnn10 505 512 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn11 505 513 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn14 505 533 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn17 505 515 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnn18 505 527 511 511 NMOS  AD=407P AS=111P W=37U NRD=0.135135 NRS=0.027027 PD=96U
++ PS=80U L=1U   
+mnjznmos 505 511 511 511 NMOS  AD=7150P AS=1950P W=650U NRD=0.007692 NRS=0.001538
++ PD=1322U PS=1306U L=1U   
+Miz20zpm 507 506 509 509 PMOS  AD=150P AS=225P L=1U NRD=0.01 NRS=0.01 PD=112U
++ PS=168U W=100U   
+Miz21zpm 507 506 509 509 PMOS  AD=150P AS=225P L=1U NRD=0.01 NRS=0.01 PD=112U
++ PS=168U W=100U   
+Miz50zpm 505 508 509 509 PMOS  AD=2750P AS=900P L=1U NRD=0.01 NRS=0.002 PD=610U
++ PS=636U W=500U   
+Miz35zpm 505 507 509 509 PMOS  AD=2750P AS=900P L=1U NRD=0.01 NRS=0.002 PD=610U
++ PS=636U W=500U   
+
+.end
+
+* End O(n) output section
+
+*******************************************************************************
+*
+* SPICE 2G level 3 models begin
+*
+*******************************************************************************
+* BEST CASE 
+*******************************************************************************
+
+.MODEL NMOS NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.7            TOX     = 135E-10     
++ XJ     = 6.0E-8      LD      = 2.0E-7         RSH     = 534     
++ NSUB   = 6.048E+16   NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10     
++ CJ     = 3.79E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1
+*+ DW     = -0.2E-6
+*+ XQC    = 1
+
+.MODEL NMOSLV NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.196          TOX     = 135E-10     
++ XJ     = 6.0E-8      LD      = 2.0E-7         RSH     = 534     
++ NSUB   = 6.048E+16   NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10     
++ CJ     = 3.79E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1
+*+ DW     = -0.2E-6
+*+ XQC    = 1
+
+.MODEL PMOS PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -0.87          TOX     = 135E-10
++ XJ     = 9.7E-8      LD      = 2.0E-7         RSH     = 1454
++ NSUB   = 2.648E+16   NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = -0.2E-6
+*+ XQC    = 1
+
+.MODEL PMOSHV PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -1.425         TOX     = 135E-10
++ XJ     = 9.7E-8      LD      = 2.0E-7         RSH     = 1454
++ NSUB   = 2.648E+16   NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = -0.2E-6
+*+ XQC    = 1
+
+*******************************************************************************
+* TYPICAL CASE 
+*******************************************************************************
+
+.MODEL NMOS NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.804          TOX     = 150E-10     
++ XJ     = 6.0E-8      LD      = 1.21E-7        RSH     = 534     
++ NSUB   = 7.56E+16    NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10
++ CJ     = 3.39E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1
+*+ DW     = -2.11E-8               
+*+ XQC    = 1
+
+.MODEL NMOSLV NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.3            TOX     = 150E-10     
++ XJ     = 6.0E-8      LD      = 1.21E-7        RSH     = 534     
++ NSUB   = 7.56E+16    NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10
++ CJ     = 3.39E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1
+*+ DW     = -2.11E-8               
+*+ XQC    = 1
+
+.MODEL PMOS PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -1.00          TOX     = 150E-10
++ XJ     = 9.7E-8      LD      = 1.02E-7        RSH     = 1454
++ NSUB   = 3.31E+16    NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = 6.25E-9
+*+ XQC    = 1
+
+.MODEL PMOSHV PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -1.555         TOX     = 150E-10
++ XJ     = 9.7E-8      LD      = 1.02E-7        RSH     = 1454
++ NSUB   = 3.31E+16    NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = 6.25E-9
+*+ XQC    = 1
+
+*******************************************************************************
+* WORST CASE 
+*******************************************************************************
+
+.MODEL NMOS NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.96           TOX     = 165E-10
++ XJ     = 6.0E-8      LD      = 0.05E-6        RSH     = 534     
++ NSUB   = 9.072E+16   NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10
++ CJ     = 3.79E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1     
+*+ DW     = 0.1E-6
+*+ XQC    = 1
+
+.MODEL NMOSLV NMOS LEVEL=3
++ NSS    = 0.0         VTO     = 0.456          TOX     = 165E-10
++ XJ     = 6.0E-8      LD      = 0.05E-6        RSH     = 534     
++ NSUB   = 9.072E+16   NFS     = 4.9E11         UO      = 520     
++ VMAX   = 1.7E5       DELTA   = 0.87           THETA   = 0.126
++ ETA    = 0.008       KAPPA   = 0.289
++ CGSO   = 5.571E-10   CGDO    = 5.571E-10
++ CJ     = 3.79E-4     CJSW    = 3.35E-10       PB      = 0.75
++ MJ     = 0.4         MJSW    = 0.31           TPG     = 1     
+*+ DW     = 0.1E-6
+*+ XQC    = 1
+
+.MODEL PMOS PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -1.13          TOX     = 165E-10     
++ XJ     = 9.7E-8      LD      = 0.05E-6        RSH     = 1454
++ NSUB   = 3.972E+16   NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = 0.1E-6
+*+ XQC    = 1
+
+.MODEL PMOSHV PMOS LEVEL=3
++ NSS    = 0.0         VTO     = -1.685         TOX     = 165E-10     
++ XJ     = 9.7E-8      LD      = 0.05E-6        RSH     = 1454
++ NSUB   = 3.972E+16   NFS     = 6.5E11         UO      = 160     
++ VMAX   = 5.0E7       DELTA   = 0.47           THETA   = 0.149
++ ETA    = 0.021       KAPPA   = 0.1     
++ CGSO   = 4.696E-10   CGDO    = 4.696E-10     
++ CJ     = 4.45E-4     CJSW    = 2.58E-10       PB      = 0.75
++ MJ     = 0.42        MJSW    = 0.33           TPG     = -1     
+*+ DW     = 0.1E-6
+*+ XQC    = 1
+
+*******************************************************************************
+*
+* SPICE Level 3 models end
+*
+*******************************************************************************

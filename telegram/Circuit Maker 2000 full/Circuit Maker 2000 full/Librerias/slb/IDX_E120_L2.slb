@@ -1,0 +1,132 @@
+*version 9.1 1884767512
+@index
+symloc IDP04E120_L2 0 521
+symloc IDP30E120_L2 521 523
+symloc IDP18E120_L2 1044 523
+symloc IDP12E120_L2 1567 523
+symloc IDP09E120_L2 2090 522
+*symbol IDP04E120_L2
+d INFINEON TECHNOLOGIES 4A1200V Level 2 EMCON diode
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP04E120_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP04E120_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;
+*symbol IDP30E120_L2
+d INFINEON TECHNOLOGIES 30A/1200V Level 2 EMCON diode
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP30E120_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP30E120_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;
+*symbol IDP18E120_L2
+d INFINEON TECHNOLOGIES 18A/1200V Level 2 EMCON diode
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP18E120_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP18E120_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 20 5
+20 15
+;
+v 0 10 10
+12 10
+;
+*symbol IDP12E120_L2
+d INFINEON TECHNOLOGIES 12A/1200V Level 2 EMCON diode
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP12E120_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP12E120_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;
+*symbol IDP09E120_L2
+d INFINEON TECHNOLOGIES 9A/1200V Level 2 EMCON diode
+@type p
+@attributes
+a 0 sp 0:13 0 15 25 hln 100 MODEL=IDP09E120_L2
+a 0 sp 9 0 15 0 hln 100 REFDES=D?
+a 0 s 0 0 0 10 hlb 100 SIMULATIONONLY=
+a 0 s 11 0 0 0 hln 100 PART=IDP09E120_L2
+a 0 s 0:13 0 0 0 hln 100 TEMPLATE=X^@REFDES %1 %2 @MODEL PARAMS: ?TJ|TJ=@TJ||TJ=27|
+a 0 u 0:13 0 0 0 hln 100 TJ=27
+@pins
+p 0 13 12 hln 100 1 n 0 10 h
+p 0 17 12 hrn 100 2 n 30 10 u
+@graphics 30 20 0 10 10
+v 0 12 5
+12 15
+20 10
+12 5
+;
+v 0 10 10
+12 10
+;
+v 0 20 5
+20 15
+;

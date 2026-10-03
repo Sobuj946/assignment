@@ -1,0 +1,65 @@
+template mmbta63lt1 c b e
+#*********************************************************************
+#               This template created by Analogy, Inc.               *
+#           for exclusive use with the Saber(TM) simulator.          *
+#           Copyright 1997, Analogy, Inc.                            *
+#   This template may not be  reproduced in any way (physically or   *
+#   electronically)  without permission  from Analogy,  Inc.   The   *
+#   content  of this template is subject to change without notice.   *
+#   Analogy does not assume liability for the use of this template   *
+#   or the results obtained from using it.                           *
+#*********************************************************************
+# Model generated on Apr 14, 98
+# MODEL FORMAT: Saber
+# Darlington macro model
+# External node designations
+# Node c -> Collect
+# Node b -> Base
+# Node e -> Emitter
+electrical c,b,e
+
+external number temp
+
+string part_type  = "bjt"
+string part_class = "darlington"
+
+export val i  ic, ib
+export val p  pwrd
+export val tc tempj
+
+{
+# BODY_BEGIN
+# Default values used in dmodel
+#   EG=1.11 TT=0 BV=infinite
+spd..model dmodel=(
+is=1e-12,rs=0,n=0.5,xti=0.5,
+cjo=0,vj=0.75,m=0.33,fc=0.5)
+spq..model qmodel=(type=_p,
+is=1.26184e-14,bf=309.375,nf=1.06922,vaf=30,
+ikf=0.00211028,ise=2.71282e-14,ne=1.53483,br=3.75284,
+nr=0.958599,var=10,ikr=1e-05,isc=2.71282e-14,
+nc=4,rb=0.1,irb=0.1,rbm=0.1,
+re=0.0001,rc=99.3883,xtb=1.00315,xti=4,eg=1.206,
+cje=3e-12,vje=0.75,mje=0.33,tf=1e-11,
+xtf=1,vtf=10,itf=0.01,cjc=5e-12,
+vjc=0.75,mjc=0.33,xcjc=0.9,fc=0.5,
+tr=1e-07,ptf=0,kf=0,af=1)
+spq..model q1m=(type=_p,
+is=1.26184e-14,bf=309.375,nf=1.06922,vaf=30,
+ikf=0.00211028,ise=2.71282e-14,ne=1.53483,br=3.75284,
+nr=0.958599,var=10,ikr=1e-05,isc=2.71282e-14,
+nc=4,rb=0.1,irb=0.1,rbm=0.1,
+re=0.0001,rc=99.3883,xtb=1.00315,xti=4,eg=1.206,
+cje=3e-12,vje=0.75,mje=0.33,tf=1e-11,
+xtf=1,vtf=10,itf=0.01,cjc=0,
+vjc=0.75,mjc=0.33,xcjc=0.9,fc=0.5,
+tr=1e-07,ptf=0,kf=0,af=1)
+spq.q1 c b d d=model=qmodel
+spq.q2 c d e e=model=q1m,area=64.3815
+spd.d1 c e=model=dmodel
+
+pwrd  = pwrd(spq.q1) + pwrd(spq.q2) + pwrd(spd.d1))
+icc   =   icc(spq.q2)
+ib    =   icc(spq.q1) - iee(spq.q1)
+tempj = tempj(spq.q2)
+}

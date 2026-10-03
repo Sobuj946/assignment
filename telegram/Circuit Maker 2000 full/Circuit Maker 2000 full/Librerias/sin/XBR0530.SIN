@@ -1,0 +1,118 @@
+###############################################################################
+#                                                                             #
+#                                                                             #
+#                                                                             #
+#        #############################################################        #
+#        #                                                           #        #
+#        #                         xbr0530                           #        #
+#        #                                                           #        #
+#        #                                                           #        #
+#        #                 Motorola Power Rectifier                  #        #
+#        #                       0.5 AMPERES                         #        #
+#        #                        30 VOLTS                           #        #
+#        #                                                           #        #
+#        #               This model was developed by                 #        #
+#        #                      Analogy, Inc.                        #        #
+#        #                    9205 SW Gemini Dr.                     #        #
+#        #                   Beaverton, OR  97005                    #        #
+#        #               Copyright 1994 Analogy, Inc.                #        #
+#        #                  All Rights Reserved                      #        #
+#        #                                                           #        #
+#        #    The content of this model is subject to change         #        #
+#        #    without notice and may not be modified or altered      #        #
+#        #    without permission from Motorola, Inc.  This model     #        #
+#        #    has been carefully checked and is believed to be       #        #
+#        #    accurate, however neither Analogy nor Motorola         #        #
+#        #    assume liability for the use of this model or the      #        #
+#        #    results obtained from using it.                        #        #
+#        #                                                           #        #
+#        #    For more information regarding modeling services,      #        #
+#        #    model libraries or simulation products, please         #        #
+#        #    call Analogy, Inc. (503) 626-9700.                     #        #
+#        #                                                           #        #
+#        #############################################################        #
+#                                                                             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+encrypted element component template dxbr0530 a k = model, ic,
+                                      ratings, rth_ja, rth_jc, rth_hs,
+                                      part_type, part_class
+electrical a,k
+external number temp, include_stress
+string part_type  = "diode",
+       part_class = "hi_pwr rect"
+# stress ratings
+dp..ratings ratings= (piv= 30, imax= undef, iavg= .5,
+                      pdmax_ja= undef, pdmax_jc=undef,
+                      tjmax= 150, tjmin= -65)
+number rth_ja= undef, rth_jc= undef, rth_hs= undef, ic=undef
+export val p  pwrd
+export val tc tempj
+export val i  id
+!crypt_start
+008abac6f7c2526a8a6
+032adfc9080250eed4eb7a32e206604ac47fbaf266c65b15ef5e6b30b473dac19ab
+016a0a640ef60bb10a7bebe236c3e392f77
+016a0b493816354fe03f8b9d3c420ac0da7
+01650571d1604190544e6b340476a36e3a6
+00857131c585c401856
+016b5ad627c7b38e3b7f1b31fe12cac0da7
+016a1624e288d8fb1f0bdbe226c6636e3a6
+008a127436c8dcdb1b4
+016bba440f131a20db7f1b300e13a39347b
+016bba99ad4364fe313f8b9ccc46636e3a6
+0165057051607190544e6b340476a36e3a6
+016f08e4f32742f257bfeb304ed2321eeb6
+016b5b074757b23e3b5fdb31fe12e39387b
+008b5be6c603027fea6
+008ad2750608dd3b1b1
+016a0a251ef7abc10a7f7be2e6c2b41e303
+016a0fd8b8a7914fe03fc975a3c4d4c1844
+0165e561c4d044c4e59f6be3f6c3d39347b
+0084d1303585c401854
+016afaf7a617b73e3b7fbb31fe16636e3a6
+016ac304c62dfd0aca5eabe3d6069bc00b6
+016f5a64c538b321200fcb9d6c46a36e3a6
+016a4a30ef52cb81da9f7270a6c963c1210
+008afbf50f431a20db7
+008bbb58dd46441a71e
+008521308585c401854
+008f8975a3c3335386a
+016b7375262d9d4aca5ffb9ccc46636e3a6
+008b72b527cd9c1f9b8
+016b1a247f765ac57bafeb9d9c42239387b
+016a8ab8cc47b5cab4217135b589cc1b1a5
+0165b020b55154c5959e5b9c0c42e39387b
+0084d1f00480d4c0959
+008ed9b522c62392a66
+008afb2607c3c36f2bb
+008bb2b487ccac1a3b8
+008f7bf4857de3c030d
+008bdbf5df164ac1fba
+0164d03005803514e55b5971c3c414c1844
+016ed87523c6c246e69f7be2e6c2cac0da7
+016afb07c7c3536f2bbb3b3164b3b2d2e6b
+016bb29547fc3c1a3b8f9b5d9d2852c571d
+008bb2b547ccac1a0b8
+008f7bf5457cc3c000d
+016bda989c4785cb912f7be2e6c414c1844
+0164d03075812514256e327066c2cac0da7
+016ed875b3c7c247d2db5971c3c414c1844
+016afb06c7c3036f2bbf9bf03f73cbf14b5
+024f7a2444ac03c000db7810e2c50410c01e5b313e12e39387b
+008bb2b4f7cdbc1f7b8
+016bea351f131a20db7081342586636e3a6
+016a7a882cf3604e312fcb9ccc4414c1844
+008acb587d2364fe313
+016f4d34972606c257bacb986c44d4c1844
+016b6fa7b223663fea6bebe686c6f36e3a6
+008a0be2e6c6636e3a6
+016a2f64538c4684b4057130a5890c1b1a5
+dp.dp1 a k = model= model, ic= ic,
+          ratings= ratings, rth_ja= rth_ja, rth_jc= rth_jc, rth_hs= rth_hs,
+          part_type= part_type, part_class= part_class
+pwrd  =  pwrd(dp.dp1)
+tempj = tempj(dp.dp1)
+id    =    id(dp.dp1)
+}
